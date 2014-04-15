@@ -4,8 +4,9 @@ using System.Collections;
 public class testAutoMonkey : MonoBehaviour {
 
 	public Vector3 moveDirection = new Vector3(0,0,1);
-	public float moveSpeed = 2.0f;
+	public float moveSpeed = 1.0f;
 	public float rotationSpeed = 0.0f;
+	private bool onTree = false;
 
 	// Use this for initialization
 	void Start () {
@@ -15,13 +16,15 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnCollisionEnter(Collision other)
 	{
 		print(gameObject.name + " hit " + other.gameObject.name);
-		if (other.gameObject.tag == "Tree")
-			moveDirection = new Vector3(0,1,0);
-
+		if (other.gameObject.tag == "Tree") {
+			moveDirection = new Vector3 (0, 1, 0);
+			onTree = true;
+		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+		//if(!onTree)
+			gameObject.transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
 	}
 }
