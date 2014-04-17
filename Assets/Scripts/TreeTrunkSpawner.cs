@@ -15,8 +15,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	public float moveSpeed = 40.0f;
 
 	public Transform [] obstacles;
-	public float obstacleSpawnMin = 2f;
-	public float obstacleSpawnMax = 3f;
+	public float obstacleSpawnMin = 0.5f;
+	public float obstacleSpawnMax = 1.25f;
 	public float obstaclePlacementOffset = 10f;
 
 	private bool moveRight = false;

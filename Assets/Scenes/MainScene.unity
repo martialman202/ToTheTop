@@ -179,6 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 995751108}
+  - {fileID: 763684186}
   m_Father: {fileID: 0}
 --- !u!114 &338260385
 MonoBehaviour:
@@ -260,7 +261,7 @@ GameObject:
   - 64: {fileID: 760939780}
   - 23: {fileID: 760939779}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,6 +319,91 @@ Transform:
   m_LocalScale: {x: 10.7476511, y: 10.7476511, z: 10.7476511}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!1 &763684185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 763684186}
+  - 33: {fileID: 763684191}
+  - 65: {fileID: 763684190}
+  - 23: {fileID: 763684189}
+  - 54: {fileID: 763684188}
+  m_Layer: 0
+  m_Name: Obstacle Destroyer
+  m_TagString: Destroyer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &763684186
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763684185}
+  m_LocalRotation: {x: 1.98269817e-10, y: -1, z: 0, w: -1.63070567e-07}
+  m_LocalPosition: {x: -2.10861208e-06, y: -13.1729097, z: -3.01910019}
+  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_Children: []
+  m_Father: {fileID: 338260384}
+--- !u!54 &763684188
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763684185}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!23 &763684189
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763684185}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!65 &763684190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763684185}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .5, y: 1, z: .5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &763684191
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763684185}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &995751103
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +501,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1185485446}
-  - 114: {fileID: 1185485448}
+  - 114: {fileID: 1185485447}
   m_Layer: 0
   m_Name: Tree Spawner
   m_TagString: TreeSpawner
@@ -434,7 +520,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1185485448
+--- !u!114 &1185485447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -445,18 +531,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d66df5d0d7f64d6a801e92791e34820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
-  spawner: {fileID: 1185485446}
+  treeTrunk: {fileID: 0}
+  spawner: {fileID: 0}
   distance: 5
   pos: []
   currentRotation: 0
   rotations: []
-  moveSpeed: 250
-  obstacles:
-  - {fileID: 400000, guid: f5ce5a9751ec64d63855c1da400f5aef, type: 2}
-  obstacleSpawnMin: 1
-  obstacleSpawnMax: 3
-  obstaclePlacementOffset: 20
+  moveSpeed: 40
+  obstacles: []
+  obstacleSpawnMin: .5
+  obstacleSpawnMax: 1.25
+  obstaclePlacementOffset: 10
 --- !u!1001 &1568808656
 Prefab:
   m_ObjectHideFlags: 0
