@@ -14,9 +14,15 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	public float[] rotations;
 	public float moveSpeed = 40.0f;
 
-	public bool moveRight = false;
-	public bool moveLeft = false;
+	public Transform [] obstacles;
+	public float obstacleSpawnMin = 2f;
+	public float obstacleSpawnMax = 3f;
+	public float obstaclePlacementOffset = 10f;
 
+	private bool moveRight = false;
+	private bool moveLeft = false;
+
+	private GameObject mainCam;
 	private bool onTree = false;
 
 	void Start () {
@@ -33,12 +39,34 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		Transform tree1 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)), Quaternion.identity);
 		Transform tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
 		Transform tree3 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[2]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[2]/180.0f)), Quaternion.identity);
-	
+
+
 		tree1.transform.parent = spawner;
 		tree2.transform.parent = spawner;
 		tree3.transform.parent = spawner;
+
+		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
+
+		SpawnObstacle();
 	}
 
+	void SpawnObstacle() {
+		float beeHiveDistance = distance+1;
+
+		int numObstacles = Random.Range (1, 3); // number of obstacles to spawn, either 1 or 2
+		if (!moveLeft && !moveRight) {
+			for (int i = 0; i < numObstacles; i++) {
+				int whichObstacle = Random.Range (0, obstacles.Length); // choose which obstacle to spawn
+				int whichTree = Random.Range (0, 3); // choose which tree to spawn on
+
+				Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [whichTree] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [whichTree] / 180.0f)), Quaternion.identity);
+				obstacle.transform.parent = spawner;
+
+
+			}
+		}
+		Invoke("SpawnObstacle",Random.Range(obstacleSpawnMin,obstacleSpawnMax));
+	}
 
 	// Update is called once per frame
 	void Update () {

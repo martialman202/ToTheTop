@@ -8,17 +8,20 @@ public class ExtendTreeTrunk : MonoBehaviour {
 	public float placementOffset = 5.0f;
 	public float checkOffset = 1.0f;
 
-	public GameObject mainCam;
-	public GameObject thisTrunk;
+	private GameObject mainCam;
+	private GameObject thisTrunk;
 
 	public bool childExists = false;
 
+	private GameObject treeSpawner;
+	
+
 	// Use this for initialization
 	void Start () {
-		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 		thisTrunk = this.gameObject;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (!childExists && mainCam.transform.position.y >= thisTrunk.transform.position.y - checkOffset) {
