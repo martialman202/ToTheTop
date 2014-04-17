@@ -13,6 +13,7 @@ GameObject:
   - 64: {fileID: 6400000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: CartoonTrunk
   m_TagString: Tree
@@ -102,6 +103,20 @@ MonoBehaviour:
   placementOffset: 2
   checkOffset: 20
   childExists: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7ef2f0e3e2f458d83c96c79c568059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 20
+  mainCam: {fileID: 0}
+  thisTrunk: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

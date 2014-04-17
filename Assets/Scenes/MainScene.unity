@@ -415,7 +415,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1185485446}
-  - 114: {fileID: 1185485447}
   - 114: {fileID: 1185485448}
   m_Layer: 0
   m_Name: Tree Spawner
@@ -435,22 +434,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1185485447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d,
-    type: 2}
-  m_PrefabInternal: {fileID: 1568808656}
-  m_GameObject: {fileID: 1185485445}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a89e177d2f1221b45bdec95ff8156bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  treeSection: {fileID: 400002, guid: cf0a6eb033c38664a9d0f09778bea69d, type: 2}
-  distance: 20
-  treeSectionHeight: 8
-  traps: []
 --- !u!114 &1185485448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +504,8 @@ Prefab:
       propertyPath: m_TagString
       value: TreeSpawner
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
   m_RootGameObject: {fileID: 1185485445}
   m_IsPrefabParent: 0
