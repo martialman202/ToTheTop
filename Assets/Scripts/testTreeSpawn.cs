@@ -19,6 +19,7 @@ public class testTreeSpawn : MonoBehaviour {
 
 		float height = 8.0f; //TODO how can I access the height of the trunk?
 
+		//instantiates tree sections in the proper location relative to the spawner
 		for (int i = 0; i < 20; i++) 
 		{
 			Instantiate(treeSection, new Vector3(distance,height*i, 0), Quaternion.identity);
