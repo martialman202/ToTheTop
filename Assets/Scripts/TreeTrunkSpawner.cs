@@ -39,7 +39,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.D) && !moveLeft && !moveRight) {
+		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight) {
 			moveRight = true;
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
@@ -48,7 +48,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if(Input.GetKeyDown (KeyCode.A) && !moveLeft && !moveRight) {
+		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight) {
 			moveLeft = true;
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;

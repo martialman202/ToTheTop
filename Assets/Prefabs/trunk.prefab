@@ -142,7 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trunkPrefab: {fileID: 400002}
   placementOffset: 5
-  checkOffset: 5
+  checkOffset: 7
   mainCam: {fileID: 0}
   thisTrunk: {fileID: 0}
   childExists: 0
