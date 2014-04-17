@@ -501,7 +501,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1185485446}
-  - 114: {fileID: 1185485447}
+  - 114: {fileID: 1185485448}
   m_Layer: 0
   m_Name: Tree Spawner
   m_TagString: TreeSpawner
@@ -520,7 +520,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1185485447
+--- !u!114 &1185485448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -532,17 +532,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treeTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
-  spawner: {fileID: 400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
+  spawner: {fileID: 1185485446}
   distance: 5
   pos: []
   currentRotation: 0
   rotations: []
-  moveSpeed: 40
+  moveSpeed: 250
   obstacles:
   - {fileID: 400000, guid: f5ce5a9751ec64d63855c1da400f5aef, type: 2}
   obstacleSpawnMin: .5
   obstacleSpawnMax: 1.25
-  obstaclePlacementOffset: 10
+  obstaclePlacementOffset: 20
 --- !u!1001 &1568808656
 Prefab:
   m_ObjectHideFlags: 0
