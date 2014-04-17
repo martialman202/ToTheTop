@@ -109,6 +109,7 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: -1}
   moveSpeed: 10
   rotationSpeed: 0
+  onTree: 0
 --- !u!143 &338260380
 CharacterController:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ Transform:
   m_PrefabInternal: {fileID: 669111070}
   m_GameObject: {fileID: 338260378}
   m_LocalRotation: {x: 0, y: .99992764, z: 0, w: .0120335286}
-  m_LocalPosition: {x: .224445343, y: 2, z: -19.5096283}
+  m_LocalPosition: {x: .300000012, y: 2, z: -19.5096283}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 995751108}
@@ -199,7 +200,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .224445343
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: m_LocalPosition.y
@@ -329,6 +330,7 @@ GameObject:
   - 92: {fileID: 995751106}
   - 124: {fileID: 995751105}
   - 81: {fileID: 995751104}
+  - 45: {fileID: 995751109}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -392,11 +394,19 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 995751103}
-  m_LocalRotation: {x: .00397091173, y: .999801219, z: -.0193787832, w: .00250794459}
-  m_LocalPosition: {x: .469218463, y: 4.53040552, z: 20.389143}
-  m_LocalScale: {x: 1.17894149, y: 1.16366887, z: .865350544}
+  m_LocalRotation: {x: .00397091173, y: .999801159, z: -.0193787832, w: .00250794459}
+  m_LocalPosition: {x: .469218582, y: 4.53040552, z: 20.3891468}
+  m_LocalScale: {x: 1.17897809, y: 1.16457772, z: .866000175}
   m_Children: []
   m_Father: {fileID: 338260384}
+--- !u!45 &995751109
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995751103}
+  m_Enabled: 0
+  m_CustomSkybox: {fileID: 2100000, guid: 93074eff559734934be9005d139a9ad5, type: 2}
 --- !u!1 &1185485445
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +468,7 @@ MonoBehaviour:
   pos: []
   currentRotation: 0
   rotations: []
-  moveSpeed: 150
+  moveSpeed: 250
   moveRight: 0
   moveLeft: 0
 --- !u!1001 &1568808656

@@ -17,6 +17,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	public bool moveRight = false;
 	public bool moveLeft = false;
 
+	private bool onTree = false;
+
 	void Start () {
 		pos = new float[3];
 		pos[0] = 30.0f;
@@ -36,10 +38,14 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		tree2.transform.parent = spawner;
 		tree3.transform.parent = spawner;
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
-		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight) {
+		GameObject monkey = GameObject.Find ("Monkey");
+		testAutoMonkey x = monkey.GetComponent<testAutoMonkey> ();
+		onTree = x.onTree;
+		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree) {
 			moveRight = true;
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
@@ -48,7 +54,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight) {
+		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree) {
 			moveLeft = true;
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;
