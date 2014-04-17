@@ -406,7 +406,7 @@ Skybox:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 995751103}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: f60723ea36fc34476899abc83a5309c9, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 72949d705e43d492886aa304d7074ecc, type: 2}
 --- !u!1 &1185485445
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d66df5d0d7f64d6a801e92791e34820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeTrunk: {fileID: 400002, guid: cf0a6eb033c38664a9d0f09778bea69d, type: 2}
+  treeTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
   spawner: {fileID: 1185485446}
   distance: 5
   pos: []
