@@ -531,14 +531,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d66df5d0d7f64d6a801e92791e34820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeTrunk: {fileID: 0}
-  spawner: {fileID: 0}
+  treeTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
+  spawner: {fileID: 400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
   distance: 5
   pos: []
   currentRotation: 0
   rotations: []
   moveSpeed: 40
-  obstacles: []
+  obstacles:
+  - {fileID: 400000, guid: f5ce5a9751ec64d63855c1da400f5aef, type: 2}
   obstacleSpawnMin: .5
   obstacleSpawnMax: 1.25
   obstaclePlacementOffset: 10
