@@ -6,7 +6,7 @@ public class Obstacle1 : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Player") {
-			//Debug.Break ();
+			Debug.Break ();
 		} else if (other.tag == "Destroyer") {
 			Destroy (this.gameObject);
 		}
