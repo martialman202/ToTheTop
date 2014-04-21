@@ -17,7 +17,7 @@ public class ExtendTreeTrunk : MonoBehaviour {
 	void Start () {
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 		thisTrunk = this.gameObject;
-		//this.gameObject.name = "Tree Trunk"; //or else (clone)(clone)...(clone)
+		this.gameObject.name = "Tree Trunk"; //or else (clone)(clone)...(clone)
 	}
 
 	// Update is called once per frame

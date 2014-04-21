@@ -65,9 +65,6 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 				Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [whichTree] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [whichTree] / 180.0f)), Quaternion.identity);
 				obstacle.transform.parent = spawner.transform;
-
-				print(whichObstacle);
-
 			}
 		}
 		Invoke("SpawnObstacle",Random.Range(obstacleSpawnMin,obstacleSpawnMax));
@@ -78,9 +75,9 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		GameObject monkey = GameObject.Find ("Monkey");
 		testAutoMonkey x = monkey.GetComponent<testAutoMonkey> ();
 		onTree = x.onTree;
-		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree) {
+		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree && !x.isJumping) {
 			moveRight = true;
-			x.isJumping = true;
+			x.isJumping = false;
 			x.jumpVel = x.jumpImpulse;
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
@@ -89,9 +86,9 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree) {
+		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree && !x.isJumping) {
 			moveLeft = true;
-			x.isJumping = true;
+			x.isJumping = false;
 			x.jumpVel = x.jumpImpulse;
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;

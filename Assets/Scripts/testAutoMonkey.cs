@@ -9,7 +9,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public float moveSpeed = 1.0f; 
 	public bool onTree = false;
 
-	private GameObject mainCam; //camera should stop following monkey on lose
+	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
 	MonkeyState monkeyState = MonkeyState.initial;
 	//int monkeyState = (int)MonkeyState.initial;
@@ -50,7 +50,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		print (isJumping);
+		//print (isJumping);
 
 		if (lifePoints == 0) {
 			monkeyState = MonkeyState.lose;
