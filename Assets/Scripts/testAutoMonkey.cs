@@ -59,7 +59,7 @@ public class testAutoMonkey : MonoBehaviour {
 		if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 				gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 
-				if( !isJumping && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("up")) ) {
+				if( !isJumping && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("up")) && onTree ) {
 					isJumping = true;
 					jumpVel = jumpImpulse;
 				}
