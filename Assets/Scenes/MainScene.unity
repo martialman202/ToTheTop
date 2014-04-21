@@ -459,9 +459,9 @@ MonoBehaviour:
   rotations: []
   moveSpeed: 200
   obstacles:
-  - {fileID: 400000, guid: f5ce5a9751ec64d63855c1da400f5aef, type: 2}
   - {fileID: 400000, guid: 885b3b24c192d4c4fb33d8b2f6067f7b, type: 2}
-  - {fileID: 400000, guid: 0f08a292dd118ad4c967b446b000a11f, type: 2}
+  - {fileID: 400000, guid: 885b3b24c192d4c4fb33d8b2f6067f7b, type: 2}
+  - {fileID: 400000, guid: 885b3b24c192d4c4fb33d8b2f6067f7b, type: 2}
   obstacleSpawnMin: .5
   obstacleSpawnMax: 1.25
   obstaclePlacementOffset: 10

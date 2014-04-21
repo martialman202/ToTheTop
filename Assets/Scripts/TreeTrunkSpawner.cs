@@ -63,7 +63,19 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				int whichObstacle = Random.Range (0, obstacles.Length); // choose which obstacle to spawn
 				int whichTree = Random.Range (0, 3); // choose which tree to spawn on
 
-				Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [whichTree] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [whichTree] / 180.0f)), Quaternion.identity);
+				float rotateObstacle = 0.0f;
+				switch (whichTree) {
+				case 1:
+					rotateObstacle = 120.0f;
+					break;
+				case 0:
+					rotateObstacle = 240.0f;
+					break;
+				default:
+					break;
+				}
+
+				Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [whichTree] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [whichTree] / 180.0f)), Quaternion.AngleAxis(rotateObstacle,new Vector3(0,1,0)));
 				obstacle.transform.parent = spawner.transform;
 			}
 		}
