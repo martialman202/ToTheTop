@@ -62,6 +62,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [whichTree] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [whichTree] / 180.0f)), Quaternion.identity);
 				obstacle.transform.parent = spawner;
 
+				print(whichObstacle);
 
 			}
 		}

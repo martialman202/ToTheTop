@@ -3,8 +3,11 @@ using System.Collections;
 
 public class HUDScript : MonoBehaviour {
 
+	public Texture2D heart;
+
 	private GameObject player ;
-	private testAutoMonkey monkeyScript = player.GetComponent<testAutoMonkey>();
+	private testAutoMonkey monkeyScript;
+
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +22,11 @@ public class HUDScript : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUI.Label (new Rect (110, 110, 200, 130), "Life: " + Other.lifePoints);
+		//GUI.Label (new Rect (110, 110, 200, 130), "Life: " + monkeyScript.lifePoints);
+
+		if (monkeyScript.lifePoints <= 3)
+		for (int i = 0; i < monkeyScript.lifePoints; i++) {
+			GUI.DrawTexture(new Rect(110+(16*i),16, 16, 16), heart);
+		}
 	}
 }
