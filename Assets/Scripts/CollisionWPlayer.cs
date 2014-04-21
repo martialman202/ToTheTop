@@ -7,6 +7,7 @@ public class CollisionWPlayer : MonoBehaviour {
 	{
 		if (other.tag == "Player") {
 			Debug.Break ();
+			//Application.LoadLevel (Application.loadedLevelName);
 		}
 	}
 }

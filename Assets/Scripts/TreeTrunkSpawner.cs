@@ -55,7 +55,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	}
 
 	void SpawnObstacle() {
-		float beeHiveDistance = distance+1;
+		float beeHiveDistance = distance+1.0f;
 
 		int numObstacles = Random.Range (1, 3); // number of obstacles to spawn, either 1 or 2
 		if (!moveLeft && !moveRight) {
@@ -79,6 +79,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		onTree = x.onTree;
 		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree) {
 			moveRight = true;
+			x.isJumping = true;
+			x.jumpVel = x.jumpImpulse;
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
 			}
@@ -88,6 +90,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		}
 		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree) {
 			moveLeft = true;
+			x.isJumping = true;
+			x.jumpVel = x.jumpImpulse;
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;
 			}

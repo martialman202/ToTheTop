@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DestroyTreeTrunk : MonoBehaviour {
 
-	public float offset = 20.0f;
+	public float offset = 25.0f;
 
 	public GameObject mainCam;
 	public GameObject thisTrunk;
