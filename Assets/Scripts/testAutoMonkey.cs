@@ -9,10 +9,16 @@ public class testAutoMonkey : MonoBehaviour {
 	public float moveSpeed = 1.0f; 
 	public bool onTree = false;
 
-	private GameObject mainCam; //camera should stop following monkey on lose
+	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
 	MonkeyState monkeyState = MonkeyState.initial;
 	//int monkeyState = (int)MonkeyState.initial;
+
+	public bool isJumping = false;
+	public float jumpVel = 0.0f;
+	public float simGravity = 2.0f;
+	public float jumpImpulse = -60.0f;
+	public float origZ = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +29,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnCollisionEnter(Collision other)
 	{
 		if (other.gameObject.tag == "Tree") {
+			origZ = gameObject.transform.position.z;
 			moveDirection = new Vector3 (0, 1, 0);
 			onTree = true;
 			monkeyState = MonkeyState.climbing;
@@ -43,12 +50,32 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		//print (isJumping);
+
 		if (lifePoints == 0) {
 			monkeyState = MonkeyState.lose;
 		}
 
 		if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 				gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
+
+				if( !isJumping && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("up")) ) {
+					isJumping = true;
+					jumpVel = jumpImpulse;
+				}
+
+				if( isJumping ) {
+					jumpVel += simGravity;
+					if( origZ <= gameObject.transform.position.z + jumpVel*Time.deltaTime ) {
+						Vector3 newPos = gameObject.transform.position;
+						newPos.z = origZ;
+						gameObject.transform.position = newPos;
+						isJumping = false;
+					}
+					else {
+						gameObject.transform.Translate ( new Vector3(0,0,-1) * jumpVel * Time.deltaTime );
+					}
+				}
 		}
 		else if (monkeyState == MonkeyState.lose) {
 			lose ();

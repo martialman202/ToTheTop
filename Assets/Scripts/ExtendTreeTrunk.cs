@@ -5,16 +5,13 @@ public class ExtendTreeTrunk : MonoBehaviour {
 
 	public Transform trunkPrefab;
 
-	public float placementOffset = 5.0f;
+	public float placementOffset = 2.0f;
 	public float checkOffset = 1.0f;
 
 	private GameObject mainCam;
 	private GameObject thisTrunk;
 
 	public bool childExists = false;
-
-	private GameObject treeSpawner;
-	
 
 	// Use this for initialization
 	void Start () {

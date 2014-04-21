@@ -4,7 +4,9 @@ using System.Collections;
 public class TreeTrunkSpawner : MonoBehaviour {
 
 	public Transform treeTrunk;
-	public Transform spawner;
+
+	public float placementOffset = 2.0f;
+	public int numTrunks = 5;
 
 	public float distance = 5.0f;
 	public float[] pos;// = new float[3];//{ 90.0f, 225.0f, 315.0f };
@@ -12,7 +14,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	public int currentRotation = 0;
 	public float[] rotations;
-	public float moveSpeed = 40.0f;
+	public float moveSpeed = 150.0f;
 
 	public Transform [] obstacles;
 	public float obstacleSpawnMin = 0.5f;
@@ -21,6 +23,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	private bool moveRight = false;
 	private bool moveLeft = false;
+
+	public GameObject spawner;
 
 	private GameObject mainCam;
 	private bool onTree = false;
@@ -36,22 +40,22 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		rotations[1] = 120.0f;
 		rotations[2] = 240.0f;
 
+		spawner = this.gameObject;
+		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
+
 		Transform tree1 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)), Quaternion.identity);
 		Transform tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
 		Transform tree3 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[2]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[2]/180.0f)), Quaternion.identity);
 
-
-		tree1.transform.parent = spawner;
-		tree2.transform.parent = spawner;
-		tree3.transform.parent = spawner;
-
-		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
+		tree1.transform.parent = spawner.transform;
+		tree2.transform.parent = spawner.transform;
+		tree3.transform.parent = spawner.transform;
 
 		SpawnObstacle();
 	}
 
 	void SpawnObstacle() {
-		float beeHiveDistance = distance+1;
+		float beeHiveDistance = distance+1.0f;
 
 		int numObstacles = Random.Range (1, 3); // number of obstacles to spawn, either 1 or 2
 		if (!moveLeft && !moveRight) {
@@ -60,10 +64,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				int whichTree = Random.Range (0, 3); // choose which tree to spawn on
 
 				Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [whichTree] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [whichTree] / 180.0f)), Quaternion.identity);
-				obstacle.transform.parent = spawner;
-
-				print(whichObstacle);
-
+				obstacle.transform.parent = spawner.transform;
 			}
 		}
 		Invoke("SpawnObstacle",Random.Range(obstacleSpawnMin,obstacleSpawnMax));
@@ -74,8 +75,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		GameObject monkey = GameObject.Find ("Monkey");
 		testAutoMonkey x = monkey.GetComponent<testAutoMonkey> ();
 		onTree = x.onTree;
-		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree) {
+		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree && !x.isJumping) {
 			moveRight = true;
+			x.isJumping = false;
+			x.jumpVel = x.jumpImpulse;
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
 			}
@@ -83,8 +86,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree) {
+		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree && !x.isJumping) {
 			moveLeft = true;
+			x.isJumping = false;
+			x.jumpVel = x.jumpImpulse;
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;
 			}
@@ -95,57 +100,57 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 		if (moveRight) {
 			if( rotations[currentRotation] == 0.0f ) {
-				if( spawner.eulerAngles.y >= rotations[2] ) {
-					spawner.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
+				if( spawner.transform.eulerAngles.y >= rotations[2] ) {
+					spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
 				}
 				else {
-					Vector3 set = spawner.eulerAngles;
+					Vector3 set = spawner.transform.eulerAngles;
 					set.y = rotations[currentRotation];
-					spawner.eulerAngles = set;
+					spawner.transform.eulerAngles = set;
 					moveRight = false;
 				}
 			}
-			else if( spawner.eulerAngles.y >= rotations[currentRotation] ) {
-				Vector3 set = spawner.eulerAngles;
+			else if( spawner.transform.eulerAngles.y >= rotations[currentRotation] ) {
+				Vector3 set = spawner.transform.eulerAngles;
 				set.y = rotations[currentRotation];
-				spawner.eulerAngles = set;
+				spawner.transform.eulerAngles = set;
 				moveRight = false;
 			}
 			else {
-				spawner.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
+				spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
 			}
 		}
 		else if (moveLeft) {
 			if( rotations[currentRotation] == 0.0f ) {
-				if( spawner.eulerAngles.y-0.1f <= rotations[1] ) {
-					spawner.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
+				if( spawner.transform.eulerAngles.y-0.1f <= rotations[1] ) {
+					spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
 				}
 				else {
-					Vector3 set = spawner.eulerAngles;
+					Vector3 set = spawner.transform.eulerAngles;
 					set.y = rotations[currentRotation];
-					spawner.eulerAngles = set;
+					spawner.transform.eulerAngles = set;
 					moveLeft = false;
 				}
 			}
 			else if( rotations[currentRotation] == 240.0f ) {
-				if( spawner.eulerAngles.y == 0.0f || spawner.eulerAngles.y > rotations[currentRotation] ) {
-					spawner.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
+				if( spawner.transform.eulerAngles.y == 0.0f || spawner.transform.eulerAngles.y > rotations[currentRotation] ) {
+					spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
 				}
 				else {
-					Vector3 set = spawner.eulerAngles;
+					Vector3 set = spawner.transform.eulerAngles;
 					set.y = rotations[currentRotation];
-					spawner.eulerAngles = set;
+					spawner.transform.eulerAngles = set;
 					moveLeft = false;
 				}
 			}
-			else if( spawner.eulerAngles.y <= rotations[currentRotation] ) {
-				Vector3 set = spawner.eulerAngles;
+			else if( spawner.transform.eulerAngles.y <= rotations[currentRotation] ) {
+				Vector3 set = spawner.transform.eulerAngles;
 				set.y = rotations[currentRotation];
-				spawner.eulerAngles = set;
+				spawner.transform.eulerAngles = set;
 				moveLeft = false;
 			}
 			else {
-				spawner.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
+				spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
 			}
 		}
 	}
