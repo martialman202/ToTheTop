@@ -44,15 +44,14 @@ public class testAutoMonkey : MonoBehaviour {
 		if (other.gameObject.tag == "Obstacle") {
 			lifePoints--;
 			print (gameObject.name + " hit " + other.gameObject.name +"!");
-
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
 		//print (isJumping);
-
-		if (lifePoints == 0) {
+		print ("Life: " + lifePoints);
+		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
 		}
 
@@ -87,8 +86,9 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void lose() {
-		Debug.Log ("You Lose.");
+		print("You Lose.");
 		Debug.Break ();
+		Application.LoadLevel(0);
 	}
 	
 	void win() {
