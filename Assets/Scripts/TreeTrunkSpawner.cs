@@ -26,6 +26,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	public float obstacleSpawnMax = 1.25f;
 	public float obstaclePlacementOffset = 10f;
 
+	public Transform treeTop;
+	public float winHeight = 1000.0f;
+	private bool spawnedTreeTop = false;
+
 	private bool moveRight = false;
 	private bool moveLeft = false;
 
@@ -104,11 +108,17 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				}
 			}
 		}
-		Invoke("SpawnObstacle",Random.Range(obstacleSpawnMin,obstacleSpawnMax));
+		if (!spawnedTreeTop)
+			Invoke("SpawnObstacle",Random.Range(obstacleSpawnMin,obstacleSpawnMax));
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if (mainCam.transform.position.y >= winHeight && !spawnedTreeTop) {
+			spawnedTreeTop = true;
+			Instantiate(treeTop,this.transform.position + (Vector3.up*(mainCam.transform.position.y+obstaclePlacementOffset)),Quaternion.identity);
+		}
+
 		GameObject monkey = GameObject.Find ("Monkey");
 		testAutoMonkey x = monkey.GetComponent<testAutoMonkey> ();
 		onTree = x.onTree;

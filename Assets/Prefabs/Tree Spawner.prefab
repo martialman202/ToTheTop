@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Tree Spawner
-  m_TagString: Player
+  m_TagString: TreeSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22,7 +22,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: -.39273113, z: 0, w: .919653356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -35,13 +35,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a89e177d2f1221b45bdec95ff8156bee, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d66df5d0d7f64d6a801e92791e34820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeSection: {fileID: 100002, guid: cf0a6eb033c38664a9d0f09778bea69d, type: 2}
-  distance: 20
-  treeSectionHeight: 8
-  traps: []
+  treeTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
+  placementOffset: 5
+  numTrunks: 5
+  distance: 5
+  pos: []
+  currentRotation: 0
+  rotations: []
+  moveSpeed: 200
+  beeHiveObstacle: {fileID: 400000, guid: f5ce5a9751ec64d63855c1da400f5aef, type: 2}
+  snakeObstacle: {fileID: 400000, guid: 885b3b24c192d4c4fb33d8b2f6067f7b, type: 2}
+  unclimbableObstacle: {fileID: 400000, guid: 0f08a292dd118ad4c967b446b000a11f, type: 2}
+  obstacleSpawnMin: .75
+  obstacleSpawnMax: 1.5
+  obstaclePlacementOffset: 15
+  treeTop: {fileID: 400000, guid: 7bd947eab52544819bc5d3d41bf6cf07, type: 2}
+  winHeight: 1000
+  spawner: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -30,64 +30,75 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "Tree") {
+		if (other.gameObject.tag == "Tree" && !onTree && monkeyState != MonkeyState.win) {
 			origZ = gameObject.transform.position.z;
 			moveDirection = new Vector3 (0, 1, 0);
 			onTree = true;
 			monkeyState = MonkeyState.climbing;
+			print ("collision detected!");
 		}
-
-		return;
 
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			if (Time.time > lastHitTime + repeatDamagePeriod){
+			if (Time.time > lastHitTime + repeatDamagePeriod) {
 				lifePoints--;
-				print (gameObject.name + " hit " + other.gameObject.name +"!");
+				print (gameObject.name + " hit " + other.gameObject.name + "!");
 				lastHitTime = Time.time;
 			}
+		}
+		if (other.gameObject.tag == "TreeTop") {
+			print ("hit " + other.gameObject.tag);
+			monkeyState = MonkeyState.win;
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		//print (isJumping);
 		print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
 		}
 
 		if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
-				gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
+			gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 
-				if( !isJumping && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("up")) && onTree ) {
-					isJumping = true;
-					jumpVel = jumpImpulse;
-				}
+			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up")) && onTree) {
+				isJumping = true;
+				jumpVel = jumpImpulse;
+			}
 
-				if( isJumping ) {
-					jumpVel += simGravity;
-					if( origZ <= gameObject.transform.position.z + jumpVel*Time.deltaTime ) {
-						Vector3 newPos = gameObject.transform.position;
-						newPos.z = origZ;
-						gameObject.transform.position = newPos;
-						isJumping = false;
-					}
-					else {
-						gameObject.transform.Translate ( new Vector3(0,0,-1) * jumpVel * Time.deltaTime );
-					}
+			if (isJumping) {
+				jumpVel += simGravity;
+				if (origZ <= gameObject.transform.position.z + jumpVel * Time.deltaTime) {
+					Vector3 newPos = gameObject.transform.position;
+					newPos.z = origZ;
+					gameObject.transform.position = newPos;
+					isJumping = false;
+				} else {
+					gameObject.transform.Translate (new Vector3 (0, 0, -1) * jumpVel * Time.deltaTime);
 				}
-		}
-		else if (monkeyState == MonkeyState.lose) {
+			}
+		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
+		} else if (monkeyState == MonkeyState.win) {
+			if (isJumping) {
+				jumpVel += simGravity;
+				if (origZ <= gameObject.transform.position.z + jumpVel * Time.deltaTime) {
+					Vector3 newPos = gameObject.transform.position;
+					newPos.z = origZ;
+					gameObject.transform.position = newPos;
+					isJumping = false;
+					win ();
+				} else {
+					gameObject.transform.Translate (new Vector3 (0, 0, -1) * jumpVel * Time.deltaTime);
+				}
+			}
+			else if(onTree)
+				win ();
 		}
-
-
-
-
 	}
 
 	void lose() {
