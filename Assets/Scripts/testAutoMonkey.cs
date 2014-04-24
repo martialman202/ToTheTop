@@ -87,7 +87,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		Debug.Break ();
+		//Debug.Break ();
 		Application.LoadLevel(0);
 	}
 	
