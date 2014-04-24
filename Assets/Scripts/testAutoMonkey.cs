@@ -8,6 +8,8 @@ public class testAutoMonkey : MonoBehaviour {
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
 	public float moveSpeed = 1.0f; 
 	public bool onTree = false;
+	public float repeatDamagePeriod = 0.5f;
+	private float lastHitTime = 0.0f;
 
 	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
@@ -42,8 +44,11 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			lifePoints--;
-			print (gameObject.name + " hit " + other.gameObject.name +"!");
+			if (Time.time > lastHitTime + repeatDamagePeriod){
+				lifePoints--;
+				print (gameObject.name + " hit " + other.gameObject.name +"!");
+				lastHitTime = Time.time;
+			}
 		}
 	}
 
@@ -87,7 +92,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		Debug.Break ();
+		//Debug.Break ();
 		Application.LoadLevel(0);
 	}
 	

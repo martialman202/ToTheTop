@@ -83,7 +83,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		if (obstacles [whichObstacle] == unclimbableObstacle)
 			spawnUnclimbable = true;
 
-		if (!moveLeft && !moveRight) {
+		if (!moveLeft && !moveRight && onTree) {
 			if( spawnUnclimbable ) {
 				for( int i = 0; i < 3; i++ ) {
 					Transform obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [i] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [i] / 180.0f)), Quaternion.AngleAxis(rotateObstacle[i]-35.0f,new Vector3(0,1,0)));
