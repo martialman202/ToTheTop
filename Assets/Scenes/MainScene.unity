@@ -222,7 +222,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
       propertyPath: winHeight
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
@@ -524,7 +524,8 @@ MonoBehaviour:
   obstacleSpawnMax: 1.5
   obstaclePlacementOffset: 15
   treeTop: {fileID: 400000, guid: 7bd947eab52544819bc5d3d41bf6cf07, type: 2}
-  winHeight: 500
+  winHeight: 100
+  treeTopHeightOffset: 25
   spawner: {fileID: 0}
 --- !u!1 &1996748312
 GameObject:
