@@ -7,12 +7,11 @@ public class testAutoMonkey : MonoBehaviour {
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
 	public float moveSpeed = 1.0f; 
-	public bool onTree = false;
+	public bool onTree = false; //does this stay true after monkey makes contact with tree?
 
 	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
 	MonkeyState monkeyState = MonkeyState.initial;
-	//int monkeyState = (int)MonkeyState.initial;
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
@@ -20,10 +19,30 @@ public class testAutoMonkey : MonoBehaviour {
 	public float jumpImpulse = -60.0f;
 	public float origZ = 0.0f;
 
+	public AudioClip [] Clips;
+	private AudioSource[] audioSources;
+	public bool playJumpSound;
+
 	// Use this for initialization
 	void Start () {
+		//Testing
 		print (gameObject.name + " has been started.");
+
+		//find main camera
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+
+		//Audio
+		playJumpSound = false;
+		audioSources = new AudioSource[Clips.Length];
+		for (int i = 0; i < 2; i++) {
+			print(i);
+			audioSources[i] = this.gameObject.AddComponent("AudioSource") as AudioSource;
+			audioSources[i].clip = Clips[i];
+		}
+
+		//Set position
+		//TODO: have the monkey start relative to the tree spawners spawn distance
+
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -44,13 +63,12 @@ public class testAutoMonkey : MonoBehaviour {
 		if (other.gameObject.tag == "Obstacle") {
 			lifePoints--;
 			print (gameObject.name + " hit " + other.gameObject.name +"!");
-
+			audioSources[0].Play(); //play audio
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
-		//print (isJumping);
 
 		if (lifePoints == 0) {
 			monkeyState = MonkeyState.lose;
@@ -62,6 +80,7 @@ public class testAutoMonkey : MonoBehaviour {
 				if( !isJumping && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("up")) ) {
 					isJumping = true;
 					jumpVel = jumpImpulse;
+				audioSources[1].Play();
 				}
 
 				if( isJumping ) {
@@ -93,7 +112,7 @@ public class testAutoMonkey : MonoBehaviour {
 	
 	void win() {
 		Debug.Log ("You Win");
-		Debug.Break ();
+		//Debug.Break ();
 	}
 	
 }

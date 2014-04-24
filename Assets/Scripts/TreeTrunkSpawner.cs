@@ -79,6 +79,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 			moveRight = true;
 			x.isJumping = false;
 			x.jumpVel = x.jumpImpulse;
+			audio.Play ();
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
 			}
@@ -90,6 +91,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 			moveLeft = true;
 			x.isJumping = false;
 			x.jumpVel = x.jumpImpulse;
+			audio.Play ();
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;
 			}
