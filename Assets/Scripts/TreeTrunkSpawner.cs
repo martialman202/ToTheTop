@@ -94,7 +94,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					for (int i = 0; i < 3; i++) {
 						Transform obstacle;
 
-						obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [i] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [i] / 180.0f)), Quaternion.AngleAxis (rotateObstacle [i] - 35.0f, new Vector3 (0, 1, 0)));
+						obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((distance) * Mathf.Cos (Mathf.PI * pos [i] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (distance) * Mathf.Sin (Mathf.PI * pos [i] / 180.0f)), Quaternion.AngleAxis (rotateObstacle [i] + 180.0f, new Vector3 (0, 1, 0)));
 						obstacle.transform.parent = spawner.transform;
 					}
 				} else {
