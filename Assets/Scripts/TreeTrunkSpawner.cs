@@ -79,6 +79,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	}
 
 	void SpawnObstacle() {
+		bool [] obstacleOnTree = new bool [3];
+		obstacleOnTree [0] = false;
+		obstacleOnTree [1] = false;
+		obstacleOnTree [2] = false;
 		if (!spawnedTreeTop) {
 			bool spawnUnclimbable = false;
 			int numObstacles = Random.Range (1, 3); // number of obstacles to spawn, either 1 or 2
@@ -92,8 +96,25 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				tree[1] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
 				tree[2] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
 				spawnUnclimbable = false;
-			}
+			} else {
+				for (int i = 0; i < numObstacles; i++) {
+					whichObstacle = Random.Range (0, obstacles.Length - 1); // choose which obstacle to spawn
+					int whichTree = Random.Range (0, 3); // choose which tree to spawn on
+					
+					if (!obstacleOnTree [whichTree]) { // if there isn't an obstacle on this tree
+						obstacleOnTree [whichTree] = true; // mark that we're spawning an obstacle on this tree
 
+					switch (whichObstacle) {
+							case 0:
+								tree[whichTree] = ExtendTreeTrunk.TreeType.BEEHIVE;
+								break;
+							case 1:
+								tree[whichTree] = ExtendTreeTrunk.TreeType.SNAKE;
+								break;
+						}
+					}
+				}
+			}
 			Invoke ("SpawnObstacle", Random.Range (obstacleSpawnMin, obstacleSpawnMax));
 		}
 	}

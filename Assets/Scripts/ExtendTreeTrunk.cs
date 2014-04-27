@@ -41,6 +41,12 @@ public class ExtendTreeTrunk : MonoBehaviour {
 				case TreeType.CARTOON:
 					newTrunk = (Transform)Instantiate(trunkPrefab,newTrunkPos,Quaternion.identity);
 					break;
+				case TreeType.BEEHIVE:
+					newTrunk = (Transform)Instantiate(beeHiveTrunk,newTrunkPos,Quaternion.identity);
+					break;
+				case TreeType.SNAKE:
+					newTrunk = (Transform)Instantiate(snakeTrunk,newTrunkPos,Quaternion.identity);
+					break;
 				case TreeType.UNCLIMBABLE:
 					newTrunk = (Transform)Instantiate(bushTrunk,newTrunkPos,Quaternion.identity);
 					break;

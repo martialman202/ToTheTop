@@ -436,11 +436,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aef47a3fffba4dcaa2df0e1ce873e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trunkPrefab: {fileID: 400012}
+  trunkPrefab: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
+  beeHiveTrunk: {fileID: 400012}
+  snakeTrunk: {fileID: 400058, guid: abaa185c9d3e84828884aab81209dd50, type: 2}
+  bushTrunk: {fileID: 400004, guid: 7dd8080d3922746f998a45408070f137, type: 2}
   placementOffset: 2
   checkOffset: 40
   childExists: 0
   treeID: 0
+  treeType: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
