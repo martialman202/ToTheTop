@@ -24,12 +24,12 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	public float obstacleSpawnMin = 0.5f;
 	public float obstacleSpawnMax = 1.25f;
-	public float obstaclePlacementOffset = 10f;
+	public float obstaclePlacementOffset = 40f;
 
 	public Transform treeTop;
 	public float winHeight = 1000.0f;
 	private bool spawnedTreeTop = false;
-	public float treeTopHeightOffset = 25.0f;
+	public float treeTopHeightOffset = 72.25f;
 
 	private bool moveRight = false;
 	private bool moveLeft = false;
@@ -127,7 +127,14 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	void Update () {
 		if (mainCam.transform.position.y >= winHeight && !spawnedTreeTop) {
 			spawnedTreeTop = true;
-			Instantiate(treeTop,this.transform.position + (Vector3.up*(mainCam.transform.position.y+treeTopHeightOffset)),Quaternion.identity);
+			Vector3 h = this.transform.position + (Vector3.up*(mainCam.transform.position.y+treeTopHeightOffset));
+			Transform tt1 = (Transform)Instantiate(treeTop, h + new Vector3(distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)),Quaternion.identity);
+			Transform tt2 = (Transform)Instantiate(treeTop, h + new Vector3(distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)),Quaternion.identity);
+			Transform tt3 = (Transform)Instantiate(treeTop, h + new Vector3(distance * Mathf.Cos(Mathf.PI*pos[2]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[2]/180.0f)),Quaternion.identity);
+
+			tt1.transform.parent = spawner.transform;
+			tt2.transform.parent = spawner.transform;
+			tt3.transform.parent = spawner.transform;
 		}
 
 		GameObject monkey = GameObject.Find ("Monkey");
