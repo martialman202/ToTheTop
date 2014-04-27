@@ -89,7 +89,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 			if (spawnUnclimbable) {
 				print ("spawning unclimbable!");
 				tree[0] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
-				print ("parent: " + tree[0]);
+				tree[1] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
+				tree[2] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
 				spawnUnclimbable = false;
 			}
 

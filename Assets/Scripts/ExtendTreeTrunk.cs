@@ -25,6 +25,7 @@ public class ExtendTreeTrunk : MonoBehaviour {
 	void Start () {
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 		thisTrunk = this.gameObject;
+		treeID = this.transform.parent.gameObject.GetComponent<ExtendTreeTrunk> ().treeID;
 		this.gameObject.name = "Tree Trunk"; //or else (clone)(clone)...(clone)
 	}
 
@@ -36,18 +37,14 @@ public class ExtendTreeTrunk : MonoBehaviour {
 			                                  thisTrunk.transform.position.z);
 			Transform newTrunk;
 			treeType = this.transform.root.gameObject.GetComponent<TreeTrunkSpawner>().tree[treeID];
-			print(treeType);
 			switch (treeType) {
 				case TreeType.CARTOON:
-					print ("cartoon!");
 					newTrunk = (Transform)Instantiate(trunkPrefab,newTrunkPos,Quaternion.identity);
 					break;
 				case TreeType.UNCLIMBABLE:
-					print ("unclimbable!");
 					newTrunk = (Transform)Instantiate(bushTrunk,newTrunkPos,Quaternion.identity);
 					break;
 				default:
-					print ("default!");
 					newTrunk = (Transform)Instantiate(trunkPrefab,newTrunkPos,Quaternion.identity);
 					break;
 			}
