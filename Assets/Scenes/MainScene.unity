@@ -192,6 +192,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
+      propertyPath: tree.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -555,6 +559,7 @@ MonoBehaviour:
   winHeight: 1000
   treeTopHeightOffset: 72.25
   spawner: {fileID: 0}
+  tree: 000000000000000000000000
 --- !u!1 &1996748312
 GameObject:
   m_ObjectHideFlags: 0
