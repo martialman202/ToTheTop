@@ -61,6 +61,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		Transform tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
 		Transform tree3 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[2]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[2]/180.0f)), Quaternion.identity);
 
+		tree1.gameObject.GetComponent<ExtendTreeTrunk> ().treeID = 0;
+		tree2.gameObject.GetComponent<ExtendTreeTrunk> ().treeID = 1;
+		tree3.gameObject.GetComponent<ExtendTreeTrunk> ().treeID = 2;
+
 		tree1.transform.parent = spawner.transform;
 		tree2.transform.parent = spawner.transform;
 		tree3.transform.parent = spawner.transform;

@@ -12,6 +12,7 @@ public class ExtendTreeTrunk : MonoBehaviour {
 	private GameObject thisTrunk;
 
 	public bool childExists = false;
+	public int treeID;
 
 	// Use this for initialization
 	void Start () {
