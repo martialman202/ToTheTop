@@ -87,6 +87,7 @@ GameObject:
   - 23: {fileID: 338260381}
   - 143: {fileID: 338260380}
   - 114: {fileID: 338260379}
+  - 114: {fileID: 338260385}
   m_Layer: 0
   m_Name: Monkey
   m_TagString: Player
@@ -185,6 +186,17 @@ Transform:
   m_Children:
   - {fileID: 995751108}
   m_Father: {fileID: 0}
+--- !u!114 &338260385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338260378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce543ee908184123b7c31388c89fa68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &662639549
 Prefab:
   m_ObjectHideFlags: 0
