@@ -39,10 +39,16 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	private GameObject mainCam;
 	private bool onTree = false;
 
+	private Transform tree1, tree2, tree3;
+	public ExtendTreeTrunk.TreeType [] tree = new ExtendTreeTrunk.TreeType [3];
 	void Start () {
 		obstacles [0] = beeHiveObstacle;
 		obstacles [1] = snakeObstacle;
 		obstacles [2] = unclimbableObstacle;
+
+		tree [0] = ExtendTreeTrunk.TreeType.CARTOON;
+		tree [1] = ExtendTreeTrunk.TreeType.CARTOON;
+		tree [2] = ExtendTreeTrunk.TreeType.CARTOON;
 
 		pos = new float[3];
 		pos[0] = 30.0f;
@@ -57,68 +63,58 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		spawner = this.gameObject;
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 
-		Transform tree1 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)), Quaternion.identity);
-		Transform tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
-		Transform tree3 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[2]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[2]/180.0f)), Quaternion.identity);
+		tree1 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)), Quaternion.identity);
+		tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
+		tree3 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[2]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[2]/180.0f)), Quaternion.identity);
+
+		tree1.gameObject.GetComponent<ExtendTreeTrunk> ().treeID = 0;
+		tree2.gameObject.GetComponent<ExtendTreeTrunk> ().treeID = 1;
+		tree3.gameObject.GetComponent<ExtendTreeTrunk> ().treeID = 2;
 
 		tree1.transform.parent = spawner.transform;
 		tree2.transform.parent = spawner.transform;
 		tree3.transform.parent = spawner.transform;
 
-		SpawnObstacle();
+		Invoke ("SpawnObstacle", 2);
 	}
 
 	void SpawnObstacle() {
+		bool [] obstacleOnTree = new bool [3];
+		obstacleOnTree [0] = false;
+		obstacleOnTree [1] = false;
+		obstacleOnTree [2] = false;
 		if (!spawnedTreeTop) {
-			float beeHiveDistance = distance + 1.0f;
-
 			bool spawnUnclimbable = false;
-
-			bool [] obstacleOnTree = new bool[3];
-			obstacleOnTree [0] = false;
-			obstacleOnTree [1] = false;
-			obstacleOnTree [2] = false;
-
-			float [] rotateObstacle = new float[3]; // rotate obstacle depending on whichTree
-			rotateObstacle [0] = 240.0f;
-			rotateObstacle [1] = 120.0f;
-			rotateObstacle [2] = 0.0f;
-
 			int numObstacles = Random.Range (1, 3); // number of obstacles to spawn, either 1 or 2
 			int whichObstacle = Random.Range (0, obstacles.Length);
 			if (obstacles [whichObstacle] == unclimbableObstacle)
 				spawnUnclimbable = true;
+			
+			if (spawnUnclimbable) {
+				print ("spawning unclimbable!");
+				tree[0] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
+				tree[1] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
+				tree[2] = ExtendTreeTrunk.TreeType.UNCLIMBABLE;
+				spawnUnclimbable = false;
+			} else {
+				for (int i = 0; i < numObstacles; i++) {
+					whichObstacle = Random.Range (0, obstacles.Length - 1); // choose which obstacle to spawn
+					int whichTree = Random.Range (0, 3); // choose which tree to spawn on
+					
+					if (!obstacleOnTree [whichTree]) { // if there isn't an obstacle on this tree
+						obstacleOnTree [whichTree] = true; // mark that we're spawning an obstacle on this tree
 
-			if (!moveLeft && !moveRight && onTree) {
-				if (spawnUnclimbable) {
-					for (int i = 0; i < 3; i++) {
-						Transform obstacle;
-
-						obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((distance) * Mathf.Cos (Mathf.PI * pos [i] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (distance) * Mathf.Sin (Mathf.PI * pos [i] / 180.0f)), Quaternion.AngleAxis (rotateObstacle [i] + 180.0f, new Vector3 (0, 1, 0)));
-						obstacle.transform.parent = spawner.transform;
-					}
-				} else {
-					for (int i = 0; i < numObstacles; i++) {
-						whichObstacle = Random.Range (0, obstacles.Length - 1); // choose which obstacle to spawn
-						int whichTree = Random.Range (0, 3); // choose which tree to spawn on
-
-						if (!obstacleOnTree [whichTree]) { // if there isn't an obstacle on this tree
-							obstacleOnTree [whichTree] = true; // mark that we're spawning an obstacle on this tree
-
-							// spawn obstacle
-							Transform obstacle;
-							if( whichObstacle == 1 ) {
-								obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((distance) * Mathf.Cos (Mathf.PI * pos [i] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (distance) * Mathf.Sin (Mathf.PI * pos [i] / 180.0f)), Quaternion.AngleAxis (rotateObstacle [i] + 180.0f, new Vector3 (0, 1, 0)));
-							}
-							else {
-								obstacle = (Transform)Instantiate (obstacles [whichObstacle], new Vector3 ((beeHiveDistance) * Mathf.Cos (Mathf.PI * pos [i] / 180.0f), mainCam.transform.position.y + obstaclePlacementOffset, (beeHiveDistance) * Mathf.Sin (Mathf.PI * pos [i] / 180.0f)), Quaternion.AngleAxis (rotateObstacle [i] + 180.0f, new Vector3 (0, 1, 0)));
-							}
-							obstacle.transform.parent = spawner.transform;
+					switch (whichObstacle) {
+							case 0:
+								tree[whichTree] = ExtendTreeTrunk.TreeType.BEEHIVE;
+								break;
+							case 1:
+								tree[whichTree] = ExtendTreeTrunk.TreeType.SNAKE;
+								break;
 						}
 					}
 				}
 			}
-
 			Invoke ("SpawnObstacle", Random.Range (obstacleSpawnMin, obstacleSpawnMax));
 		}
 	}

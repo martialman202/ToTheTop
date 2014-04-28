@@ -12,6 +12,7 @@ public class testAutoMonkey : MonoBehaviour {
 	private float lastHitTime = 0.0f;
 
 	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
+	private Color origColor;
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
 	MonkeyState monkeyState = MonkeyState.initial;
 	//int monkeyState = (int)MonkeyState.initial;
@@ -26,6 +27,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void Start () {
 		print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+		origColor = gameObject.renderer.material.color;
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -57,7 +59,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		print ("Life: " + lifePoints);
+		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
 		}
@@ -103,13 +105,12 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		//Debug.Break ();
 		Application.LoadLevel(0);
 	}
 	
 	void win() {
-		Debug.Log ("You Win");
-		Debug.Break ();
+		print("You Win");
+		Application.LoadLevel(0);
 	}
 	
 }
