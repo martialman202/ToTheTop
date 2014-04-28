@@ -31,6 +31,9 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	private bool spawnedTreeTop = false;
 	public float treeTopHeightOffset = 72.25f;
 
+	public Transform bananas;
+	public float bananasHeightOffset = 5.0f;
+
 	private bool moveRight = false;
 	private bool moveLeft = false;
 
@@ -121,7 +124,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (mainCam.transform.position.y >= winHeight && !spawnedTreeTop) {
+		if (!moveLeft && !moveRight && mainCam.transform.position.y >= winHeight && !spawnedTreeTop) {
 			spawnedTreeTop = true;
 			Vector3 h = this.transform.position + (Vector3.up*(mainCam.transform.position.y+treeTopHeightOffset));
 			Transform tt1 = (Transform)Instantiate(treeTop, h + new Vector3(distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)),Quaternion.identity);
@@ -131,6 +134,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 			tt1.transform.parent = spawner.transform;
 			tt2.transform.parent = spawner.transform;
 			tt3.transform.parent = spawner.transform;
+
+			Instantiate(bananas, h + new Vector3(0,bananasHeightOffset,0), Quaternion.identity);
 		}
 
 		GameObject monkey = GameObject.Find ("Monkey");
