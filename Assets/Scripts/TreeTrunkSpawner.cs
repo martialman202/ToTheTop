@@ -175,6 +175,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					set.y = rotations[currentRotation];
 					spawner.transform.eulerAngles = set;
 					moveRight = false;
+					x.onTree = true;
 				}
 			}
 			else if( spawner.transform.eulerAngles.y >= rotations[currentRotation] ) {
@@ -182,6 +183,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				set.y = rotations[currentRotation];
 				spawner.transform.eulerAngles = set;
 				moveRight = false;
+				x.onTree = true;
 			}
 			else {
 				spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
@@ -198,6 +200,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					set.y = rotations[currentRotation];
 					spawner.transform.eulerAngles = set;
 					moveLeft = false;
+					x.onTree = true;
 				}
 			}
 			else if( rotations[currentRotation] == 240.0f ) {
@@ -209,6 +212,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					set.y = rotations[currentRotation];
 					spawner.transform.eulerAngles = set;
 					moveLeft = false;
+					x.onTree = true;
 				}
 			}
 			else if( spawner.transform.eulerAngles.y <= rotations[currentRotation] ) {

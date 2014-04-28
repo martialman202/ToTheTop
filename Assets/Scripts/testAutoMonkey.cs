@@ -86,7 +86,7 @@ public class testAutoMonkey : MonoBehaviour {
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
 		} else if (monkeyState == MonkeyState.win) {
-			if (isJumping) {
+			if (isJumping) { // finish jumping before winning
 				jumpVel += simGravity;
 				if (origZ <= gameObject.transform.position.z + jumpVel * Time.deltaTime) {
 					Vector3 newPos = gameObject.transform.position;
