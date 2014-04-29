@@ -238,7 +238,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
       propertyPath: winHeight
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
       propertyPath: snakeObstacle
@@ -268,6 +268,14 @@ Prefab:
       propertyPath: bananas
       value: 
       objectReference: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
+    - target: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
+      propertyPath: obstacleSpawnMin
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
+      propertyPath: obstacleSpawnMax
+      value: .75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c3d5ff5aa58f4bc39aba34fb5343b5d, type: 2}
   m_RootGameObject: {fileID: 1185485445}
@@ -363,7 +371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &760939779
 Renderer:
   m_ObjectHideFlags: 0
@@ -568,11 +576,11 @@ MonoBehaviour:
   beeHiveObstacle: {fileID: 400010, guid: c59025f1454f3854a82627134cb7a255, type: 2}
   snakeObstacle: {fileID: 400056, guid: ecc15a72301632942b40ba46848e23d8, type: 2}
   unclimbableObstacle: {fileID: 400002, guid: e140286c7486eaf45b6ba0b826eb8d32, type: 2}
-  obstacleSpawnMin: .75
-  obstacleSpawnMax: 1.5
+  obstacleSpawnMin: .5
+  obstacleSpawnMax: .75
   obstaclePlacementOffset: 40
   treeTop: {fileID: 400002, guid: dfe7e92b501244b4f8864a9c1767b459, type: 2}
-  winHeight: 100
+  winHeight: 1000
   treeTopHeightOffset: 72.25
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
