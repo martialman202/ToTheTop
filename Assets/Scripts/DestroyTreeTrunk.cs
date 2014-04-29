@@ -17,7 +17,7 @@ public class DestroyTreeTrunk : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Transform parent = thisTrunk.transform.parent;
-		if(mainCam.transform.position.y >= thisTrunk.transform.position.y+offset && parent.tag == "TreeSpawner") {
+		if(mainCam.transform.position.y >= thisTrunk.transform.position.y+offset && parent.tag != "TreeSpawner") {
 			Transform child = thisTrunk.transform.GetChild(0);
 			child.transform.parent = parent;
 			Destroy(thisTrunk);

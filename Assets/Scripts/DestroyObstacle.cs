@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class DestroyObstacle : MonoBehaviour {
-
+	
 	public float offset = 25.0f;
 	
 	public GameObject mainCam;
