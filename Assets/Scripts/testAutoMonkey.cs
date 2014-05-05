@@ -21,6 +21,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 
 	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
+	private Color origColor;
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
 	MonkeyState monkeyState = MonkeyState.initial;
 
@@ -53,7 +54,8 @@ public class testAutoMonkey : MonoBehaviour {
 
 		//Set position
 		//TODO: have the monkey start relative to the tree spawners spawn distance
-
+		
+		origColor = gameObject.renderer.material.color;
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -87,7 +89,6 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
@@ -119,7 +120,7 @@ public class testAutoMonkey : MonoBehaviour {
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
 		} else if (monkeyState == MonkeyState.win) {
-			if (isJumping) {
+			if (isJumping) { // finish jumping before winning
 				jumpVel += simGravity;
 				if (origZ <= gameObject.transform.position.z + jumpVel * Time.deltaTime) {
 					Vector3 newPos = gameObject.transform.position;
@@ -138,13 +139,12 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		//Debug.Break ();
 		Application.LoadLevel(0);
 	}
 	
 	void win() {
 		Debug.Log ("You Win");
-		//Debug.Break ();
+		Application.LoadLevel(0);
 	}
 	
 }
