@@ -13,6 +13,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	private GameObject mainCam; //camera should stop following monkey on lose //Will be used for camera work later
 	private Color origColor;
+	private MonkeyMouse mmouse;
 	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
 	MonkeyState monkeyState = MonkeyState.initial;
 	//int monkeyState = (int)MonkeyState.initial;
@@ -28,6 +29,7 @@ public class testAutoMonkey : MonoBehaviour {
 		print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
 		origColor = gameObject.renderer.material.color;
+		mmouse = this.GetComponent<MonkeyMouse> ();
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -71,13 +73,9 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
-	bool MouseMoveLeft()
-	{
-		return Input.GetMouseButton (0);
-	}
-
 	// Update is called once per frame
 	void Update () {
+
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
@@ -87,9 +85,10 @@ public class testAutoMonkey : MonoBehaviour {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*moveSpeed;
 
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up")) && onTree) {
+			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
+				mmouse.ResetPos();
 			}
 
 			if (isJumping) {
