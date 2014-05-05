@@ -19,8 +19,8 @@ public class testAutoMonkey : MonoBehaviour {
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
-	public float simGravity = 2.0f;
-	public float jumpImpulse = -60.0f;
+	public float simGravity = 3.0f;
+	public float jumpImpulse = -45.0f;
 	public float origZ = 0.0f;
 
 	// Use this for initialization
@@ -40,6 +40,20 @@ public class testAutoMonkey : MonoBehaviour {
 			print ("collision detected!");
 		}
 
+	}
+
+	void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		if (hit.gameObject.tag == "Tree" && !onTree && monkeyState != MonkeyState.win) {
+			moveDirection = new Vector3 (0, 1, 0);
+			onTree = true;
+			monkeyState = MonkeyState.climbing;
+			print ("collision detected!");
+		}
+		else if( hit.gameObject.tag == "Tree" && isJumping) {
+			isJumping = false;
+			jumpVel = 0;
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -65,7 +79,8 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 
 		if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
-			gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
+			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
+			Vector3 dir = moveDirection*moveSpeed;
 
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up")) && onTree) {
 				isJumping = true;
@@ -74,29 +89,20 @@ public class testAutoMonkey : MonoBehaviour {
 
 			if (isJumping) {
 				jumpVel += simGravity;
-				if (origZ <= gameObject.transform.position.z + jumpVel * Time.deltaTime) {
-					Vector3 newPos = gameObject.transform.position;
-					newPos.z = origZ;
-					gameObject.transform.position = newPos;
-					isJumping = false;
-				} else {
-					gameObject.transform.Translate (new Vector3 (0, 0, -1) * jumpVel * Time.deltaTime);
-				}
+				dir += new Vector3(0,0,jumpVel);
 			}
+
+			CharacterController controller = GetComponent<CharacterController>();
+			controller.Move(dir * Time.deltaTime);
+
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
 		} else if (monkeyState == MonkeyState.win) {
 			if (isJumping) { // finish jumping before winning
 				jumpVel += simGravity;
-				if (origZ <= gameObject.transform.position.z + jumpVel * Time.deltaTime) {
-					Vector3 newPos = gameObject.transform.position;
-					newPos.z = origZ;
-					gameObject.transform.position = newPos;
-					isJumping = false;
-					win ();
-				} else {
-					gameObject.transform.Translate (new Vector3 (0, 0, -1) * jumpVel * Time.deltaTime);
-				}
+				Vector3 dir = new Vector3(0,0,jumpVel);
+				CharacterController controller = GetComponent<CharacterController>();
+				controller.Move(dir * Time.deltaTime);
 			}
 			else if(onTree)
 				win ();
