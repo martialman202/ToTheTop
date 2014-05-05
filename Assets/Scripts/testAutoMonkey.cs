@@ -57,6 +57,11 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
+	bool MouseMoveLeft()
+	{
+		return Input.GetMouseButton (0);
+	}
+
 	// Update is called once per frame
 	void Update () {
 		//print ("Life: " + lifePoints);
