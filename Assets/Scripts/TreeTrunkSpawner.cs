@@ -31,6 +31,9 @@ public class TreeTrunkSpawner : MonoBehaviour {
 	private bool spawnedTreeTop = false;
 	public float treeTopHeightOffset = 72.25f;
 
+	public Transform bananas;
+	public float bananasHeightOffset = 5.0f;
+
 	private bool moveRight = false;
 	private bool moveLeft = false;
 
@@ -121,7 +124,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (mainCam.transform.position.y >= winHeight && !spawnedTreeTop) {
+		if (!moveLeft && !moveRight && mainCam.transform.position.y >= winHeight && !spawnedTreeTop) {
 			spawnedTreeTop = true;
 			Vector3 h = this.transform.position + (Vector3.up*(mainCam.transform.position.y+treeTopHeightOffset));
 			Transform tt1 = (Transform)Instantiate(treeTop, h + new Vector3(distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)),Quaternion.identity);
@@ -131,15 +134,17 @@ public class TreeTrunkSpawner : MonoBehaviour {
 			tt1.transform.parent = spawner.transform;
 			tt2.transform.parent = spawner.transform;
 			tt3.transform.parent = spawner.transform;
+
+			Instantiate(bananas, h + new Vector3(0,bananasHeightOffset,0), Quaternion.identity);
 		}
 
-		GameObject monkey = GameObject.Find ("Monkey");
-		testAutoMonkey x = monkey.GetComponent<testAutoMonkey> ();
-		onTree = x.onTree;
-		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree && !x.isJumping) {
+		GameObject m = GameObject.Find ("Monkey");
+		testAutoMonkey monkey = m.GetComponent<testAutoMonkey> ();
+		onTree = monkey.onTree;
+		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
-			x.isJumping = false;
-			x.jumpVel = x.jumpImpulse;
+			monkey.isJumping = false;
+			monkey.jumpVel = monkey.jumpImpulse;
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
 			}
@@ -147,10 +152,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree && !x.isJumping) {
+		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
-			x.isJumping = false;
-			x.jumpVel = x.jumpImpulse;
+			monkey.isJumping = false;
+			monkey.jumpVel = monkey.jumpImpulse;
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;
 			}
@@ -160,7 +165,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		}
 
 		if (moveRight) {
-			x.onTree = false;
+			monkey.onTree = false;
 			if( rotations[currentRotation] == 0.0f ) {
 				if( spawner.transform.eulerAngles.y >= rotations[2] ) {
 					spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
@@ -170,6 +175,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					set.y = rotations[currentRotation];
 					spawner.transform.eulerAngles = set;
 					moveRight = false;
+					monkey.onTree = true;
 				}
 			}
 			else if( spawner.transform.eulerAngles.y >= rotations[currentRotation] ) {
@@ -177,13 +183,14 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				set.y = rotations[currentRotation];
 				spawner.transform.eulerAngles = set;
 				moveRight = false;
+				monkey.onTree = true;
 			}
 			else {
 				spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
 			}
 		}
 		else if (moveLeft) {
-			x.onTree = false;
+			monkey.onTree = false;
 			if( rotations[currentRotation] == 0.0f ) {
 				if( spawner.transform.eulerAngles.y-0.1f <= rotations[1] ) {
 					spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
@@ -193,6 +200,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					set.y = rotations[currentRotation];
 					spawner.transform.eulerAngles = set;
 					moveLeft = false;
+					monkey.onTree = true;
 				}
 			}
 			else if( rotations[currentRotation] == 240.0f ) {
@@ -204,6 +212,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 					set.y = rotations[currentRotation];
 					spawner.transform.eulerAngles = set;
 					moveLeft = false;
+					monkey.onTree = true;
 				}
 			}
 			else if( spawner.transform.eulerAngles.y <= rotations[currentRotation] ) {
@@ -211,6 +220,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				set.y = rotations[currentRotation];
 				spawner.transform.eulerAngles = set;
 				moveLeft = false;
+				monkey.onTree = true;
 			}
 			else {
 				spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
