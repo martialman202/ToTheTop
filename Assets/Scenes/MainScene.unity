@@ -115,7 +115,7 @@ MonoBehaviour:
   jumpVel: 0
   simGravity: 3
   jumpImpulse: -50
-  origZ: 0
+  jumpDir: {x: 0, y: 0, z: 1}
 --- !u!143 &338260380
 CharacterController:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 995751108}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1697772360}
 --- !u!114 &338260385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1697772360}
     m_Modifications:
     - target: {fileID: 400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: m_LocalPosition.x
@@ -582,9 +582,6 @@ MonoBehaviour:
   numTrunks: 5
   distance: 5
   pos: []
-  currentRotation: 0
-  rotations: []
-  moveSpeed: 200
   beeHiveObstacle: {fileID: 400010, guid: c59025f1454f3854a82627134cb7a255, type: 2}
   snakeObstacle: {fileID: 400056, guid: ecc15a72301632942b40ba46848e23d8, type: 2}
   unclimbableObstacle: {fileID: 400002, guid: e140286c7486eaf45b6ba0b826eb8d32, type: 2}
@@ -598,6 +595,50 @@ MonoBehaviour:
   bananasHeightOffset: 5
   spawner: {fileID: 0}
   tree: 000000000000000000000000
+--- !u!1 &1697772359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1697772360}
+  - 114: {fileID: 1697772361}
+  m_Layer: 0
+  m_Name: SpinController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1697772360
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1697772359}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 338260384}
+  m_Father: {fileID: 0}
+--- !u!114 &1697772361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1697772359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ab47ee7d30ef04baf71618d3b9e6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRotation: 0
+  rotations: []
+  moveSpeed: 250
+  moveRight: 0
+  moveLeft: 0
 --- !u!1 &1996748312
 GameObject:
   m_ObjectHideFlags: 0
