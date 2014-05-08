@@ -93,11 +93,8 @@ public class testAutoMonkey : MonoBehaviour {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
-<<<<<<< HEAD
 				mmouse.ResetPos();
-=======
 				origPos = this.gameObject.transform.position;
->>>>>>> emfb760
 			}
 
 			if (isJumping) {
@@ -123,7 +120,6 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void lose() {
-<<<<<<< HEAD
 		print("You Lose.");
 		Application.LoadLevel("EndGameScene");
 	}
@@ -131,15 +127,6 @@ public class testAutoMonkey : MonoBehaviour {
 	void win() {
 		print("You Win");
 		Application.LoadLevel("EndGameScene");
-=======
-		//print("You Lose.");
-		Application.LoadLevel(0);
-	}
-	
-	void win() {
-		//print("You Win");
-		Application.LoadLevel(0);
->>>>>>> emfb760
 	}
 	
 }

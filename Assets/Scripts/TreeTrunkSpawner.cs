@@ -32,11 +32,8 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	public GameObject spawner;
 	private GameObject mainCam;
-<<<<<<< HEAD
-	private bool onTree = false;
 	private MonkeyMouse mmouse;
-=======
->>>>>>> emfb760
+
 
 	private Transform tree1, tree2, tree3;
 	public ExtendTreeTrunk.TreeType [] tree = new ExtendTreeTrunk.TreeType [3];
@@ -130,94 +127,6 @@ public class TreeTrunkSpawner : MonoBehaviour {
 			tt3.transform.parent = spawner.transform;
 
 			Instantiate(bananas, h + new Vector3(0,bananasHeightOffset,0), Quaternion.identity);
-		}
-		GameObject m = GameObject.Find ("Monkey");
-		testAutoMonkey monkey = m.GetComponent<testAutoMonkey> ();
-		onTree = monkey.onTree;
-		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right") || mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
-			moveRight = true;
-			monkey.isJumping = false;
-			monkey.jumpVel = monkey.jumpImpulse;
-			if( currentRotation >= 2 ) {
-				currentRotation = 0;
-			}
-			else {
-				currentRotation++;
-			}
-		}
-		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left") || mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
-			moveLeft = true;
-			monkey.isJumping = false;
-			monkey.jumpVel = monkey.jumpImpulse;
-			if( currentRotation <= 0 ) {
-				currentRotation = 2;
-			}
-			else {
-				currentRotation--;
-			}
-		}
-
-		if (moveRight) {
-			monkey.onTree = false;
-			if( rotations[currentRotation] == 0.0f ) {
-				if( spawner.transform.eulerAngles.y >= rotations[2] ) {
-					spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
-				}
-				else {
-					Vector3 set = spawner.transform.eulerAngles;
-					set.y = rotations[currentRotation];
-					spawner.transform.eulerAngles = set;
-					moveRight = false;
-					monkey.onTree = true;
-				}
-			}
-			else if( spawner.transform.eulerAngles.y >= rotations[currentRotation] ) {
-				Vector3 set = spawner.transform.eulerAngles;
-				set.y = rotations[currentRotation];
-				spawner.transform.eulerAngles = set;
-				moveRight = false;
-				monkey.onTree = true;
-			}
-			else {
-				spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
-			}
-		}
-		else if (moveLeft) {
-			monkey.onTree = false;
-			if( rotations[currentRotation] == 0.0f ) {
-				if( spawner.transform.eulerAngles.y-0.1f <= rotations[1] ) {
-					spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
-				}
-				else {
-					Vector3 set = spawner.transform.eulerAngles;
-					set.y = rotations[currentRotation];
-					spawner.transform.eulerAngles = set;
-					moveLeft = false;
-					monkey.onTree = true;
-				}
-			}
-			else if( rotations[currentRotation] == 240.0f ) {
-				if( spawner.transform.eulerAngles.y == 0.0f || spawner.transform.eulerAngles.y > rotations[currentRotation] ) {
-					spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
-				}
-				else {
-					Vector3 set = spawner.transform.eulerAngles;
-					set.y = rotations[currentRotation];
-					spawner.transform.eulerAngles = set;
-					moveLeft = false;
-					monkey.onTree = true;
-				}
-			}
-			else if( spawner.transform.eulerAngles.y <= rotations[currentRotation] ) {
-				Vector3 set = spawner.transform.eulerAngles;
-				set.y = rotations[currentRotation];
-				spawner.transform.eulerAngles = set;
-				moveLeft = false;
-				monkey.onTree = true;
-			}
-			else {
-				spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
-			}
 		}
 	}
 }
