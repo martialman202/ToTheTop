@@ -24,12 +24,12 @@ public class MonkeyMouse : MonoBehaviour {
 		return dragging && (change.sqrMagnitude != 0) && (change.y > threshhold) && (change.y > change.x);
 	}
 
-	public bool MoveLeft() {
+	public bool MoveRight() {
 		Vector3 change = DeltaMousePos();
 		return dragging && (change.sqrMagnitude != 0) && (-1.0f * change.x > threshhold) && (-1.0f * change.x > change.y);
 	}
 
-	public bool MoveRight() {
+	public bool MoveLeft() {
 		Vector3 change = DeltaMousePos();
 		return dragging && (change.sqrMagnitude != 0) && (change.x > threshhold) && (change.x > change.y);
 	}

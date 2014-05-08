@@ -604,6 +604,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1697772360}
   - 114: {fileID: 1697772361}
+  - 114: {fileID: 1697772362}
   m_Layer: 0
   m_Name: SpinController
   m_TagString: Untagged
@@ -639,6 +640,17 @@ MonoBehaviour:
   moveSpeed: 250
   moveRight: 0
   moveLeft: 0
+--- !u!114 &1697772362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1697772359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74b3bd668a1c4e488a3966b7fa9d4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1996748312
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,9 @@ public class SpinController : MonoBehaviour {
 	private bool onTree = false;
 	
 	private GameObject spawner;
+	private GameObject monkeyObject;
+	private testAutoMonkey monkey;
+	private MonkeyMouse mmouse;
 
 	// Use this for initialization
 	void Start () {
@@ -22,14 +25,16 @@ public class SpinController : MonoBehaviour {
 		rotations[0] = 0.0f;
 		rotations[1] = 120.0f;
 		rotations[2] = 240.0f;
+
+		monkeyObject = GameObject.Find ("Monkey");
+		monkey = monkeyObject.GetComponent<testAutoMonkey> ();
+		mmouse = this.GetComponent<MonkeyMouse> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		GameObject m = GameObject.Find ("Monkey");
-		testAutoMonkey monkey = m.GetComponent<testAutoMonkey> ();
 		onTree = monkey.onTree;
-		if ((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		if ((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
 
 			if( currentRotation >= 2 ) {
@@ -39,7 +44,7 @@ public class SpinController : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		else if((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
 
 			if( currentRotation <= 0 ) {
