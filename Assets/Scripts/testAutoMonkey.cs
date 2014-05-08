@@ -30,6 +30,7 @@ public class testAutoMonkey : MonoBehaviour {
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
 		origColor = gameObject.renderer.material.color;
 		mmouse = this.GetComponent<MonkeyMouse> ();
+		PlayerPrefs.SetInt ("previousLevel", Application.loadedLevel);
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -115,12 +116,12 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		Application.LoadLevel(0);
+		Application.LoadLevel("EndGameScene");
 	}
 	
 	void win() {
 		print("You Win");
-		Application.LoadLevel(0);
+		Application.LoadLevel("EndGameScene");
 	}
 	
 }
