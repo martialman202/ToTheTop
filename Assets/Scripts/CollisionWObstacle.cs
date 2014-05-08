@@ -13,7 +13,7 @@ public class CollisionWObstacle : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Obstacle") {
-			print("Hit obstacle, should change color");
+			//print("Hit obstacle, should change color");
 			lastHit = 0;
 		}
 	}
