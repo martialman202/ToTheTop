@@ -42,6 +42,10 @@ public class BuildLevel : MonoBehaviour {
 
 	private GameObject spawner;
 
+	/*void Awake() {
+		Application.targetFrameRate = 120;
+	}*/
+
 	private void LoadIntro()
 	{
 		for (int i = 0; i < introHeight; ++i) {

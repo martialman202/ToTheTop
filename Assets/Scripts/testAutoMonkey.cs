@@ -73,6 +73,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		print (Time.deltaTime);
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
