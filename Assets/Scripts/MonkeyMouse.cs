@@ -5,13 +5,15 @@ public class MonkeyMouse : MonoBehaviour {
 
 	private Vector3 prevMousePos;
 	private Vector3 currMousePos;
-	private float threshhold = 0.0005f;
+	private float threshhold = 0.001f;
+	private bool dragging;
 	private int frameCount;
 	private int frameWait = 3;
 
 	public MonkeyMouse () {
-		prevMousePos = new Vector3 (0.0f, 0.0f);
-		currMousePos = new Vector3 (0.0f, 0.0f);
+		currMousePos = Vector3.zero;
+		prevMousePos = Vector3.zero;
+		dragging = false;
 		frameCount = 0;
 		print ("Initial mmouse " + currMousePos.y);
 	}
@@ -54,6 +56,18 @@ public class MonkeyMouse : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		currMousePos = Input.mousePosition;
+		if(Input.GetMouseButton(0)) {
+			if(frameCount == frameWait) {
+				prevMousePos = currMousePos;
+				frameCount = 0;
+			}
+			else {
+				frameCount++;
+			}
+		}
+	
+		/*
 		if(!Input.GetMouseButtonDown(0)) {
 			this.ResetPos();
 		}
