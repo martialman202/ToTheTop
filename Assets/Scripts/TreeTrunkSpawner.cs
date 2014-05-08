@@ -41,6 +41,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	private GameObject mainCam;
 	private bool onTree = false;
+	private MonkeyMouse mmouse;
 
 	private Transform tree1, tree2, tree3;
 	public ExtendTreeTrunk.TreeType [] tree = new ExtendTreeTrunk.TreeType [3];
@@ -65,6 +66,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 		spawner = this.gameObject;
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
+		mmouse = GameObject.FindGameObjectWithTag ("Player").GetComponent<MonkeyMouse> ();
 
 		tree1 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)), Quaternion.identity);
 		tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
@@ -141,7 +143,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		GameObject m = GameObject.Find ("Monkey");
 		testAutoMonkey monkey = m.GetComponent<testAutoMonkey> ();
 		onTree = monkey.onTree;
-		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right"))) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		if ((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right") || mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
 			monkey.isJumping = false;
 			monkey.jumpVel = monkey.jumpImpulse;
@@ -152,7 +154,7 @@ public class TreeTrunkSpawner : MonoBehaviour {
 				currentRotation++;
 			}
 		}
-		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left"))) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		else if((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left") || mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
 			monkey.isJumping = false;
 			monkey.jumpVel = monkey.jumpImpulse;
