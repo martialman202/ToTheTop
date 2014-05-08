@@ -27,7 +27,8 @@ public class ExtendTreeTrunk : MonoBehaviour {
 	void Start () {
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 		thisTrunk = this.gameObject;
-		treeID = this.transform.parent.gameObject.GetComponent<ExtendTreeTrunk> ().treeID;
+		if( this.transform.parent.gameObject.GetComponent<ExtendTreeTrunk>() )
+			treeID = this.transform.parent.gameObject.GetComponent<ExtendTreeTrunk> ().treeID;
 		this.gameObject.name = "Tree Trunk"; //or else (clone)(clone)...(clone)
 		rotations [0] = 240.0f;
 		rotations [1] = 120.0f;
