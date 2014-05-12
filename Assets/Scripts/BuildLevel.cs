@@ -7,7 +7,7 @@ using System.IO;
 
 public class BuildLevel : MonoBehaviour {
 
-	public string levelFileName = "Assets/Levels/test.level";
+	public string levelFileName = "Levels/test";
 
 	public float distance = 5.0f;
 
@@ -81,128 +81,96 @@ public class BuildLevel : MonoBehaviour {
 		// Handle any problems that might arise when reading the text
 		try
 		{
-			string line;
-			// Create a new StreamReader, tell it which file to read and what encoding the file
-			// was saved as
-			StreamReader theReader = new StreamReader(fileName, Encoding.Default);
+			TextAsset theReader = Resources.Load(fileName) as TextAsset;
+			print(fileName);
+			print (theReader.text);
+			string[] linesFromFile = theReader.text.Split("\n"[0]);
 
-			// Immediately clean up the reader after this block of code is done.
-			// You generally use the "using" statement for potentially memory-intensive objects
-			// instead of relying on garbage collection.
-			// (Do not confuse this with the using directive for namespace at the 
-			// beginning of a class!)
-			using (theReader)
-			{
-				// While there's lines left in the text file, do this:
-				do
+			foreach ( string line in linesFromFile ) {
+				print (line);		
+				string[] entries = line.Split(' ');
+				if (entries.Length == 3)
 				{
-					line = theReader.ReadLine();
-					
-					if (line != null)
-					{
-						// Do whatever you need to do with the text line, it's a string now
-						// In this example, I split it into arguments based on comma
-						// deliniators, then send that array to DoStuff()
-						string[] entries = line.Split(' ');
-						if (entries.Length == 3)
-						{
-							Transform tree1;
-							Transform tree2;
-							Transform tree3;
+					Transform tree1;
+					Transform tree2;
+					Transform tree3;
 
-							switch(int.Parse(entries[0])) {
-							case 1:
-								tree1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
-								break;
-							case 2:
-								tree1 = (Transform)Instantiate(beehiveTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
-								break;
-							case 3:
-								tree1 = (Transform)Instantiate(snakeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
-								break;
-							case 4:
-								tree1 = (Transform)Instantiate(bushTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
-								break;
-							default:
-								tree1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
-								break;
-							}
+					switch(int.Parse(entries[0])) {
+						case 1:
+							tree1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
+							break;
+						case 2:
+							tree1 = (Transform)Instantiate(beehiveTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
+							break;
+						case 3:
+							tree1 = (Transform)Instantiate(snakeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
+							break;
+						case 4:
+							tree1 = (Transform)Instantiate(bushTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
+							break;
+						default:
+							tree1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
+							break;
+					}
 
-							switch(int.Parse(entries[1])) {
-							case 1:
-								tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
-								break;
-							case 2:
-								tree2 = (Transform)Instantiate(beehiveTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
-								break;
-							case 3:
-								tree2 = (Transform)Instantiate(snakeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
-								break;
-							case 4:
-								tree2 = (Transform)Instantiate(bushTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
-								break;
-							default:
-								tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
-								break;
-							}
+					switch(int.Parse(entries[1])) {
+						case 1:
+							tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
+							break;
+						case 2:
+							tree2 = (Transform)Instantiate(beehiveTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
+							break;
+						case 3:
+							tree2 = (Transform)Instantiate(snakeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
+							break;
+						case 4:
+							tree2 = (Transform)Instantiate(bushTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
+							break;
+						default:
+							tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
+							break;
+					}
 
-							switch(int.Parse(entries[2])) {
-							case 1:
-								tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-								break;
-							case 2:
-								tree3 = (Transform)Instantiate(beehiveTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-								break;
-							case 3:
-								tree3 = (Transform)Instantiate(snakeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-								break;
-							case 4:
-								tree3 = (Transform)Instantiate(bushTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-								break;
-							default:
-								tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-								break;
-							}
+					switch(int.Parse(entries[2])) {
+						case 1:
+							tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+							break;
+						case 2:
+							tree3 = (Transform)Instantiate(beehiveTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+							break;
+						case 3:
+							tree3 = (Transform)Instantiate(snakeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+							break;
+						case 4:
+							tree3 = (Transform)Instantiate(bushTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+							break;
+						default:
+							tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+							break;
+					}
 
-							tree1.transform.Rotate(new Vector3(0,120.0f,0));
-							tree3.transform.Rotate(new Vector3(0,240.0f,0));
+					tree1.transform.Rotate(new Vector3(0,120.0f,0));
+					tree3.transform.Rotate(new Vector3(0,240.0f,0));
 
-							tree1.transform.parent = spawner.transform;
-							tree2.transform.parent = spawner.transform;
-							tree3.transform.parent = spawner.transform;
+					trunkCounter++;
 
-							trunkCounter++;
-
-							for (int i = 0; i < fillHeight; ++i) {
-								Transform extra1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
-								Transform extra2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
-								Transform extra3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+					for (int i = 0; i < fillHeight; ++i) {
+						Transform extra1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
+						Transform extra2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
+						Transform extra3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
 								
-								extra1.transform.parent = spawner.transform;
-								extra2.transform.parent = spawner.transform;
-								extra3.transform.parent = spawner.transform;
-								
-								trunkCounter++;
-							}
-						}
+						trunkCounter++;
 					}
 				}
-				while (line != null);
-				
-				// Done reading, close the reader and return true to broadcast success    
-				theReader.Close();
-				return true;
 			}
-		}
-		
-		// If anything broke in the try block, we throw an exception with information
-		// on what didn't work
-		catch (Exception e)
-		{
-			print(e.Message);
-			return false;
-		}
+		return true;
 	}
+	catch (Exception e)
+	{
+		print(e.Message);
+		return false;
+	}
+}
 
 	// Use this for initialization
 	void Start () {
