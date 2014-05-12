@@ -102,6 +102,7 @@ public class testAutoMonkey : MonoBehaviour {
 		if (other.gameObject.tag == "TreeTop") {
 			//print ("hit " + other.gameObject.tag);
 			monkeyState = MonkeyState.win;
+			moveDirection = Vector3.zero;
 		}
 	}
 
@@ -143,9 +144,11 @@ public class testAutoMonkey : MonoBehaviour {
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
 		} else if (monkeyState == MonkeyState.win) {
+			Vector3 dir = moveDirection*moveSpeed;
 			if (isJumping) { // finish jumping before winning
 				jumpVel += simGravity;
-				Vector3 dir = new Vector3(0,0,jumpVel);
+				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
+				//dir = new Vector3(0,0,jumpVel);
 				CharacterController controller = GetComponent<CharacterController>();
 				controller.Move(dir * Time.deltaTime);
 			}
