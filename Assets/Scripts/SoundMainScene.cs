@@ -4,8 +4,10 @@
  * Note on the audio sources:
  * 	In the array, the elements should be as follows:
  * 	0 - main music
- * 	1 - win music
+ * 	1 - win music 
  * 	2 - lose music
+ * 	3 - monkeyHurt
+ * 	4 - monkeyJump
 */
 
 using UnityEngine;
@@ -14,8 +16,10 @@ using System.Collections;
 public class SoundMainScene : MonoBehaviour {
 
 	public bool playMusic = true;
+	public float musicVolume = 0.7f; //0.0 - 1.0
+	public bool playSoundEffects = true;
 	public AudioClip [] Clips;
-	private AudioSource[] audioSources;
+	public AudioSource[] audioSources;
 
 	// Use this for initialization
 	void Start () {
@@ -25,15 +29,19 @@ public class SoundMainScene : MonoBehaviour {
 			print(i);
 			audioSources[i] = this.gameObject.AddComponent("AudioSource") as AudioSource;
 			audioSources[i].clip = Clips[i];
-		//end Audio
 		}
-	
+		audioSources [0].priority = 0; //Set music to highest priority
+		audioSources [0].volume = musicVolume; //turn it down a little bit
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (playMusic && !(AudioSource [0].isPlaying())) {
-			AudioSource.Play();
+		if (playMusic && !(audioSources [0].isPlaying)) {
+			audioSources[0].Play();
+		}
+		else if (!playMusic) {
+			if (audioSources[0].isPlaying)
+				audioSources[0].Stop ();
 		}
 	}
 }
