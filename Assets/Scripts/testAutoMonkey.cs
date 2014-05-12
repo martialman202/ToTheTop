@@ -21,28 +21,31 @@ public class testAutoMonkey : MonoBehaviour {
 
 	private GameObject mainCam;
 	private Color origColor;
-	private enum MonkeyState {initial=1, climbing=2, lose=3, win=4};
-	MonkeyState monkeyState = MonkeyState.initial;
+	private MonkeyMouse mmouse;
+	private enum MonkeyState {sceneStart = 0, initial=1, climbing=2, lose=3, win=4, pause=5};
+	MonkeyState monkeyState = MonkeyState.sceneStart;
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
 	public float simGravity = 3.0f;
 	public float jumpImpulse = -45.0f;
-	public float origZ = 0.0f;
+	public Vector3 jumpDir = new Vector3(0,0,1);
 
+	private Vector3 origPos = Vector3.zero;
+	
 	public AudioClip [] Clips;
 	private AudioSource[] audioSources;
 
+	//Camera stuff
+	public bool cameraPermission = false; //Let the monkey move when the camera gives it permission.
+	public bool isClimbing = false; //for use with CameraController only
+
 	//Audio
 	private SoundMainScene sounds;
-	//End Audio
 
 	// Use this for initialization
 	void Start () {
-		//Testing
-		print (gameObject.name + " has been started.");
-
-		//find main camera
+		//print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
 
 		//Audio
@@ -52,19 +55,19 @@ public class testAutoMonkey : MonoBehaviour {
 		//TODO: have the monkey start relative to the tree spawners spawn distance
 		
 		origColor = gameObject.renderer.material.color;
+		mmouse = this.GetComponent<MonkeyMouse> ();
+		PlayerPrefs.SetInt ("previousLevel", Application.loadedLevel);
 	}
 
-	void OnCollisionEnter(Collision other)
+	/*void OnCollisionEnter(Collision other)
 	{
 		if (other.gameObject.tag == "Tree" && !onTree && monkeyState != MonkeyState.win) {
-			origZ = gameObject.transform.position.z;
 			moveDirection = new Vector3 (0, 1, 0);
 			onTree = true;
 			monkeyState = MonkeyState.climbing;
-			print ("collision detected!");
 		}
 
-	}
+	}*/
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
 	{
@@ -72,11 +75,16 @@ public class testAutoMonkey : MonoBehaviour {
 			moveDirection = new Vector3 (0, 1, 0);
 			onTree = true;
 			monkeyState = MonkeyState.climbing;
-			print ("collision detected!");
+			isClimbing = true; //this variable is for the CameraController
+
+			//print ("collision detected!");
 		}
 		else if( hit.gameObject.tag == "Tree" && isJumping) {
 			isJumping = false;
 			jumpVel = 0;
+			Vector3 resetPos = origPos;
+			resetPos.y = this.gameObject.transform.position.y;
+			this.gameObject.transform.position = resetPos;
 		}
 	}
 
@@ -85,40 +93,48 @@ public class testAutoMonkey : MonoBehaviour {
 		if (other.gameObject.tag == "Obstacle") {
 			if (Time.time > lastHitTime + repeatDamagePeriod) {
 				lifePoints--;
-				print (gameObject.name + " hit " + other.gameObject.name + "!");
+				//print (gameObject.name + " hit " + other.gameObject.name + "!");
 				lastHitTime = Time.time;
 				if (sounds.playSoundEffects)
 					sounds.audioSources[3].Play ();
 			}
 		}
 		if (other.gameObject.tag == "TreeTop") {
-			print ("hit " + other.gameObject.tag);
+			//print ("hit " + other.gameObject.tag);
 			monkeyState = MonkeyState.win;
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
+		//print (Time.deltaTime);
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
 			monkeyState = MonkeyState.lose;
 		}
 
-		if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
+		if (monkeyState == MonkeyState.sceneStart) {
+			if (cameraPermission)
+				monkeyState = MonkeyState.initial;
+		}
+		else if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*moveSpeed;
 
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up")) && onTree) {
+			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
+
 				if (sounds.playSoundEffects)
 					sounds.audioSources[4].Play();
 
+				mmouse.ResetPos();
+				origPos = this.gameObject.transform.position;
 			}
 
 			if (isJumping) {
 				jumpVel += simGravity;
-				dir += new Vector3(0,0,jumpVel);
+				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 			}
 
 			CharacterController controller = GetComponent<CharacterController>();
@@ -140,12 +156,13 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		Application.LoadLevel(0);
+		Application.LoadLevel("EndGameScene");
 	}
 	
 	void win() {
-		Debug.Log ("You Win");
-		Application.LoadLevel(0);
+
+		print("You Win");
+		Application.LoadLevel("EndGameScene");
 	}
 	
 }

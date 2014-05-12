@@ -14,8 +14,10 @@ public class HUDScriptMainMenu : MonoBehaviour {
 		if (!PlayerPrefs.HasKey ("PlayMusic"))
 			PlayerPrefs.SetInt ("PlayMusic", 1);
 
-		GUI.enabled = true;
+		GUI.enabled = true; //had bugs earlier, used this to try and fix
 	}
+
+	//TODO: make some of these values variables so changing it changes a lot of them
 
 	void OnGUI() {
 		print ("why doesnt this work"); //seriously, why
