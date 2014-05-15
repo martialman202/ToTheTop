@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using System;
@@ -29,6 +29,8 @@ public class BuildLevel : MonoBehaviour {
 	
 	public Transform bananas;
 	public float bananasHeightOffset = 5.0f;
+
+	public float treeHeight = 0;
 
 	private GameObject spawner;
 
@@ -73,7 +75,8 @@ public class BuildLevel : MonoBehaviour {
 		tt2.transform.parent = spawner.transform;
 		tt3.transform.parent = spawner.transform;
 		
-		Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
+		/*/Transform b = (Transform)*/Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
+		treeHeight = tt1.position.y;
 	}
 
 	private bool LoadLevel(string fileName)
@@ -179,6 +182,7 @@ public class BuildLevel : MonoBehaviour {
 		LoadIntro ();
 		LoadLevel (levelFileName);
 		LoadOutro ();
+
 	}
 	
 	// Update is called once per frame
