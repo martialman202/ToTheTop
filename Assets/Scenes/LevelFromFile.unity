@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d830b3f9db195d943bf93d271130d496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFileName: Levels/med1
+  levelFileName: Levels/easy0
   distance: 5
   heightOffset: 2
   introHeight: 25
@@ -248,6 +248,9 @@ MonoBehaviour:
   treeTop: {fileID: 400002, guid: dfe7e92b501244b4f8864a9c1767b459, type: 2}
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
+  treeHeight: 0
+  progressBarEmpty: {fileID: 2800000, guid: d265d920a382542139f90297c918cef6, type: 3}
+  progressBarFull: {fileID: 2800000, guid: 93e86ca3b481f45a4bbef58ae115bb14, type: 3}
 --- !u!4 &618506411
 Transform:
   m_ObjectHideFlags: 0

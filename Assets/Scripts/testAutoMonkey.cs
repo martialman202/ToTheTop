@@ -81,6 +81,8 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		// Tell Manager how far up I've climbed
+		Manager.Instance.monkeyHeight = this.transform.position.y;
 		//print (Time.deltaTime);
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {

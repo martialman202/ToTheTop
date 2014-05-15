@@ -31,12 +31,31 @@ public class BuildLevel : MonoBehaviour {
 	public float bananasHeightOffset = 5.0f;
 
 	public float treeHeight = 0;
+	public Texture2D progressBarEmpty;
+	public Texture2D progressBarFull;
+	public Vector2 size;
+	private float barDisplay = 0.0f;
+
 
 	private GameObject spawner;
 
 	/*void Awake() {
 		Application.targetFrameRate = 120;
 	}*/
+
+	void OnGUI () {
+		// health bar
+		// draw the background:
+		GUI.BeginGroup (new Rect (Screen.width-size.x-10, 5, size.x, size.y));
+			GUI.DrawTexture (new Rect (0, 0, size.x, size.y), progressBarEmpty);
+			
+			// draw the filled-in part:
+			GUI.BeginGroup (new Rect (0, 0, size.x, size.y));
+				GUI.DrawTexture (new Rect (0, size.y, size.x, -(size.y * barDisplay)), progressBarFull);
+			GUI.EndGroup ();
+		GUI.EndGroup ();
+		//print (Manager.Instance.treeHeight);
+	}
 
 	private void LoadIntro()
 	{
@@ -77,6 +96,7 @@ public class BuildLevel : MonoBehaviour {
 		
 		/*/Transform b = (Transform)*/Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
 		treeHeight = tt1.position.y;
+		Manager.Instance.treeHeight = treeHeight;
 	}
 
 	private bool LoadLevel(string fileName)
@@ -183,9 +203,12 @@ public class BuildLevel : MonoBehaviour {
 		LoadLevel (levelFileName);
 		LoadOutro ();
 
+		size = new Vector2(Screen.width/15,Screen.height/4);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		// Update progress bar
+		barDisplay = Manager.Instance.monkeyHeight/Manager.Instance.treeHeight;
 	}
 }
