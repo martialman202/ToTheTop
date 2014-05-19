@@ -431,8 +431,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 111: {fileID: 11100000}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: CartoonSnakePrefab
   m_TagString: Obstacle
@@ -451,7 +449,6 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 64: {fileID: 6400000}
-  - 54: {fileID: 5400000}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   m_Layer: 0
@@ -848,21 +845,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100058}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5400000
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100058}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!64 &6400000
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -904,31 +886,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26ed1c933bfc984d9ef854a318b62f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 25
-  mainCam: {fileID: 0}
-  thisObstacle: {fileID: 0}
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146254453f6214b88a8d351236233f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -955,9 +912,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trunkPrefab: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
-  beeHiveTrunk: {fileID: 400012, guid: 0adb9f1482bf549aeb651d4fd8c9fd0d, type: 2}
+  beeHiveTrunk: {fileID: 400004, guid: ff33c9efcc3ec024ea1d7408178cf3c1, type: 2}
   snakeTrunk: {fileID: 400058}
-  bushTrunk: {fileID: 400004, guid: 7dd8080d3922746f998a45408070f137, type: 2}
+  bushTrunk: {fileID: 400004, guid: 00f69daeae3716a43b27db7c48d5b700, type: 2}
   placementOffset: 2
   checkOffset: 40
   childExists: 0
