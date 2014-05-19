@@ -176,3 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
+  stars:
+  - {fileID: 2800000, guid: dd343f69f9a994ff394084562317174c, type: 3}
+  - {fileID: 2800000, guid: faef81ccf571a4920a1127023675ddc2, type: 3}
+  - {fileID: 2800000, guid: 479d9d367c9d242528b0ad075fe1a8f1, type: 3}
+  - {fileID: 2800000, guid: 064034b0c27ce4bcd9760507eeea2ee2, type: 3}

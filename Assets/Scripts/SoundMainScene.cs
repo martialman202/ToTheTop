@@ -3,11 +3,12 @@
  * 
  * Note on the audio sources:
  * 	In the array, the elements should be as follows:
- * 	0 - main music
- * 	1 - win music 	--classified as sound effect
- * 	2 - lose music 	--classified as sound effect
+ * 	0 - main music loop
+ * 	1 - win sound 	--classified as sound effect
+ * 	2 - lose sound 	--classified as sound effect
  * 	3 - monkeyHurt
  * 	4 - monkeyJump
+ * 	5 - main music intro 
 */
 
 using UnityEngine;
@@ -23,6 +24,7 @@ public class SoundMainScene : MonoBehaviour {
 
 	public bool changedSettings; //this is set by another script if player prefs change
 
+	private bool playedIntro;
 	private bool playedLose;
 	private bool playedWin;
 
@@ -39,7 +41,7 @@ public class SoundMainScene : MonoBehaviour {
 		audioSources [0].priority = 0; //Set music to highest priority
 		audioSources [0].volume = musicVolume; //turn it down a little bit
 
-		updatePrefs ();
+		//updatePrefs ();
 		playedLose = false;
 		playedWin = false;
 
@@ -48,11 +50,19 @@ public class SoundMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (changedSettings) {
-			updatePrefs();
+		//	updatePrefs();
 		}
 
-		if (playMusic && !(audioSources [0].isPlaying)) {
-			audioSources[0].Play();
+		if (playMusic && !playedIntro) {
+			if (!audioSources[5].isPlaying) {
+				audioSources[5].Play();
+				playedIntro = true;
+			}
+		}
+		else if (playMusic && playedIntro && (!audioSources [5].isPlaying)) {
+			if (!audioSources[0].isPlaying) {
+				audioSources[0].Play();
+			}
 		}
 		else if (!playMusic) {
 			if (audioSources[0].isPlaying)
