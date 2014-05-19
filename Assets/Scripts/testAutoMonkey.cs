@@ -1,7 +1,7 @@
 ﻿/*
  * Note on the audio sources:
  * SoundMainScene is a script attached to the camera.
- * Read comments there for details.
+ * Read comments there for details about array of sounds.
  * */
 
 using UnityEngine;
@@ -44,6 +44,8 @@ public class testAutoMonkey : MonoBehaviour {
 
 	//Audio
 	private SoundMainScene sounds;
+	private bool playedWin;
+	private bool playedLose; 
 
 	// Use this for initialization
 	void Start () {
@@ -158,13 +160,28 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void lose() {
 		print("You Lose.");
-		Application.LoadLevel("EndGameScene");
+
+		if (!sounds.audioSources[2].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
+			sounds.playMusic = false;
+			sounds.audioSources[2].Play();
+			playedLose = true;
+		}
+		else if (playedLose && !sounds.audioSources[2].isPlaying) { //if that sound is not playing, and we have played it
+			Application.LoadLevel("EndGameScene");
+		}
 	}
 	
 	void win() {
 
 		print("You Win");
-		Application.LoadLevel("EndGameScene");
+		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
+			sounds.playMusic = false;
+			sounds.audioSources[1].Play();
+			playedLose = true;
+		}
+		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
+			Application.LoadLevel("EndGameScene");
+		}
 	}
 	
 }

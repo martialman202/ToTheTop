@@ -13,6 +13,11 @@ public class CameraController : MonoBehaviour {
 	public float secondsLookingAtBananas = 2;
 	public float secondsGoingDownTree = 3;
 
+	//play with these until it looks right. Mostly postion y and z, and rotation x.
+	//If you need to change them, change them in the scene editor.
+	public Vector3 finalPosition = new Vector3(0.0f,-0.6f,10f); 
+	public Vector3 finalRotation= new Vector3(333.2337f, 0.0f, 0.0f);
+
 	//other objects
 	private GameObject monkey;
 	private GameObject bananas;
@@ -128,13 +133,14 @@ public class CameraController : MonoBehaviour {
 
 	/*
 	 * TODO: Change the following values until the camera looks good when it follows the monkey:
-	 * 		
+	 * 		new vector being added in BH_finalPosition
+	 * 		new vector being added to monkey.transform.position during the LookAt
 	 */
 	void getBehindMonkey(){
 		if (!set_BH_start) {
 			BH_start = Time.time;
 			BH_initialPosition = transform.position;
-			BH_finalPosition = monkey.transform.position + new Vector3(0,1.4f, -distanceFromMonkey); //above monkey
+			BH_finalPosition = monkey.transform.position + new Vector3(0,-0.2888703f, -distanceFromMonkey); //above monkey
 			set_BH_start = true;
 		}
 		float t = Time.time - BH_start;
@@ -143,7 +149,8 @@ public class CameraController : MonoBehaviour {
 
 		if (transform.position == BH_finalPosition) {
 			behindMonkey = true;
-			this.transform.LookAt(monkey.transform.position + new Vector3(0,5,0));
+			//Lerp to final LookAt position
+			//this.transform.LookAt(monkey.transform.position + new Vector3(0,5,0));
 			monkeyScript.cameraPermission = true; //allow the monkey to move
 		}
 	}
@@ -162,9 +169,16 @@ public class CameraController : MonoBehaviour {
 			this.transform.parent = monkey.transform;
 			if (monkeyScript.isClimbing) {
 				//this.transform.parent = null;
+				this.transform.position = monkey.transform.position + finalPosition;
+				this.transform.rotation = Quaternion.Euler(finalRotation);
 				beforeTree = false;
 			}
 		}
+
+		//Make camera lookAt smoother and easier
+		/*void LerpLookAt(Vector3 Start, Vector3 End, float StartTime, float duration) {
+
+		}*/
 
 		//old
 		/*if ((transform.position - monkey.transform.position).magnitude >= distanceFromMonkey) {
