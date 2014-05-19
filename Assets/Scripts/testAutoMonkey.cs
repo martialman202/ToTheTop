@@ -9,6 +9,8 @@ using System.Collections;
 
 public class testAutoMonkey : MonoBehaviour {
 
+	public bool classicMode = false;
+
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
@@ -23,7 +25,7 @@ public class testAutoMonkey : MonoBehaviour {
 	private Color origColor;
 	private MonkeyMouse mmouse;
 	private enum MonkeyState {sceneStart = 0, initial=1, climbing=2, lose=3, win=4, pause=5};
-	MonkeyState monkeyState = MonkeyState.sceneStart;
+	MonkeyState monkeyState;
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
@@ -45,6 +47,13 @@ public class testAutoMonkey : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (classicMode) {
+			monkeyState = MonkeyState.initial;
+		}
+		else { //if not classic mode
+			monkeyState = MonkeyState.sceneStart;
+		}
+
 		//print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
 
@@ -58,16 +67,6 @@ public class testAutoMonkey : MonoBehaviour {
 		mmouse = this.GetComponent<MonkeyMouse> ();
 		PlayerPrefs.SetInt ("previousLevel", Application.loadedLevel);
 	}
-
-	/*void OnCollisionEnter(Collision other)
-	{
-		if (other.gameObject.tag == "Tree" && !onTree && monkeyState != MonkeyState.win) {
-			moveDirection = new Vector3 (0, 1, 0);
-			onTree = true;
-			monkeyState = MonkeyState.climbing;
-		}
-
-	}*/
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
 	{
