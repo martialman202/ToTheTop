@@ -5,7 +5,6 @@
  * 	In the array, the elements should be as follows:
  * 	0 - music intro
  * 	1 - portion of music to be looped
- * 	2 - TODO: menu sound (a click or something)
 */
 
 using UnityEngine;
@@ -44,14 +43,15 @@ public class SoundMainMenu : MonoBehaviour {
 		if (changedSettings) {
 			updatePrefs ();
 		}
+
 		//Music
-		if (playMusic && !playedIntro) {
+		/*if (playMusic && !playedIntro) {
 			if (!audioSources[0].isPlaying) {
 				audioSources[0].Play();
 				playedIntro = true;
 			}
 		}
-		else if (playMusic && playedIntro) {
+		else*/ playedIntro = true; if (playMusic && playedIntro && !audioSources[0].isPlaying) {
 			if (!audioSources[1].isPlaying) {
 				audioSources[1].Play();
 			}
