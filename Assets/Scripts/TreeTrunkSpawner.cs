@@ -37,6 +37,11 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 	private Transform tree1, tree2, tree3;
 	public ExtendTreeTrunk.TreeType [] tree = new ExtendTreeTrunk.TreeType [3];
+
+	//Audio
+	private SoundMainScene sounds;
+	//End Audio
+
 	void Start () {
 		obstacles [0] = beeHiveObstacle;
 		obstacles [1] = snakeObstacle;
@@ -54,6 +59,10 @@ public class TreeTrunkSpawner : MonoBehaviour {
 		spawner = this.gameObject;
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 		mmouse = GameObject.FindGameObjectWithTag ("Player").GetComponent<MonkeyMouse> ();
+
+		//Audio
+		sounds = mainCam.GetComponent<SoundMainScene> ();
+		//End Audio
 
 		tree1 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[0]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[0]/180.0f)), Quaternion.identity);
 		tree2 = (Transform)Instantiate(treeTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*pos[1]/180.0f), 0, distance * Mathf.Sin(Mathf.PI*pos[1]/180.0f)), Quaternion.identity);
@@ -128,5 +137,6 @@ public class TreeTrunkSpawner : MonoBehaviour {
 
 			Instantiate(bananas, h + new Vector3(0,bananasHeightOffset,0), Quaternion.identity);
 		}
+
 	}
 }

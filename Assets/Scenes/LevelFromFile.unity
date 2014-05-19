@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d830b3f9db195d943bf93d271130d496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFileName: Levels/easy0
   distance: 5
   heightOffset: 2
   introHeight: 25
@@ -250,7 +249,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 871305514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e74b3bd668a1c4e488a3966b7fa9d4e7, type: 3}
   m_Name: 
@@ -289,6 +288,10 @@ Prefab:
     - target: {fileID: 400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: m_LocalRotation.w
       value: -1.62920685e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: distanceFromMonkey
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
@@ -352,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf2ba01bbb0a0b43a89692e5b578332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  classicMode: 0
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 20
@@ -362,6 +366,9 @@ MonoBehaviour:
   simGravity: 4
   jumpImpulse: -45
   jumpDir: {x: 0, y: 0, z: 1}
+  Clips: []
+  cameraPermission: 0
+  isClimbing: 0
 --- !u!114 &1630754041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +440,7 @@ GameObject:
   - 81: {fileID: 1976681950}
   - 45: {fileID: 1976681949}
   - 114: {fileID: 1976681948}
+  - 114: {fileID: 1976681954}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -463,7 +471,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14566e27ffdcd84f894949fe1a808a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayLife: 1
   heart: {fileID: 2800000, guid: ee6f4ff62d7585347ba35d0339429426, type: 3}
+  heartScale: 1
+  displayWin: 0
 --- !u!45 &1976681949
 Skybox:
   m_ObjectHideFlags: 0
@@ -527,3 +538,18 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
+--- !u!114 &1976681954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 938923994}
+  m_GameObject: {fileID: 1976681946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9be4720ea1d44aa8855a12c6cc2a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFromMonkey: 10
+  secondsLookingAtBananas: 2
+  secondsGoingDownTree: 3
