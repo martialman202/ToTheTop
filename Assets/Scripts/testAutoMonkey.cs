@@ -79,7 +79,6 @@ public class testAutoMonkey : MonoBehaviour {
 			onTree = true;
 			monkeyState = MonkeyState.climbing;
 			isClimbing = true; //this variable is for the CameraController
-
 			//print ("collision detected!");
 		}
 		else if( hit.gameObject.tag == "Tree" && isJumping) {

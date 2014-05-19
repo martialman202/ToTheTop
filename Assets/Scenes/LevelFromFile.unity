@@ -116,7 +116,7 @@ MonoBehaviour:
   repeatDamagePeriod: .5
   isJumping: 0
   jumpVel: 0
-  simGravity: 4
+  simGravity: 3
   jumpImpulse: -50
   jumpDir: {x: 0, y: 0, z: 1}
   Clips: []
@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d830b3f9db195d943bf93d271130d496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFileName: Levels/test
   distance: 5
   heightOffset: 2
   introHeight: 25
@@ -412,16 +411,13 @@ Prefab:
       value: 1.20000005
       objectReference: {fileID: 0}
     - target: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
-      propertyPath: finalPosition.z
-      value: -17.6800003
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
-      propertyPath: finalPosition.y
-      value: 1.01999998
+      propertyPath: distanceFromMonkey
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
     - {fileID: 6500000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+    - {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_RootGameObject: {fileID: 338260378}
   m_IsPrefabParent: 0
@@ -510,8 +506,8 @@ GameObject:
   - 81: {fileID: 1455833685}
   - 45: {fileID: 1455833684}
   - 114: {fileID: 1455833683}
+  - 114: {fileID: 1455833682}
   - 114: {fileID: 1455833689}
-  - 114: {fileID: 1455833690}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -530,6 +526,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 338260384}
+--- !u!114 &1455833682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1455833680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9be4720ea1d44aa8855a12c6cc2a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFromMonkey: 5
+  secondsLookingAtBananas: 2
+  secondsGoingDownTree: 3
+  finalPosition: {x: 0, y: -.600000024, z: -10}
+  finalRotation: {x: 333.233704, y: 0, z: 0}
 --- !u!114 &1455833683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,23 +624,6 @@ Camera:
 --- !u!114 &1455833689
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e,
-    type: 2}
-  m_PrefabInternal: {fileID: 669111070}
-  m_GameObject: {fileID: 1455833680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9be4720ea1d44aa8855a12c6cc2a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceFromMonkey: 5
-  secondsLookingAtBananas: 2
-  secondsGoingDownTree: 3
-  finalPosition: {x: 0, y: 1.01999998, z: -17.6800003}
-  finalRotation: {x: 333.233704, y: 0, z: 0}
---- !u!114 &1455833690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1455833680}
@@ -638,15 +633,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playMusic: 1
-  musicVolume: .699999988
+  musicVolume: 1
   playSoundEffects: 1
   Clips:
-  - {fileID: 8300000, guid: 6c7d2316da23b471c98a2838eb2703ac, type: 3}
+  - {fileID: 8300000, guid: 8434bc07254fc4062940bf06e56ee092, type: 3}
   - {fileID: 8300000, guid: 589dedc41ad924744894e301dc5f4b33, type: 3}
   - {fileID: 8300000, guid: c5041fe5b5effed47a971efdddf30944, type: 3}
   - {fileID: 8300000, guid: e2842b451a082a54285abe861494938d, type: 3}
   - {fileID: 8300000, guid: 6019c1debb9454c46a3b0f893e694400, type: 3}
-  - {fileID: 8300000, guid: 8434bc07254fc4062940bf06e56ee092, type: 3}
+  - {fileID: 8300000, guid: 6c7d2316da23b471c98a2838eb2703ac, type: 3}
   audioSources: []
   changedSettings: 0
 --- !u!1 &1996748312

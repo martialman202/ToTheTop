@@ -7,7 +7,7 @@ using System.IO;
 
 public class BuildLevel : MonoBehaviour {
 
-	public string levelFileName = "Levels/test";
+	private string levelFileName = "Levels/";
 
 	public float distance = 5.0f;
 
@@ -192,7 +192,7 @@ public class BuildLevel : MonoBehaviour {
 		spawner = this.gameObject;
 
 		LoadIntro ();
-		LoadLevel (levelFileName);
+		LoadLevel (levelFileName+Manager.Instance.levelFileName);
 		LoadOutro ();
 
 		size = new Vector2(Screen.width/15,Screen.height/4);

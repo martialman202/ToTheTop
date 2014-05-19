@@ -21,8 +21,11 @@ public class DifficultySelectionGUI : MonoBehaviour {
 		// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 		
 		// We'll make a box so you can see where the group is on-screen.
-		if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Easy"))
-			Application.LoadLevel ("EasyLevels");
+		if (GUI.Button (new Rect (0, 0, Screen.width / 2, buttonHeight), "Easy")) {
+			// Tell Manager what level to load
+			Manager.Instance.levelFileName = "easy0";
+			Application.LoadLevel ("LevelFromFile");
+		}
 		GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Medium");
 			//A/plication.LoadLevel ("DifficultySelectionScene");
 		//GUI.Button (new Rect (0, 140, 150, 50), "Hard");
@@ -39,8 +42,11 @@ public class DifficultySelectionGUI : MonoBehaviour {
 		GUI.Label(new Rect(0.60f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[3]);
 
 		//Level buttons
-		if(GUI.Button(new Rect(0, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "1"))
-			Application.LoadLevel("EasyLevels");
+		if (GUI.Button (new Rect (0, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "1")) {
+			// Tell Manager what level to load
+			Manager.Instance.levelFileName = "easy0";
+			Application.LoadLevel ("LevelFromFile");
+		}
 		if(GUI.Button(new Rect(0.29f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "2"));
 		if(GUI.Button(new Rect(0.58f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "3"));
 		GUI.EndGroup ();
