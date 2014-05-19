@@ -26,7 +26,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: ReducedCartoonBrushPrefab
   m_TagString: Obstacle
@@ -170,20 +169,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2, z: 6}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b26ed1c933bfc984d9ef854a318b62f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 25
-  mainCam: {fileID: 0}
-  thisObstacle: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
