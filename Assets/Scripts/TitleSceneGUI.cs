@@ -19,10 +19,10 @@ public class TitleSceneGUI : MonoBehaviour {
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 			
 			// We'll make a box so you can see where the group is on-screen.
-			if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Classic"))
-				Application.LoadLevel ("MainScene");
-			if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Arcade"))
+			if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Arcade"))
 				Application.LoadLevel ("DifficultySelectionScene");
+			if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Classic"))
+				Application.LoadLevel ("MainSceen");
 			if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Exit"))
 				Application.Quit ();
 			
