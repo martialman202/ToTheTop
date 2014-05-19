@@ -72,12 +72,7 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
-<<<<<<< HEAD
-=======
-		// Tell Manager how far up I've climbed
 		Manager.Instance.monkeyHeight = this.transform.position.y;
-
->>>>>>> e039383cb4c31ac7a57e6efcf6f439d029f60cae
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
@@ -88,10 +83,6 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
-<<<<<<< HEAD
-	// Update is called once per frame
-=======
->>>>>>> e039383cb4c31ac7a57e6efcf6f439d029f60cae
 	void FixedUpdate () {
 		//print (Time.deltaTime);
 		//print ("Life: " + lifePoints);

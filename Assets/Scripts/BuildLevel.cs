@@ -82,9 +82,6 @@ public class BuildLevel : MonoBehaviour {
 		Transform tt2 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)),Quaternion.identity);
 		Transform tt3 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)),Quaternion.identity);
 
-<<<<<<< HEAD
-		Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
-=======
 		tt1.transform.parent = spawner.transform;
 		tt2.transform.parent = spawner.transform;
 		tt3.transform.parent = spawner.transform;
@@ -92,7 +89,6 @@ public class BuildLevel : MonoBehaviour {
 		/*/Transform b = (Transform)*/Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
 		treeHeight = tt1.position.y;
 		Manager.Instance.treeHeight = treeHeight;
->>>>>>> e039383cb4c31ac7a57e6efcf6f439d029f60cae
 	}
 
 	private bool LoadLevel(string fileName)
