@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 using System;
@@ -30,11 +30,32 @@ public class BuildLevel : MonoBehaviour {
 	public Transform bananas;
 	public float bananasHeightOffset = 5.0f;
 
+	public float treeHeight = 0;
+	public Texture2D progressBarEmpty;
+	public Texture2D progressBarFull;
+	public Vector2 size;
+	private float barDisplay = 0.0f;
+
+
 	private GameObject spawner;
 
 	/*void Awake() {
 		Application.targetFrameRate = 120;
 	}*/
+
+	void OnGUI () {
+		// health bar
+		// draw the background:
+		GUI.BeginGroup (new Rect (Screen.width-size.x-10, 5, size.x, size.y));
+			GUI.DrawTexture (new Rect (0, 0, size.x, size.y), progressBarEmpty);
+			
+			// draw the filled-in part:
+			GUI.BeginGroup (new Rect (0, 0, size.x, size.y));
+				GUI.DrawTexture (new Rect (0, size.y, size.x, -(size.y * barDisplay)), progressBarFull);
+			GUI.EndGroup ();
+		GUI.EndGroup ();
+		//print (Manager.Instance.treeHeight);
+	}
 
 	private void LoadIntro()
 	{
@@ -61,7 +82,17 @@ public class BuildLevel : MonoBehaviour {
 		Transform tt2 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)),Quaternion.identity);
 		Transform tt3 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)),Quaternion.identity);
 
+<<<<<<< HEAD
 		Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
+=======
+		tt1.transform.parent = spawner.transform;
+		tt2.transform.parent = spawner.transform;
+		tt3.transform.parent = spawner.transform;
+		
+		/*/Transform b = (Transform)*/Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
+		treeHeight = tt1.position.y;
+		Manager.Instance.treeHeight = treeHeight;
+>>>>>>> e039383cb4c31ac7a57e6efcf6f439d029f60cae
 	}
 
 	private bool LoadLevel(string fileName)
@@ -167,9 +198,13 @@ public class BuildLevel : MonoBehaviour {
 		LoadIntro ();
 		LoadLevel (levelFileName);
 		LoadOutro ();
+
+		size = new Vector2(Screen.width/15,Screen.height/4);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		// Update progress bar
+		barDisplay = Manager.Instance.monkeyHeight/Manager.Instance.treeHeight;
 	}
 }

@@ -6,7 +6,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 1.0f; 
+	public float moveSpeed = 20.0f; 
 	public bool onTree = false;
 	public float repeatDamagePeriod = 0.5f;
 	private float lastHitTime = 0.0f;
@@ -72,6 +72,12 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
+<<<<<<< HEAD
+=======
+		// Tell Manager how far up I've climbed
+		Manager.Instance.monkeyHeight = this.transform.position.y;
+
+>>>>>>> e039383cb4c31ac7a57e6efcf6f439d029f60cae
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
@@ -82,7 +88,10 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
+<<<<<<< HEAD
 	// Update is called once per frame
+=======
+>>>>>>> e039383cb4c31ac7a57e6efcf6f439d029f60cae
 	void FixedUpdate () {
 		//print (Time.deltaTime);
 		//print ("Life: " + lifePoints);
