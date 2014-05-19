@@ -107,9 +107,7 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
-		// Tell Manager how far up I've climbed
 		Manager.Instance.monkeyHeight = this.transform.position.y;
-
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
