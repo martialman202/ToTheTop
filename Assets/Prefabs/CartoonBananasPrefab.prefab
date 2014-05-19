@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &100002
 GameObject:
@@ -30,10 +30,10 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: CartoonBananasPrefab
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30ebf8654f5a4ff4838791483a4c0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 30
+  rotateSpeed: 45
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

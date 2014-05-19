@@ -3,10 +3,16 @@ using System.Collections;
 
 public class HUDScript : MonoBehaviour {
 
+	public bool displayLife = true;
 	public Texture2D heart;
+	public float heartScale = 1.0f;
 
 	private GameObject player ;
 	private testAutoMonkey monkeyScript;
+	private float heartSize = 16.0f;
+
+	public bool displayWin;
+
 
 
 	// Use this for initialization
@@ -22,11 +28,16 @@ public class HUDScript : MonoBehaviour {
 
 	void OnGUI()
 	{
-		//GUI.Label (new Rect (110, 110, 200, 130), "Life: " + monkeyScript.lifePoints);
-
-		if (monkeyScript.lifePoints <= 3)
+		//Life Display
+		float heartD = heartSize * heartScale;
+		if (displayLife) 
 		for (int i = 0; i < monkeyScript.lifePoints; i++) {
-			GUI.DrawTexture(new Rect(110+(16*i),16, 16, 16), heart);
+			GUI.DrawTexture(new Rect(100+(heartD*i),heartD, heartD, heartD), heart);
+		}
+
+		//Win Screen
+		if (displayWin) {
+			//TODO: set display win from testAutoMonkey
 		}
 	}
 }
