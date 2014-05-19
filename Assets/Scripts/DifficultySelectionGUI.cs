@@ -34,7 +34,7 @@ public class DifficultySelectionGUI : MonoBehaviour {
 		// Grid level selection
 		GUI.BeginGroup(new Rect(0.1f * Screen.width, Screen.height/2 - Screen.width/4, 0.9f * Screen.width, 3 * buttonHeight));
 		//Star labels
-		GUI.Label(new Rect(0.02f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[1]);
+		GUI.Label(new Rect(0.02f * Screen.width, 0, 0.22f * Screen.width, 0.08f * Screen.width), stars[1]);
 		GUI.Label(new Rect(0.31f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[2]);
 		GUI.Label(new Rect(0.60f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[3]);
 
