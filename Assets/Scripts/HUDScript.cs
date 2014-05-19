@@ -2,10 +2,16 @@
 using System.Collections;
 
 public class HUDScript : MonoBehaviour {
-
+	public GUISkin menuSkin;
+	
 	public bool displayLife = true;
 	public Texture2D heart;
 	public float heartScale = 1.0f;
+
+	public float pauseButtonSize = Screen.width / 12;
+	private bool paused = false;	
+	private float buttonHeight = Screen.width/6;
+	private float betweenButton = Screen.width/4;
 
 	private GameObject player ;
 	private testAutoMonkey monkeyScript;
@@ -28,12 +34,51 @@ public class HUDScript : MonoBehaviour {
 
 	void OnGUI()
 	{
+		GUI.skin = menuSkin;
+		
 		//Life Display
 		float heartD = 0.05f * Screen.width;
-		if (displayLife) 
+		if (displayLife) {
 			for (int i = 0; i < monkeyScript.lifePoints; i++) {
-				GUI.DrawTexture(new Rect(heartD+(heartD*i),heartD, heartD, heartD), heart);
+				GUI.DrawTexture (new Rect (heartD + (heartD * i), heartD, heartD, heartD), heart);
 			}
+		}
+
+		//Pause Button
+		if (GUI.Button (new Rect (Screen.width - (pauseButtonSize * 1.5f), Screen.height - (pauseButtonSize * 1.5f), pauseButtonSize, pauseButtonSize), "||")) {
+			if (!paused) {
+				paused = true;
+			}
+			else {
+				paused = false;
+			}
+		}
+
+		if (paused)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = 1;
+
+		//Pause Menu
+		if (paused) {
+			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
+				// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
+				
+				// We'll make a box so you can see where the group is on-screen.
+				if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Resume")) {
+					paused = false;
+					Time.timeScale = 1;
+				}
+				if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Restart")) {
+					Application.LoadLevel(Manager.Instance.prevLevel);
+				}
+				if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Menu")) {
+					Application.LoadLevel ("TitleScene");
+				}
+				
+			// End the group we started above. This is very important to remember!
+			GUI.EndGroup ();
+		}
 
 		//Win Screen
 		if (displayWin) {
