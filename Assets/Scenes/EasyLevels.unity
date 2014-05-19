@@ -315,9 +315,9 @@ MonoBehaviour:
   outroHeight: 25
   fillHeight: 2
   emptyTrunk: {fileID: 400000, guid: fdbd6b9923be38647990f008c0f2f005, type: 2}
-  beehiveTrunk: {fileID: 400012, guid: 015520a2fa83dc546b2dc3cf45ef70ec, type: 2}
+  beehiveTrunk: {fileID: 400004, guid: b4adba4466aedc846bf047b69e117237, type: 2}
   snakeTrunk: {fileID: 400058, guid: 601cf8e17c4b5a0498170170d48df283, type: 2}
-  bushTrunk: {fileID: 400004, guid: bf1b9020b06a1cd428d855847113735c, type: 2}
+  bushTrunk: {fileID: 400004, guid: 39c4b7eeb5885ab42a4b4035b589af51, type: 2}
   treeTop: {fileID: 400002, guid: dfe7e92b501244b4f8864a9c1767b459, type: 2}
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
