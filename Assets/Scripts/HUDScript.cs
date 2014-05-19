@@ -29,11 +29,11 @@ public class HUDScript : MonoBehaviour {
 	void OnGUI()
 	{
 		//Life Display
-		float heartD = heartSize * heartScale;
+		float heartD = 0.05f * Screen.width;
 		if (displayLife) 
-		for (int i = 0; i < monkeyScript.lifePoints; i++) {
-			GUI.DrawTexture(new Rect(100+(heartD*i),heartD, heartD, heartD), heart);
-		}
+			for (int i = 0; i < monkeyScript.lifePoints; i++) {
+				GUI.DrawTexture(new Rect(heartD+(heartD*i),heartD, heartD, heartD), heart);
+			}
 
 		//Win Screen
 		if (displayWin) {
