@@ -9,6 +9,9 @@ public class TitleSceneGUI : MonoBehaviour {
 	private float betweenButton = Screen.width/4;
 
 	void OnGUI() {
+		if(Input.GetKey(KeyCode.Escape)) {
+			Application.Quit();
+		}
 		// Make a group on the center of the screen
 		GUI.skin = menuSkin;
 		GUI.Label (new Rect (0.05f * Screen.width, Screen.width / 8, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);

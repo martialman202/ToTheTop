@@ -8,6 +8,10 @@ public class DifficultySelectionGUI : MonoBehaviour {
 	private float betweenButton = Screen.width/4;
 
 	void OnGUI() {
+		if(Input.GetKey(KeyCode.Escape)) {
+			Application.LoadLevel("TitleScene");
+		}
+
 		// Make a group on the center of the screen
 		GUI.skin = menuSkin;
 		GUI.BeginGroup (new Rect (Screen.width / 2 - Screen.width/4, Screen.height / 2 - Screen.width/4, Screen.width/2, buttonHeight * 3));
