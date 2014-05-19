@@ -47,8 +47,16 @@ public class DifficultySelectionGUI : MonoBehaviour {
 			Manager.Instance.levelFileName = "easy0";
 			Application.LoadLevel ("LevelFromFile");
 		}
-		if(GUI.Button(new Rect(0.29f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "2"));
-		if(GUI.Button(new Rect(0.58f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "3"));
+		if(GUI.Button(new Rect(0.29f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "2")) {
+			// Tell Manager what level to load
+			Manager.Instance.levelFileName = "easy1";
+			Application.LoadLevel ("LevelFromFile");
+		}
+		if(GUI.Button(new Rect(0.58f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "3")) {
+			// Tell Manager what level to load
+			Manager.Instance.levelFileName = "easy2";
+			Application.LoadLevel ("LevelFromFile");
+		}
 		GUI.EndGroup ();
 	}
 }
