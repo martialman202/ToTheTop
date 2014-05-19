@@ -95,7 +95,7 @@ public class testAutoMonkey : MonoBehaviour {
 				lifePoints--;
 				//print (gameObject.name + " hit " + other.gameObject.name + "!");
 				lastHitTime = Time.time;
-				if (sounds.playSoundEffects)
+				if (sounds != null && sounds.playSoundEffects)
 					sounds.audioSources[3].Play ();
 			}
 		}
@@ -137,7 +137,7 @@ public class testAutoMonkey : MonoBehaviour {
 				isJumping = true;
 				jumpVel = jumpImpulse;
 
-				if (sounds.playSoundEffects)
+				if (sounds != null && sounds.playSoundEffects)
 					sounds.audioSources[4].Play();
 
 				mmouse.ResetPos();

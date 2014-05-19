@@ -91,6 +91,7 @@ GameObject:
   - 45: {fileID: 336995689}
   - 114: {fileID: 336995688}
   - 114: {fileID: 336995695}
+  - 114: {fileID: 336995694}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -188,6 +189,28 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
   m_OcclusionCulling: 1
+--- !u!114 &336995694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 336995686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc37d24281a2e84aa8fdb08ddc42664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playMusic: 1
+  musicVolume: .699999988
+  playSoundEffects: 1
+  Clips:
+  - {fileID: 8300000, guid: 953f05b8a7f20ea4a91b693a9e499462, type: 3}
+  - {fileID: 8300000, guid: 589dedc41ad924744894e301dc5f4b33, type: 3}
+  - {fileID: 8300000, guid: c5041fe5b5effed47a971efdddf30944, type: 3}
+  - {fileID: 8300000, guid: e2842b451a082a54285abe861494938d, type: 3}
+  - {fileID: 8300000, guid: 6019c1debb9454c46a3b0f893e694400, type: 3}
+  audioSources: []
+  changedSettings: 0
 --- !u!114 &336995695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,8 +422,8 @@ MonoBehaviour:
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
   treeHeight: 0
-  progressBarEmpty: {fileID: 0}
-  progressBarFull: {fileID: 0}
+  progressBarEmpty: {fileID: 2800000, guid: d265d920a382542139f90297c918cef6, type: 3}
+  progressBarFull: {fileID: 2800000, guid: 93e86ca3b481f45a4bbef58ae115bb14, type: 3}
   size: {x: 0, y: 0}
 --- !u!4 &618506411
 Transform:
