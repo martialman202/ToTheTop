@@ -6,7 +6,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 1.0f; 
+	public float moveSpeed = 20.0f; 
 	public bool onTree = false;
 	public float repeatDamagePeriod = 0.5f;
 	private float lastHitTime = 0.0f;
@@ -20,11 +20,13 @@ public class testAutoMonkey : MonoBehaviour {
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
-	public float simGravity = 3.0f;
+	public float simGravity = 4.0f;
 	public float jumpImpulse = -45.0f;
 	public Vector3 jumpDir = new Vector3(0,0,1);
 
 	private Vector3 origPos = Vector3.zero;
+
+	private CharacterController controller;
 
 	// Use this for initialization
 	void Start () {
@@ -33,17 +35,7 @@ public class testAutoMonkey : MonoBehaviour {
 		origColor = gameObject.renderer.material.color;
 		mmouse = this.GetComponent<MonkeyMouse> ();
 		PlayerPrefs.SetInt ("previousLevel", Application.loadedLevel);
-	}
-
-	void OnCollisionEnter(Collision other)
-	{
-		if (other.gameObject.tag == "Tree" && !onTree && monkeyState != MonkeyState.win) {
-			moveDirection = new Vector3 (0, 1, 0);
-			onTree = true;
-			monkeyState = MonkeyState.climbing;
-			//print ("collision detected!");
-		}
-
+		controller = GetComponent<CharacterController>();
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
@@ -79,10 +71,21 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
+	void Update() {
 		// Tell Manager how far up I've climbed
 		Manager.Instance.monkeyHeight = this.transform.position.y;
+
+		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
+			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
+				isJumping = true;
+				jumpVel = jumpImpulse;
+				mmouse.ResetPos();
+				origPos = this.gameObject.transform.position;
+			}
+		}
+	}
+
+	void FixedUpdate () {
 		//print (Time.deltaTime);
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
@@ -93,19 +96,11 @@ public class testAutoMonkey : MonoBehaviour {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*moveSpeed;
 
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
-			}
-
 			if (isJumping) {
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 			}
 
-			CharacterController controller = GetComponent<CharacterController>();
 			controller.Move(dir * Time.deltaTime);
 
 		} else if (monkeyState == MonkeyState.lose) {
@@ -116,7 +111,7 @@ public class testAutoMonkey : MonoBehaviour {
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 				//dir = new Vector3(0,0,jumpVel);
-				CharacterController controller = GetComponent<CharacterController>();
+
 				controller.Move(dir * Time.deltaTime);
 			}
 			else if(onTree)

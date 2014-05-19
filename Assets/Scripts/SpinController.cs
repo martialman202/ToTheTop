@@ -55,6 +55,19 @@ public class SpinController : MonoBehaviour {
 			}
 		}
 		
+
+		if( currentRotation == 0 ) {
+			monkey.jumpDir = new Vector3(0,0,1);
+		}
+		else if( currentRotation == 1 ) {
+			monkey.jumpDir = new Vector3(Mathf.Sqrt(3.0f)/2.0f,0,-0.5f);
+		}
+		else {
+			monkey.jumpDir = new Vector3(-Mathf.Sqrt(3.0f)/2.0f,0,-0.5f);
+		}
+	}
+
+	void FixedUpdate() {
 		if (moveRight) {
 			monkey.onTree = false;
 			if( rotations[currentRotation] == 0.0f ) {
@@ -116,16 +129,6 @@ public class SpinController : MonoBehaviour {
 			else {
 				spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);
 			}
-		}
-
-		if( currentRotation == 0 ) {
-			monkey.jumpDir = new Vector3(0,0,1);
-		}
-		else if( currentRotation == 1 ) {
-			monkey.jumpDir = new Vector3(Mathf.Sqrt(3.0f)/2.0f,0,-0.5f);
-		}
-		else {
-			monkey.jumpDir = new Vector3(-Mathf.Sqrt(3.0f)/2.0f,0,-0.5f);
 		}
 	}
 }
