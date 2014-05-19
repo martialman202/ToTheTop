@@ -6,4 +6,6 @@ public class Manager : Singleton<Manager> {
 	
 	public float treeHeight = 0;
 	public float monkeyHeight = 0;
+
+	public string levelFileName;
 }
