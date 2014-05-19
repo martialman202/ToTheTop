@@ -43,10 +43,6 @@ public class BuildLevel : MonoBehaviour {
 			Transform tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
 			Transform tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
 
-			tree1.transform.parent = spawner.transform;
-			tree2.transform.parent = spawner.transform;
-			tree3.transform.parent = spawner.transform;
-
 			trunkCounter++;
 		}
 	}
@@ -57,22 +53,14 @@ public class BuildLevel : MonoBehaviour {
 			Transform tree1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
 			Transform tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
 			Transform tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-			
-			tree1.transform.parent = spawner.transform;
-			tree2.transform.parent = spawner.transform;
-			tree3.transform.parent = spawner.transform;
-			
+
 			trunkCounter++;
 		}
 
 		Transform tt1 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)),Quaternion.identity);
 		Transform tt2 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)),Quaternion.identity);
 		Transform tt3 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)),Quaternion.identity);
-		
-		tt1.transform.parent = spawner.transform;
-		tt2.transform.parent = spawner.transform;
-		tt3.transform.parent = spawner.transform;
-		
+
 		Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
 	}
 
@@ -82,12 +70,12 @@ public class BuildLevel : MonoBehaviour {
 		try
 		{
 			TextAsset theReader = Resources.Load(fileName) as TextAsset;
-			print(fileName);
-			print (theReader.text);
+			//print(fileName);
+			//print (theReader.text);
 			string[] linesFromFile = theReader.text.Split("\n"[0]);
 
 			foreach ( string line in linesFromFile ) {
-				print (line);		
+				//print (line);		
 				string[] entries = line.Split(' ');
 				if (entries.Length == 3)
 				{
@@ -158,7 +146,7 @@ public class BuildLevel : MonoBehaviour {
 						Transform extra1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
 						Transform extra2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
 						Transform extra3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
-								
+
 						trunkCounter++;
 					}
 				}
