@@ -8,4 +8,6 @@ public class Manager : Singleton<Manager> {
 	public float monkeyHeight = 0;
 
 	public string levelFileName;
+
+	public int prevLevel;
 }
