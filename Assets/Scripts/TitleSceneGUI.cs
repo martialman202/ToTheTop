@@ -22,7 +22,7 @@ public class TitleSceneGUI : MonoBehaviour {
 			if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Arcade"))
 				Application.LoadLevel ("DifficultySelectionScene");
 			if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Classic"))
-				Application.LoadLevel ("MainSceen");
+				Application.LoadLevel ("MainScene");
 			if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Exit"))
 				Application.Quit ();
 			
