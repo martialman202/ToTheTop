@@ -45,6 +45,9 @@ public class HUDScript : MonoBehaviour {
 		}
 
 		//Pause Button
+		int originalSize = GUI.skin.button.fontSize;
+		int pauseSize = originalSize / 2;
+		GUI.skin.button.fontSize = pauseSize;
 		if (GUI.Button (new Rect (Screen.width - (pauseButtonSize * 1.5f), Screen.height - (pauseButtonSize * 1.5f), pauseButtonSize, pauseButtonSize), "||")) {
 			if (!paused) {
 				paused = true;
@@ -53,6 +56,7 @@ public class HUDScript : MonoBehaviour {
 				paused = false;
 			}
 		}
+		GUI.skin.button.fontSize = originalSize;
 
 		if (paused)
 			Time.timeScale = 0;
