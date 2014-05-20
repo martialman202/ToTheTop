@@ -87,7 +87,7 @@ public class HUDScript : MonoBehaviour {
 			
 				// We'll make a box so you can see where the group is on-screen.
 				if (Manager.Instance.levelIndex < Manager.Instance.levels.Length) {
-					if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "->")) {
+					if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Next Level")) {
 						//paused = false;
 						Manager.Instance.levelIndex++;
 						Manager.Instance.levelFileName = Manager.Instance.levels[Manager.Instance.levelIndex];

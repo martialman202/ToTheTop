@@ -12,7 +12,7 @@ public class Manager : Singleton<Manager> {
 	public int prevLevel;
 
 	public int numLevels = 10;
-	public int levelIndex;
+	public int levelIndex = 0;
 	public string [] levels;
 
 	void Start() {
@@ -29,5 +29,7 @@ public class Manager : Singleton<Manager> {
 		levels [9] = "hard0";
 
 		numLevels = levels.Length;
+		levelIndex = 0;
+		levelFileName = levels [levelIndex];
 	}
 }
