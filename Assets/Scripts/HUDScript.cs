@@ -7,8 +7,7 @@ public class HUDScript : MonoBehaviour {
 	public bool displayLife = true;
 	public Texture2D heart;
 	public float heartScale = 1.0f;
-
-	public float pauseButtonSize = Screen.width / 12;
+	
 	private bool paused = false;	
 	private float buttonHeight = Screen.width/6;
 	private float betweenButton = Screen.width/4;
@@ -48,13 +47,9 @@ public class HUDScript : MonoBehaviour {
 		int originalSize = GUI.skin.button.fontSize;
 		int pauseSize = originalSize / 2;
 		GUI.skin.button.fontSize = pauseSize;
-		if (GUI.Button (new Rect (Screen.width - (pauseButtonSize * 1.5f), Screen.height - (pauseButtonSize * 1.5f), pauseButtonSize, pauseButtonSize), "||")) {
-			if (!paused) {
-				paused = true;
-			}
-			else {
-				paused = false;
-			}
+		if(GUI.Button(new Rect(0.85f * Screen.width, Screen.height - (0.15f * Screen.width), 0.1f * Screen.width, 0.1f * Screen.width), "| |")) {
+			if(!paused) paused = true;
+			else paused = false;
 		}
 		GUI.skin.button.fontSize = originalSize;
 
