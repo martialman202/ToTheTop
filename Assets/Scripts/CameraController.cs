@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
+	public bool classicMode = false;
 
 	//TODO: We need to let the monkeyScript know if the camera is doing shit ot not. some bool or something;
 
@@ -73,23 +74,23 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void findBananas() {
-		//The camera starts at the monkey's position but really high up
-		if (!foundBananas) { //this is kind of a hack
-			bananas = GameObject.FindGameObjectWithTag ("Goal");
-			transform.position = (new Vector3(monkey.transform.position.x,
+		if (!classicMode) {
+			//The camera starts at the monkey's position but really high up
+			if (!foundBananas) { //this is kind of a hack
+				bananas = GameObject.FindGameObjectWithTag ("Goal");
+				transform.position = (new Vector3 (monkey.transform.position.x,
 			                                  bananas.transform.position.y,
 			                                  monkey.transform.position.z));
-			transform.LookAt (bananas.transform);
-			foundBananas = true;
-		}
-		else {
-			if(!set_LB_start) {
-				LB_start = Time.time;
-				set_LB_start = true;
-			}
-			else {//if LB_start was already set
-				if ((Time.time - LB_start) / secondsLookingAtBananas >= 1)
-					lookedAtBananas = true;
+				transform.LookAt (bananas.transform);
+				foundBananas = true;
+			} else {
+				if (!set_LB_start) {
+					LB_start = Time.time;
+					set_LB_start = true;
+				} else {//if LB_start was already set
+					if ((Time.time - LB_start) / secondsLookingAtBananas >= 1)
+						lookedAtBananas = true;
+				}
 			}
 		}
 	}
