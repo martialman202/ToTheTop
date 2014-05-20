@@ -7,8 +7,9 @@ public class HUDScript : MonoBehaviour {
 	public bool displayLife = true;
 	public Texture2D heart;
 	public float heartScale = 1.0f;
-	
-	private bool paused = false;	
+
+	public Texture2D pauseTexture;
+	private bool paused = false;
 	private float buttonHeight = Screen.width/6;
 	private float betweenButton = Screen.width/4;
 
@@ -60,6 +61,7 @@ public class HUDScript : MonoBehaviour {
 
 		//Pause Menu
 		if (paused) {
+			GUI.Label(new Rect(0.1f*Screen.width, Screen.width/7, 0.8f*Screen.width, 2* buttonHeight), pauseTexture);
 			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
 				// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 				
