@@ -68,7 +68,7 @@ public class testAutoMonkey : MonoBehaviour {
 		
 		origColor = gameObject.renderer.material.color;
 		mmouse = this.GetComponent<MonkeyMouse> ();
-		PlayerPrefs.SetInt ("previousLevel", Application.loadedLevel);
+		Manager.Instance.prevLevel = Application.loadedLevel;
 		controller = GetComponent<CharacterController>();
 	}
 

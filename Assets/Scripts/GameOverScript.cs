@@ -19,7 +19,7 @@ public class GameOverScript : MonoBehaviour {
 		GUI.BeginGroup (new Rect (Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
 			if(GUI.Button(new Rect(0, 0, Screen.width/2, buttonHeight), "Play again?"))
 			{
-				Application.LoadLevel(PlayerPrefs.GetInt("previousLevel"));
+				Application.LoadLevel(Manager.Instance.prevLevel);
 			}
 			if(GUI.Button(new Rect(0, betweenButton, Screen.width/2, buttonHeight), "Main Menu"))
 			{
