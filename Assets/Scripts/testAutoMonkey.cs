@@ -191,8 +191,11 @@ public class testAutoMonkey : MonoBehaviour {
 			playedLose = true;
 		}
 		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
-			Application.LoadLevel("EndGameScene");
+			// Get HUDScript from Main Camera 
+			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
+			hud.displayWin = true;
+			//Application.LoadLevel("EndGameScene");
 		}
 	}
-	
+
 }
