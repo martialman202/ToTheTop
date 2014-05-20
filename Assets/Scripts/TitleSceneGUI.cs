@@ -8,6 +8,10 @@ public class TitleSceneGUI : MonoBehaviour {
 	private float buttonHeight = Screen.width/6;
 	private float betweenButton = Screen.width/4;
 
+	void Start() {
+		Manager.Instance.levelIndex = 0;
+	}
+
 	void OnGUI() {
 		if(Input.GetKey(KeyCode.Escape)) {
 			Application.Quit();
