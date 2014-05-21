@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 
 public class BuildLevel : MonoBehaviour {
+	public GUISkin menuSkin;
 
 	private string levelFileName = "Levels/";
 
@@ -44,9 +45,18 @@ public class BuildLevel : MonoBehaviour {
 	}*/
 
 	void OnGUI () {
-		// health bar
+		GUI.skin = menuSkin;
+
+		// level indicator
+		int originalSize = GUI.skin.button.fontSize;
+		int pauseSize = originalSize / 2;
+		GUI.skin.button.fontSize = pauseSize;
+		if(GUI.Button(new Rect(Screen.width*0.88f, Screen.width*0.01f, Screen.width*0.1f, Screen.width*0.1f), (Manager.Instance.levelIndex+1).ToString()));
+		GUI.skin.button.fontSize = originalSize;
+		
+		// progress bar
 		// draw the background:
-		GUI.BeginGroup (new Rect (Screen.width-size.x-10, 5, size.x, size.y));
+		GUI.BeginGroup (new Rect (Screen.width*0.90f, Screen.height*0.1f, size.x, size.y+(Screen.width*0.25f)));
 			GUI.DrawTexture (new Rect (0, 0, size.x, size.y), progressBarEmpty);
 			
 			// draw the filled-in part:
@@ -195,7 +205,7 @@ public class BuildLevel : MonoBehaviour {
 		LoadLevel (levelFileName+Manager.Instance.levelFileName);
 		LoadOutro ();
 
-		size = new Vector2(Screen.width/15,Screen.height/4);
+		size = new Vector2(Screen.width*0.06f,Screen.height*0.25f);
 	}
 	
 	// Update is called once per frame

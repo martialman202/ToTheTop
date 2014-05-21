@@ -2,7 +2,16 @@ fileFormatVersion: 2
 guid: d830b3f9db195d943bf93d271130d496
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
+  - emptyTrunk: {instanceID: 0}
+  - beehiveTrunk: {instanceID: 0}
+  - snakeTrunk: {instanceID: 0}
+  - bushTrunk: {instanceID: 0}
+  - treeTop: {instanceID: 0}
+  - bananas: {instanceID: 0}
+  - progressBarEmpty: {instanceID: 0}
+  - progressBarFull: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

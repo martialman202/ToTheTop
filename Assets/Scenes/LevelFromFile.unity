@@ -109,7 +109,9 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -1.62920685e-07
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400010, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+    - {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_RootGameObject: {fileID: 338260378}
   m_IsPrefabParent: 0
@@ -128,8 +130,6 @@ GameObject:
   - 114: {fileID: 338260386}
   - 114: {fileID: 338260387}
   - 114: {fileID: 338260379}
-  - 114: {fileID: 338260385}
-  - 114: {fileID: 338260382}
   m_Layer: 0
   m_Name: Monkey
   m_TagString: Player
@@ -200,18 +200,6 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
---- !u!114 &338260382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e,
-    type: 2}
-  m_PrefabInternal: {fileID: 245108711}
-  m_GameObject: {fileID: 338260378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74b3bd668a1c4e488a3966b7fa9d4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!33 &338260383
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -232,18 +220,6 @@ Transform:
   m_Children:
   - {fileID: 1455833681}
   m_Father: {fileID: 453839739}
---- !u!114 &338260385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400010, guid: 28459d0063949484c9028ea5b83b4a6e,
-    type: 2}
-  m_PrefabInternal: {fileID: 245108711}
-  m_GameObject: {fileID: 338260378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cce543ee908184123b7c31388c89fa68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &338260386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d830b3f9db195d943bf93d271130d496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
   distance: 5
   heightOffset: 2
   introHeight: 25
@@ -494,6 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9be4720ea1d44aa8855a12c6cc2a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  classicMode: 0
   distanceFromMonkey: 5
   secondsLookingAtBananas: 2
   secondsGoingDownTree: 3

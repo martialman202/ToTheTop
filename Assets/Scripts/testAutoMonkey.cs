@@ -194,7 +194,6 @@ public class testAutoMonkey : MonoBehaviour {
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
 			hud.displayWin = true;
-			//Application.LoadLevel("EndGameScene");
 		}
 	}
 
