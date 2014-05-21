@@ -38,7 +38,7 @@ public class DifficultySelectionGUI : MonoBehaviour {
 		}
 		if(GUI.Button(new Rect(0.58f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "3")) {
 			// Tell Manager what level to load
-			Manager.Instance.levelIndex = 9;
+			Manager.Instance.levelIndex = 8;
 			Manager.Instance.levelFileName = Manager.Instance.levels[Manager.Instance.levelIndex];
 			Application.LoadLevel ("LevelFromFile");
 		}
