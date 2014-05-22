@@ -53,11 +53,15 @@ public class HUDScript : MonoBehaviour {
 		}
 		GUI.skin.button.fontSize = originalSize;
 
+		if (paused)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = 1;
+
 		//Win Screen
 		if (displayWin) {
 			paused = false;
-			//TODO: set display win from testAutoMonkey
-			//Time.timeScale = 0;
+			Time.timeScale = 0;
 			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 			
@@ -80,11 +84,6 @@ public class HUDScript : MonoBehaviour {
 			// End the group we started above. This is very important to remember!
 			GUI.EndGroup ();
 		}
-
-		if (paused)
-			Time.timeScale = 0;
-		else
-			Time.timeScale = 1;
 
 		//Pause Menu
 		if (paused) {
