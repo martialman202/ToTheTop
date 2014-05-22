@@ -63,11 +63,11 @@ public class CameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!lookedAtBananas) //if we havent looked at the bananas, go do that
+		if (!lookedAtBananas && !classicMode) //if we havent looked at the bananas, go do that
 			findBananas ();
-		else if (!wentToMonkey) //then if we havent gotten down to the monkey, do that
+		else if (!wentToMonkey && !classicMode) //then if we havent gotten down to the monkey, do that
 			gotoMonkey(secondsGoingDownTree);
-		else if (!behindMonkey) //then if we havent gotten behind the monkey and let it move, do that
+		else if (!behindMonkey && !classicMode) //then if we havent gotten behind the monkey and let it move, do that
 			getBehindMonkey(); //should make monkey move after this
 		else 
 			followMonkey();

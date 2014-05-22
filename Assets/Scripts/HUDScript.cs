@@ -15,7 +15,7 @@ public class HUDScript : MonoBehaviour {
 	private float betweenButton = 0.22f * Screen.width;
 
 	private GameObject player;
-	private GameObject coconut;
+	private Transform coconut;
 	private testAutoMonkey monkeyScript;
 	private float heartSize = 16.0f;
 
@@ -31,7 +31,7 @@ public class HUDScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		coconut = GameObject.Find ("Coconut");
+		coconut = player.transform.parent.transform.Find ("Coconut");
 	}
 
 	void OnGUI()
@@ -110,6 +110,7 @@ public class HUDScript : MonoBehaviour {
 		}
 
 		//Coconut warning
+		//TODO: show only if monkey is under coconut
 		if (coconut != null) {
 			int warningSize = originalSize*3;
 			GUI.skin.label.fontSize = warningSize;

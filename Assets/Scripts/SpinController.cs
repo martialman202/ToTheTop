@@ -33,6 +33,7 @@ public class SpinController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Transform coconut = this.transform.Find ("Coconut");
 		onTree = monkey.onTree;
 		if ((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
@@ -43,6 +44,8 @@ public class SpinController : MonoBehaviour {
 			else {
 				currentRotation++;
 			}
+			if (coconut != null)
+				coconut.transform.parent = null;
 		}
 		else if((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
@@ -53,6 +56,8 @@ public class SpinController : MonoBehaviour {
 			else {
 				currentRotation--;
 			}
+			if (coconut != null)
+				coconut.transform.parent = null;
 		}
 		
 

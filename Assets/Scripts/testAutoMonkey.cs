@@ -19,8 +19,9 @@ public class testAutoMonkey : MonoBehaviour {
 
 	public GameObject coconut;
 	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
-	public float coconutInterval = 3.0f; // the time interval for coconuts to fall if monkey is on same tree
+	public float coconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
 	private float timeCounter = 0.0f;
+	private GameObject coconutClone;
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -54,6 +55,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void Start () {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
+			coconutInterval *= 2;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
@@ -202,7 +204,11 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void SpawnCoconut() {
-		GameObject coconutClone = (GameObject)Instantiate (coconut, new Vector3 (this.transform.position.x, this.transform.position.y + Screen.height/Camera.main.orthographicSize, this.transform.position.z), Quaternion.identity);
-		coconutClone.name = coconut.name;
+		float height = origPos.y + (Screen.height / Camera.main.orthographicSize);
+		if ((height < Manager.Instance.treeHeight || classicMode) && monkeyState == MonkeyState.climbing) {
+			coconutClone = (GameObject)Instantiate (coconut, new Vector3 (origPos.x, height, origPos.z), Quaternion.identity);
+			coconutClone.name = coconut.name;
+			coconutClone.transform.parent = this.transform.parent; //make sibling to monkey
+		}
 	}
 }
