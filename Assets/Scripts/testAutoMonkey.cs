@@ -16,9 +16,6 @@ public class testAutoMonkey : MonoBehaviour {
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
 	public float moveSpeed = 20.0f; 
 	public bool onTree = false;
-	public float repeatDamagePeriod = 0.5f;
-	private float lastHitTime = 0.0f;
-
 
 	private GameObject mainCam;
 	private Color origColor;
