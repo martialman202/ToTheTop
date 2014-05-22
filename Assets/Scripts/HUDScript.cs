@@ -7,10 +7,12 @@ public class HUDScript : MonoBehaviour {
 	public bool displayLife = true;
 	public Texture2D heart;
 	public float heartScale = 1.0f;
-	
-	private bool paused = false;	
-	private float buttonHeight = Screen.width/6;
-	private float betweenButton = Screen.width/4;
+
+	public Texture2D pauseTexture;
+	private bool paused = false;
+	private float buttonWidth = 0.7f * Screen.width;
+	private float buttonHeight = 0.17f * Screen.width;
+	private float betweenButton = 0.22f * Screen.width;
 
 	private GameObject player ;
 	private testAutoMonkey monkeyScript;
@@ -61,23 +63,29 @@ public class HUDScript : MonoBehaviour {
 		//Win Screen
 		if (displayWin) {
 			paused = false;
+<<<<<<< HEAD
 			Time.timeScale = 0;
 			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
+=======
+			//TODO: set display win from testAutoMonkey
+			//Time.timeScale = 0;
+			GUI.BeginGroup (new Rect (0.15f*Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
+>>>>>>> af48e15ec57a87450b46874be73ed89488cc99e8
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 			
 			// We'll make a box so you can see where the group is on-screen.
 			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length) {
-				if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Next Level")) {
+				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Next Level")) {
 					//paused = false;
 					Manager.Instance.levelIndex++;
 					Manager.Instance.levelFileName = Manager.Instance.levels[Manager.Instance.levelIndex];
 					Application.LoadLevel ("LevelFromFile");
 				}
 			}
-			if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Play Again")) {
+			if (GUI.Button (new Rect (0, betweenButton, buttonWidth, buttonHeight), "Play Again")) {
 				Application.LoadLevel(Manager.Instance.prevLevel);
 			}
-			if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Menu")) {
+			if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Menu")) {
 				Application.LoadLevel ("TitleScene");
 			}
 			
@@ -87,17 +95,18 @@ public class HUDScript : MonoBehaviour {
 
 		//Pause Menu
 		if (paused) {
-			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
+			GUI.Label(new Rect(0.1f*Screen.width, Screen.width/7, 0.8f*Screen.width, 2* buttonHeight), pauseTexture);
+			GUI.BeginGroup (new Rect (0.15f * Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 				// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 				
 				// We'll make a box so you can see where the group is on-screen.
-				if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Resume")) {
+				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Resume")) {
 					paused = false;
 				}
-				if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Restart")) {
+				if (GUI.Button (new Rect (0, betweenButton, buttonWidth, buttonHeight), "Restart")) {
 					Application.LoadLevel(Manager.Instance.prevLevel);
 				}
-				if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Menu")) {
+				if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Menu")) {
 					Application.LoadLevel ("TitleScene");
 				}
 				
