@@ -93,13 +93,9 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			//if (Time.time > lastHitTime + repeatDamagePeriod) {
-				lifePoints--;
-				//print (gameObject.name + " hit " + other.gameObject.name + "!");
-			//	lastHitTime = Time.time;
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[3].Play ();
-			//}
+			lifePoints--;
+			if (sounds != null && sounds.playSoundEffects)
+				sounds.audioSources[3].Play ();
 		}
 		if (other.gameObject.tag == "TreeTop") {
 			//print ("hit " + other.gameObject.tag);
