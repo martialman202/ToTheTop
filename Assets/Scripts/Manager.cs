@@ -11,7 +11,7 @@ public class Manager : Singleton<Manager> {
 
 	public int prevLevel;
 
-	public int numLevels = 10;
+	public int numLevels = 9;
 	public int levelIndex = 0;
 	public string [] levels;
 
@@ -25,8 +25,7 @@ public class Manager : Singleton<Manager> {
 		levels [5] = "med0";
 		levels [6] = "med1";
 		levels [7] = "med2";
-		levels [8] = "med3";
-		levels [9] = "hard0";
+		levels [8] = "hard0";
 
 		numLevels = levels.Length;
 		levelIndex = 0;

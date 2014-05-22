@@ -16,9 +16,6 @@ public class testAutoMonkey : MonoBehaviour {
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
 	public float moveSpeed = 20.0f; 
 	public bool onTree = false;
-	public float repeatDamagePeriod = 0.5f;
-	private float lastHitTime = 0.0f;
-
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -93,13 +90,9 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			if (Time.time > lastHitTime + repeatDamagePeriod) {
-				lifePoints--;
-				//print (gameObject.name + " hit " + other.gameObject.name + "!");
-				lastHitTime = Time.time;
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[3].Play ();
-			}
+			lifePoints--;
+			if (sounds != null && sounds.playSoundEffects)
+				sounds.audioSources[3].Play ();
 		}
 		if (other.gameObject.tag == "TreeTop") {
 			//print ("hit " + other.gameObject.tag);
@@ -194,7 +187,6 @@ public class testAutoMonkey : MonoBehaviour {
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
 			hud.displayWin = true;
-			//Application.LoadLevel("EndGameScene");
 		}
 	}
 

@@ -54,6 +54,34 @@ public class HUDScript : MonoBehaviour {
 		}
 		GUI.skin.button.fontSize = originalSize;
 
+		//Win Screen
+		if (displayWin) {
+			paused = false;
+			//TODO: set display win from testAutoMonkey
+			//Time.timeScale = 0;
+			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
+			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
+			
+			// We'll make a box so you can see where the group is on-screen.
+			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length) {
+				if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Next Level")) {
+					//paused = false;
+					Manager.Instance.levelIndex++;
+					Manager.Instance.levelFileName = Manager.Instance.levels[Manager.Instance.levelIndex];
+					Application.LoadLevel ("LevelFromFile");
+				}
+			}
+			if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Play Again")) {
+				Application.LoadLevel(Manager.Instance.prevLevel);
+			}
+			if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Menu")) {
+				Application.LoadLevel ("TitleScene");
+			}
+			
+			// End the group we started above. This is very important to remember!
+			GUI.EndGroup ();
+		}
+
 		if (paused)
 			Time.timeScale = 0;
 		else
@@ -80,31 +108,5 @@ public class HUDScript : MonoBehaviour {
 			GUI.EndGroup ();
 		}
 
-		//Win Screen
-		if (displayWin) {
-			//TODO: set display win from testAutoMonkey
-			//Time.timeScale = 0;
-			GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
-			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
-			
-				// We'll make a box so you can see where the group is on-screen.
-				if (Manager.Instance.levelIndex < Manager.Instance.levels.Length) {
-					if (GUI.Button (new Rect (0, 0, Screen.width/2, buttonHeight), "Next Level")) {
-						//paused = false;
-						Manager.Instance.levelIndex++;
-						Manager.Instance.levelFileName = Manager.Instance.levels[Manager.Instance.levelIndex];
-						Application.LoadLevel ("LevelFromFile");
-					}
-				}
-				if (GUI.Button (new Rect (0, betweenButton, Screen.width/2, buttonHeight), "Play Again")) {
-					Application.LoadLevel(Manager.Instance.prevLevel);
-				}
-				if (GUI.Button (new Rect (0, 2*betweenButton, Screen.width/2, buttonHeight), "Menu")) {
-					Application.LoadLevel ("TitleScene");
-				}
-			
-			// End the group we started above. This is very important to remember!
-			GUI.EndGroup ();
-		}
 	}
 }
