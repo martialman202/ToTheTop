@@ -18,7 +18,7 @@ public class TitleSceneGUI : MonoBehaviour {
 		}
 		// Make a group on the center of the screen
 		GUI.skin = menuSkin;
-		GUI.Label (new Rect (0.05f * Screen.width, Screen.width / 8, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);
+		GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);
 		GUI.BeginGroup (new Rect (Screen.width/2 - Screen.width/4, Screen.height/2 - Screen.width/4, Screen.width/2, buttonHeight*4));
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 			
