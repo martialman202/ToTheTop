@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Coconut : MonoBehaviour {
-	public float speed = 5.0f;
+	public float speed = 10.0f;
 	// Use this for initialization
 	void Start () {
 	

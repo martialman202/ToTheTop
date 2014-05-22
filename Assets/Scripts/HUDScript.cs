@@ -14,7 +14,8 @@ public class HUDScript : MonoBehaviour {
 	private float buttonHeight = 0.17f * Screen.width;
 	private float betweenButton = 0.22f * Screen.width;
 
-	private GameObject player ;
+	private GameObject player;
+	private GameObject coconut;
 	private testAutoMonkey monkeyScript;
 	private float heartSize = 16.0f;
 
@@ -30,7 +31,7 @@ public class HUDScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		coconut = GameObject.Find ("Coconut");
 	}
 
 	void OnGUI()
@@ -106,6 +107,12 @@ public class HUDScript : MonoBehaviour {
 				
 			// End the group we started above. This is very important to remember!
 			GUI.EndGroup ();
+		}
+
+		//Coconut warning
+		if (coconut != null) {
+			print( "coconut spawned!");
+			GUI.Label(new Rect(0.1f*Screen.width, Screen.width/7, 0.8f*Screen.width, 2* buttonHeight), "!");
 		}
 
 	}

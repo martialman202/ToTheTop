@@ -18,7 +18,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public bool onTree = false;
 
 	public GameObject coconut;
-	public float coconutSpawnHeight = 10.0f; //how far above the monkey the coconut should respond
+	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
 	public float coconutInterval = 3.0f; // the time interval for coconuts to fall if monkey is on same tree
 	private float timeCounter = 0.0f;
 
@@ -202,6 +202,6 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void SpawnCoconut() {
-		Instantiate (coconut, new Vector3 (this.transform.position.x, this.transform.position.y + coconutSpawnHeight, this.transform.position.z), Quaternion.identity);
+		Instantiate (coconut, new Vector3 (this.transform.position.x, this.transform.position.y + Screen.height/Camera.main.orthographicSize, this.transform.position.z), Quaternion.identity);
 	}
 }
