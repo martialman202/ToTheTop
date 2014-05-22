@@ -107,6 +107,10 @@ public class testAutoMonkey : MonoBehaviour {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
+
+				if (sounds != null && sounds.playSoundEffects)
+					sounds.audioSources[4].Play();
+
 				mmouse.ResetPos();
 				origPos = this.gameObject.transform.position;
 			}
@@ -127,17 +131,6 @@ public class testAutoMonkey : MonoBehaviour {
 		else if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*moveSpeed;
-
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[4].Play();
-
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
-			}
 
 			if (isJumping) {
 				jumpVel += simGravity;
