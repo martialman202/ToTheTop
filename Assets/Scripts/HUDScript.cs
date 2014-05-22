@@ -111,8 +111,13 @@ public class HUDScript : MonoBehaviour {
 
 		//Coconut warning
 		if (coconut != null) {
-			print( "coconut spawned!");
-			GUI.Label(new Rect(0.1f*Screen.width, Screen.width/7, 0.8f*Screen.width, 2* buttonHeight), "!");
+			int warningSize = originalSize*3;
+			GUI.skin.label.fontSize = warningSize;
+			Color originalColor = GUI.skin.label.normal.textColor;
+			GUI.skin.label.normal.textColor = Color.red;
+			GUI.Label(new Rect(Screen.width*.45f, Screen.width*.7f, 0.3f*Screen.width, 0.3f*Screen.width), "!");
+			GUI.skin.label.fontSize = originalSize;
+			GUI.skin.label.normal.textColor = originalColor;
 		}
 
 	}

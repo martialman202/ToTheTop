@@ -202,6 +202,7 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void SpawnCoconut() {
-		Instantiate (coconut, new Vector3 (this.transform.position.x, this.transform.position.y + Screen.height/Camera.main.orthographicSize, this.transform.position.z), Quaternion.identity);
+		GameObject coconutClone = (GameObject)Instantiate (coconut, new Vector3 (this.transform.position.x, this.transform.position.y + Screen.height/Camera.main.orthographicSize, this.transform.position.z), Quaternion.identity);
+		coconutClone.name = coconut.name;
 	}
 }

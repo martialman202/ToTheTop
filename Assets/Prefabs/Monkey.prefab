@@ -163,7 +163,6 @@ MonoBehaviour:
   moveSpeed: 20
   onTree: 0
   coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
-  coconutSpawnHeight: 15
   coconutInterval: 3
   isJumping: 0
   jumpVel: 0
