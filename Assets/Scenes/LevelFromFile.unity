@@ -109,6 +109,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -1.62920685e-07
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: coconut
+      value: 
+      objectReference: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
     m_RemovedComponents:
     - {fileID: 11400010, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
     - {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
@@ -154,7 +158,9 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 20
   onTree: 0
-  repeatDamagePeriod: .5
+  coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
+  coconutSpawnHeight: 25
+  coconutInterval: 3
   isJumping: 0
   jumpVel: 0
   simGravity: 3

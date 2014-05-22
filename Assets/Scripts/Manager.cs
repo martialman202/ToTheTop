@@ -7,13 +7,15 @@ public class Manager : Singleton<Manager> {
 	public float treeHeight = 0;
 	public float monkeyHeight = 0;
 
-	public string levelFileName;
+	public string levelFileName = "test";
 
 	public int prevLevel;
 
 	public int numLevels = 9;
 	public int levelIndex = 0;
 	public string [] levels;
+
+	public bool onTree;
 
 	void Start() {
 		levels = new string[numLevels];

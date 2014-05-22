@@ -17,6 +17,11 @@ public class testAutoMonkey : MonoBehaviour {
 	public float moveSpeed = 20.0f; 
 	public bool onTree = false;
 
+	public GameObject coconut;
+	public float coconutSpawnHeight = 10.0f; //how far above the monkey the coconut should respond
+	public float coconutInterval = 3.0f; // the time interval for coconuts to fall if monkey is on same tree
+	private float timeCounter = 0.0f;
+
 	private GameObject mainCam;
 	private Color origColor;
 	private MonkeyMouse mmouse;
@@ -53,6 +58,8 @@ public class testAutoMonkey : MonoBehaviour {
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
 		}
+
+		timeCounter = coconutInterval;
 
 		//print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
@@ -102,6 +109,17 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
+		Manager.Instance.onTree = onTree;
+		if (onTree) {
+			if (Time.time > timeCounter + coconutInterval) {
+				SpawnCoconut();
+				print ("spawning coconut!");
+				timeCounter = Time.time;
+			}
+		} else {
+			timeCounter = Time.time + coconutInterval;
+		}
+
 		Manager.Instance.monkeyHeight = this.transform.position.y;
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
@@ -183,4 +201,7 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
+	void SpawnCoconut() {
+		Instantiate (coconut, new Vector3 (this.transform.position.x, this.transform.position.y + coconutSpawnHeight, this.transform.position.z), Quaternion.identity);
+	}
 }

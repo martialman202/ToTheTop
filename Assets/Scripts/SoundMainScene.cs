@@ -33,7 +33,6 @@ public class SoundMainScene : MonoBehaviour {
 		//Audio
 		audioSources = new AudioSource[Clips.Length];
 		for (int i = 0; i < Clips.Length; i++) {
-			print(i);
 			audioSources[i] = this.gameObject.AddComponent("AudioSource") as AudioSource;
 			audioSources[i].clip = Clips[i];
 		}
