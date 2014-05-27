@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 using System;
 using System.Text;
@@ -40,6 +41,10 @@ public class BuildLevel : MonoBehaviour {
 
 	private GameObject spawner;
 
+	private bool startActiveManager;
+	private List<Transform> trunks;
+	private GameObject mainCam;
+
 	/*void Awake() {
 		Application.targetFrameRate = 120;
 	}*/
@@ -74,6 +79,10 @@ public class BuildLevel : MonoBehaviour {
 			Transform tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
 			Transform tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
 
+			trunks.Add(tree1);
+			trunks.Add(tree2);
+			trunks.Add(tree3);
+
 			trunkCounter++;
 		}
 	}
@@ -85,18 +94,24 @@ public class BuildLevel : MonoBehaviour {
 			Transform tree2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
 			Transform tree3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
 
+			trunks.Add(tree1);
+			trunks.Add(tree2);
+			trunks.Add(tree3);
+
 			trunkCounter++;
 		}
 
 		Transform tt1 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)),Quaternion.identity);
 		Transform tt2 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)),Quaternion.identity);
 		Transform tt3 = (Transform)Instantiate(treeTop, new Vector3(distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)),Quaternion.identity);
+				
+		Transform b = (Transform)Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
 
-		tt1.transform.parent = spawner.transform;
-		tt2.transform.parent = spawner.transform;
-		tt3.transform.parent = spawner.transform;
-		
-		/*/Transform b = (Transform)*/Instantiate(bananas, new Vector3(0,heightOffset*trunkCounter+bananasHeightOffset,0), Quaternion.identity);
+		trunks.Add(tt1);
+		trunks.Add(tt2);
+		trunks.Add(tt3);
+		trunks.Add(b);
+
 		treeHeight = tt1.position.y;
 		Manager.Instance.treeHeight = treeHeight;
 	}
@@ -178,8 +193,13 @@ public class BuildLevel : MonoBehaviour {
 					tree3.transform.Rotate(new Vector3(0,240.0f,0));
 
 					if( int.Parse(entries[0]) == 4 ) {
-						Instantiate(brushSawBlade, new Vector3(0,heightOffset*trunkCounter,0), Quaternion.identity);
+						Transform bsb = (Transform)Instantiate(brushSawBlade, new Vector3(0,heightOffset*trunkCounter,0), Quaternion.identity);
+						trunks.Add(bsb);
 					}
+
+					trunks.Add(tree1);
+					trunks.Add(tree2);
+					trunks.Add(tree3);
 
 					trunkCounter++;
 
@@ -187,6 +207,10 @@ public class BuildLevel : MonoBehaviour {
 						Transform extra1 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f)), Quaternion.identity);
 						Transform extra2 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*270.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*270.0f/180.0f)), Quaternion.identity);
 						Transform extra3 = (Transform)Instantiate(emptyTrunk, new Vector3 (distance * Mathf.Cos(Mathf.PI*30.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*30.0f/180.0f)), Quaternion.identity);
+
+						trunks.Add(extra1);
+						trunks.Add(extra2);
+						trunks.Add(extra3);
 
 						trunkCounter++;
 					}
@@ -203,7 +227,10 @@ public class BuildLevel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		trunks = new List<Transform> ();
+
 		spawner = this.gameObject;
+		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
 
 		LoadIntro ();
 		LoadLevel (levelFileName+Manager.Instance.levelFileName);
@@ -216,5 +243,25 @@ public class BuildLevel : MonoBehaviour {
 	void Update () {
 		// Update progress bar
 		barDisplay = Manager.Instance.monkeyHeight/Manager.Instance.treeHeight;
+
+
+		// Check if camera is setup
+		if( mainCam.GetComponent<CameraController>().hasFoundBananas() ) {
+			startActiveManager = true;
+		}
+
+		// Set objects to active/inactive if they're on the screen
+		if( startActiveManager ) {
+			float camY = mainCam.transform.position.y;
+			foreach( Transform t in trunks ) {
+				if( t.position.y < camY + 40.0f && t.position.y > camY - 40.0f ) {
+					t.gameObject.SetActive(true);
+				}
+				else {
+					t.gameObject.SetActive(false);
+				}
+			}
+		}
+
 	}
 }
