@@ -49,6 +49,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void Start () {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
+			Manager.Instance.score = 0;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
@@ -144,6 +145,9 @@ public class testAutoMonkey : MonoBehaviour {
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 			}
 
+			if ( classicMode )
+				Manager.Instance.score += (int)(Time.deltaTime * 100);
+
 			controller.Move(dir * Time.deltaTime);
 
 		} else if (monkeyState == MonkeyState.lose) {
@@ -160,6 +164,7 @@ public class testAutoMonkey : MonoBehaviour {
 			else if(onTree)
 				win ();
 		}
+
 	}
 
 	void lose() {
@@ -176,13 +181,19 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 	
 	void win() {
+		print("You Win!");
+
+		// update high score
+		int highScore = PlayerPrefs.GetInt ("HighScore");
+		if (Manager.Instance.score > highScore) 
+			PlayerPrefs.SetInt ("HighScore", Manager.Instance.score);
 
 		print("You Win");
 		string starPoints = "Level" + (Manager.Instance.levelIndex + 1).ToString() + "Stars";
 		if(lifePoints > PlayerPrefs.GetInt(starPoints)) {
 			PlayerPrefs.SetInt(starPoints, lifePoints);
-			PlayerPrefs.Save();
 		}
+
 		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[1].Play();
