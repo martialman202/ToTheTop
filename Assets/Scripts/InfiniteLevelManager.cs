@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class InfiniteLevelManager : MonoBehaviour {
-
+	public GUISkin menuSkin;
+	
 	private Transform[] trunks;
 
 	public Transform emptyTrunk;
@@ -30,6 +31,17 @@ public class InfiniteLevelManager : MonoBehaviour {
 	public float obstacleSpawnMin = 0.5f;
 	public float obstacleSpawnMax = 1.25f;
 	private bool spawnObstacle = false;
+
+	void OnGUI () {
+		GUI.skin = menuSkin;
+		
+		// score
+		int originalSize = GUI.skin.box.fontSize;
+		int boxSize = originalSize / 2;
+		GUI.skin.box.fontSize = boxSize;
+		GUI.Box(new Rect(Screen.width*0.80f, Screen.width*0.01f, Screen.width*0.18f, Screen.width*0.1f), (Manager.Instance.score).ToString());
+		GUI.skin.box.fontSize = originalSize;
+	}
 
 	// creates the pool of trunks that will be managed by this system
 	void instantiateTrunkPool() {
