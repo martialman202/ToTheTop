@@ -75,7 +75,7 @@ public class HUDScript : MonoBehaviour {
 			if (GUI.Button (new Rect (0, betweenButton, buttonWidth, buttonHeight), "Play Again")) {
 				Application.LoadLevel(Manager.Instance.prevLevel);
 			}
-			if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Menu")) {
+			if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Main Menu")) {
 				Application.LoadLevel ("TitleScene");
 			}
 			
@@ -90,7 +90,7 @@ public class HUDScript : MonoBehaviour {
 
 		//Pause Menu
 		if (paused) {
-			GUI.Label(new Rect(0.1f*Screen.width, Screen.width/7, 0.8f*Screen.width, 2* buttonHeight), pauseTexture);
+			GUI.Label(new Rect(0.1f*Screen.width, 0.13f * Screen.height, 0.8f*Screen.width, 4* buttonHeight), pauseTexture);
 			GUI.BeginGroup (new Rect (0.15f * Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 				// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 				
@@ -101,7 +101,7 @@ public class HUDScript : MonoBehaviour {
 				if (GUI.Button (new Rect (0, betweenButton, buttonWidth, buttonHeight), "Restart")) {
 					Application.LoadLevel(Manager.Instance.prevLevel);
 				}
-				if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Menu")) {
+				if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Main Menu")) {
 					Application.LoadLevel ("TitleScene");
 				}
 				
