@@ -188,6 +188,12 @@ public class testAutoMonkey : MonoBehaviour {
 		if (Manager.Instance.score > highScore) 
 			PlayerPrefs.SetInt ("HighScore", Manager.Instance.score);
 
+		print("You Win");
+		string starPoints = "Level" + (Manager.Instance.levelIndex + 1).ToString() + "Stars";
+		if(lifePoints > PlayerPrefs.GetInt(starPoints)) {
+			PlayerPrefs.SetInt(starPoints, lifePoints);
+		}
+
 		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[1].Play();
