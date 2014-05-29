@@ -347,7 +347,7 @@ MonoBehaviour:
   emptyTrunk: {fileID: 400000, guid: fdbd6b9923be38647990f008c0f2f005, type: 2}
   beehiveTrunk: {fileID: 400004, guid: b4adba4466aedc846bf047b69e117237, type: 2}
   snakeTrunk: {fileID: 400058, guid: 601cf8e17c4b5a0498170170d48df283, type: 2}
-  brushSawBlade: {fileID: 400002, guid: a83d4cf5003f5464299270b640ee6c3a, type: 2}
+  brushSawBlade: {fileID: 400002, guid: 2f5d5caa6bc174f49aa132f92aa7522b, type: 2}
   treeTop: {fileID: 400002, guid: dfe7e92b501244b4f8864a9c1767b459, type: 2}
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
