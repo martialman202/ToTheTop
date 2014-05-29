@@ -90,7 +90,7 @@ public class HUDScript : MonoBehaviour {
 
 		//Pause Menu
 		if (paused) {
-			GUI.Label(new Rect(0.1f*Screen.width, 0.17f * Screen.height, 0.8f*Screen.width, 2* buttonHeight), pauseTexture);
+			GUI.Label(new Rect(0.1f*Screen.width, 0.13f * Screen.height, 0.8f*Screen.width, 4* buttonHeight), pauseTexture);
 			GUI.BeginGroup (new Rect (0.15f * Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 				// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 				

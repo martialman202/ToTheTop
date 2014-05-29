@@ -26,7 +26,14 @@ public class GUIManager : MonoBehaviour {
 
 	void OnGUI () {
 		if(Input.GetKey(KeyCode.Escape))
-			Application.Quit();
+		{
+			if((prevMenu == currMenu) && (currMenu == MenuState.Main))
+				Application.Quit();
+			else
+				currMenu = prevMenu;
+				prevMenu = MenuState.Main;
+				
+		}	
 
 		GUI.skin = menuSkin;
 		// Make a group on the center of the screen
