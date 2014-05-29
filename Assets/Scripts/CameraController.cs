@@ -54,6 +54,9 @@ public class CameraController : MonoBehaviour {
 	//for following the monkey
 	private bool beforeTree = true;
 
+	public bool hasFoundBananas() {
+		return foundBananas;
+	}
 
 	// Use this for initialization
 	void Start () {

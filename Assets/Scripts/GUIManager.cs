@@ -72,31 +72,44 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw level selector
 	void DrawLevels() {
-		GUI.BeginGroup(new Rect(0.1f * Screen.width, Screen.height/2 - Screen.width/4, 0.9f * Screen.width, 3 * buttonHeight));
+		GUI.BeginGroup(new Rect(0.1f * Screen.width, 0.1f * Screen.height, 0.9f * Screen.width, 0.8f * Screen.height));
+
+		//Test drawing star labels
+		int numPerRow = 3;
+		for(int i = 0; i < Manager.Instance.numLevels; i++) {
+			int currRow = i / 3;
+			string starPoints = "Level" + (i+1).ToString() + "Stars";
+			if(PlayerPrefs.HasKey(starPoints)) {
+				// Select correct star label
+				GUI.Label(new Rect(0.32f * (i % numPerRow) * Screen.width, (currRow * 0.36f) * Screen.width,
+				                   0.22f * Screen.width, 0.1f * Screen.width), stars[(int) (PlayerPrefs.GetInt(starPoints))]);
+			}
+			else {
+				//Set the label to 0 and draw
+				PlayerPrefs.SetInt(starPoints, 0);
+				GUI.Label(new Rect(0.32f * (i % numPerRow) * Screen.width, (currRow * 0.36f) * Screen.width,
+				                   0.22f * Screen.width, 0.1f * Screen.width), stars[0]);
+			}
+		}
+
+		/*
 		//Star labels
-		GUI.Label(new Rect(0.02f * Screen.width, 0, 0.22f * Screen.width, 0.08f * Screen.width), stars[1]);
+		GUI.Label(new Rect(0.03f * Screen.width, 0, 0.22f * Screen.width, 0.08f * Screen.width), stars[1]);
 		GUI.Label(new Rect(0.31f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[2]);
 		GUI.Label(new Rect(0.60f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[3]);
-		
-		//Level buttons
-		if (GUI.Button (new Rect (0, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "1")) {
-			// Tell Manager what level to load
-			Manager.Instance.levelIndex = 0;
-			Manager.Instance.levelFileName = Manager.Instance.levels[levelIndex];
-			Application.LoadLevel ("LevelFromFile");
+		*/
+
+		//Draw levels
+		for(int i = 0; i < Manager.Instance.numLevels; i++) {
+			int currRow = i / 3;
+			if(GUI.Button(new Rect(0.29f * (i % numPerRow) * Screen.width, (0.1f + (currRow * 0.36f)) * Screen.width,
+			                       0.22f*Screen.width, 0.22f*Screen.width), (i+1).ToString ())) {
+				Manager.Instance.levelIndex = i;
+				Manager.Instance.levelFileName = Manager.Instance.levels[i];
+				Application.LoadLevel("LevelFromFile");
+			}
 		}
-		if(GUI.Button(new Rect(0.29f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "2")) {
-			// Tell Manager what level to load
-			Manager.Instance.levelIndex = 5;
-			Manager.Instance.levelFileName = Manager.Instance.levels[levelIndex];
-			Application.LoadLevel ("LevelFromFile");
-		}
-		if(GUI.Button(new Rect(0.58f * Screen.width, 0.1f * Screen.width, 0.22f * Screen.width, 0.22f * Screen.width), "3")) {
-			// Tell Manager what level to load
-			Manager.Instance.levelIndex = 9;
-			Manager.Instance.levelFileName = Manager.Instance.levels[levelIndex];
-			Application.LoadLevel ("LevelFromFile");
-		}
+
 		GUI.EndGroup ();
 	}
 
