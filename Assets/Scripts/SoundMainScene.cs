@@ -17,7 +17,7 @@ using System.Collections;
 public class SoundMainScene : MonoBehaviour {
 
 	public bool playMusic = true;
-	public float musicVolume = 0.7f; //0.0 - 1.0
+	public float musicVolume = 1.0f; //0.0 - 1.0
 	public bool playSoundEffects = true;
 	public AudioClip [] Clips;
 	public AudioSource[] audioSources;
@@ -40,8 +40,14 @@ public class SoundMainScene : MonoBehaviour {
 		changedSettings = false;
 		audioSources [0].priority = 0; //Set music to highest priority
 		audioSources [0].volume = musicVolume; //turn it down a little bit
+		audioSources [5].priority = 0;
+		audioSources [5].volume = musicVolume;
+		audioSources [1].priority = 1;
+		audioSources [2].priority = 1;
+		//End Audio
 
-		updatePrefs ();
+
+		//updatePrefs ();
 		playedLose = false;
 		playedWin = false;
 

@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 
 	//play with these until it looks right. Mostly postion y and z, and rotation x.
 	//If you need to change them, change them in the scene editor.
-	public Vector3 finalPosition = new Vector3(0.0f,-0.6f,10f); 
+	public Vector3 finalPosition = new Vector3(0.0f,-0.6f,-10f); 
 	public Vector3 finalRotation= new Vector3(333.2337f, 0.0f, 0.0f);
 
 	//other objects
@@ -52,6 +52,8 @@ public class CameraController : MonoBehaviour {
 
 	//for following the monkey
 	private bool beforeTree = true;
+	private bool set_FM_start = false;
+	private float FM_start; //start time
 
 
 	// Use this for initialization
@@ -149,8 +151,6 @@ public class CameraController : MonoBehaviour {
 
 		if (transform.position == BH_finalPosition) {
 			behindMonkey = true;
-			//Lerp to final LookAt position
-			//this.transform.LookAt(monkey.transform.position + new Vector3(0,5,0));
 			monkeyScript.cameraPermission = true; //allow the monkey to move
 		}
 	}
@@ -165,12 +165,24 @@ public class CameraController : MonoBehaviour {
 		 * 	Readjust position if monkey wins.
 		 */
 	void followMonkey(){
-		if (beforeTree) {
+		if (!set_FM_start) {
+			FM_start = Time.time;
+			set_FM_start = true;
+		}
+		Vector3 pos = this.transform.position;
+		Quaternion rot = this.transform.rotation;
+
+		/*if (!this.transform.parent) {
 			this.transform.parent = monkey.transform;
+		}*/
+
+		//Was I going to use this for something?
+		if (beforeTree) {
+		this.transform.parent = monkey.transform;
+		this.transform.position = Vector3.Lerp(pos, monkey.transform.position + finalPosition, (Time.time - FM_start) /1);
+		this.transform.rotation = Quaternion.Lerp (rot, Quaternion.Euler(finalRotation), (Time.time - FM_start) /1);
 			if (monkeyScript.isClimbing) {
-				//this.transform.parent = null;
-				this.transform.position = monkey.transform.position + finalPosition;
-				this.transform.rotation = Quaternion.Euler(finalRotation);
+				this.transform.parent = monkey.transform;
 				beforeTree = false;
 			}
 		}

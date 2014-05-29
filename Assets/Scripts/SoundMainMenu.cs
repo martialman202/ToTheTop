@@ -1,10 +1,13 @@
 ﻿/*
  * This script should be attached to the main camera in the main menu.
+ * For any music that needs to loop:
+ * 		-When you click on the audiosource file in the unity navigator, chage the compression from WAV to MPEG
+ * 		-Then, make sure "Gapless Looping" is checked.
  * 
  * Note on the audio sources:
  * 	In the array, the elements should be as follows:
  * 	0 - music intro
- * 	1 - portion of music to be looped
+ * 	1 - music loop
 */
 
 using UnityEngine;
