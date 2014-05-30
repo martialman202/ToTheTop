@@ -22,7 +22,7 @@ public class HUDScriptMainMenu : MonoBehaviour {
 	void OnGUI() {
 		print ("why doesnt this work"); //seriously, why
 		// Make a background box
-		GUI.Box(new Rect(500,10,400,100), "Logo could prolly go here");
+		GUI.Box(new Rect(0,10,400,100), "Logo could prolly go here");
 
 		if (menuState == MenuState.Main) { //main menu
 			GUI.Box(new Rect(525,375,200,200), "");

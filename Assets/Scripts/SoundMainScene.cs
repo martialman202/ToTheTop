@@ -42,12 +42,13 @@ public class SoundMainScene : MonoBehaviour {
 		audioSources [0].volume = musicVolume; //turn it down a little bit
 		audioSources [5].priority = 0;
 		audioSources [5].volume = musicVolume;
+
+		//raise priority of win/lose sounds
 		audioSources [1].priority = 1;
+		updatePrefs ();
 		audioSources [2].priority = 1;
 		//End Audio
 
-
-		//updatePrefs ();
 		playedLose = false;
 		playedWin = false;
 
@@ -56,7 +57,7 @@ public class SoundMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (changedSettings) {
-			updatePrefs();
+		//	updatePrefs();
 		}
 
 		if (playMusic && !playedIntro) {
@@ -73,11 +74,13 @@ public class SoundMainScene : MonoBehaviour {
 		else if (!playMusic) {
 			if (audioSources[0].isPlaying)
 				audioSources[0].Stop ();
+			if (audioSources[5].isPlaying)
+				audioSources[5].Stop();
 		}
 	}
 
 	void updatePrefs() {
 		playMusic = PlayerPrefs.GetInt ("PlayMusic") == 1 ? true : false;
-		playSoundEffects = PlayerPrefs.GetInt ("PlaySoundEffects") == 1 ? true : false;
+		playSoundEffects = PlayerPrefs.GetInt ("PlaySoundFX") == 1 ? true : false;
 	}
 }

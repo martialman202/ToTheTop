@@ -14,12 +14,8 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 1.0f; 
-
+	public float moveSpeed = 20.0f; 
 	public bool onTree = false;
-	public float repeatDamagePeriod = 0.5f;
-	private float lastHitTime = 0.0f;
-
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -29,7 +25,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
-	public float simGravity = 3.0f;
+	public float simGravity = 4.0f;
 	public float jumpImpulse = -45.0f;
 	public Vector3 jumpDir = new Vector3(0,0,1);
 
@@ -47,10 +43,13 @@ public class testAutoMonkey : MonoBehaviour {
 	private bool playedWin;
 	private bool playedLose; 
 
+	private CharacterController controller;
+
 	// Use this for initialization
 	void Start () {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
+			Manager.Instance.score = 0;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
@@ -67,7 +66,8 @@ public class testAutoMonkey : MonoBehaviour {
 		
 		origColor = gameObject.renderer.material.color;
 		mmouse = this.GetComponent<MonkeyMouse> ();
-		PlayerPrefs.SetInt ("previousLevel", Application.loadedLevel);
+		Manager.Instance.prevLevel = Application.loadedLevel;
+		controller = GetComponent<CharacterController>();
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
@@ -77,7 +77,6 @@ public class testAutoMonkey : MonoBehaviour {
 			onTree = true;
 			monkeyState = MonkeyState.climbing;
 			isClimbing = true; //this variable is for the CameraController
-
 			//print ("collision detected!");
 		}
 		else if( hit.gameObject.tag == "Tree" && isJumping) {
@@ -92,13 +91,9 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			if (Time.time > lastHitTime + repeatDamagePeriod) {
-				lifePoints--;
-				//print (gameObject.name + " hit " + other.gameObject.name + "!");
-				lastHitTime = Time.time;
-				if (sounds.playSoundEffects)
-					sounds.audioSources[3].Play ();
-			}
+			lifePoints--;
+			if (sounds != null && sounds.playSoundEffects)
+				sounds.audioSources[3].Play ();
 		}
 		if (other.gameObject.tag == "TreeTop") {
 			//print ("hit " + other.gameObject.tag);
@@ -107,8 +102,19 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
+	void Update() {
+		Manager.Instance.monkeyHeight = this.transform.position.y;
+		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
+			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
+				isJumping = true;
+				jumpVel = jumpImpulse;
+				mmouse.ResetPos();
+				origPos = this.gameObject.transform.position;
+			}
+		}
+	}
+
+	void FixedUpdate () {
 		//print (Time.deltaTime);
 		//print ("Life: " + lifePoints);
 		if (lifePoints <= 0) {
@@ -127,7 +133,7 @@ public class testAutoMonkey : MonoBehaviour {
 				isJumping = true;
 				jumpVel = jumpImpulse;
 
-				if (sounds.playSoundEffects)
+				if (sounds != null && sounds.playSoundEffects)
 					sounds.audioSources[4].Play();
 
 				mmouse.ResetPos();
@@ -139,7 +145,9 @@ public class testAutoMonkey : MonoBehaviour {
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 			}
 
-			CharacterController controller = GetComponent<CharacterController>();
+			if ( classicMode )
+				Manager.Instance.score += (int)(Time.deltaTime * 100);
+
 			controller.Move(dir * Time.deltaTime);
 
 		} else if (monkeyState == MonkeyState.lose) {
@@ -150,12 +158,13 @@ public class testAutoMonkey : MonoBehaviour {
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 				//dir = new Vector3(0,0,jumpVel);
-				CharacterController controller = GetComponent<CharacterController>();
+
 				controller.Move(dir * Time.deltaTime);
 			}
 			else if(onTree)
 				win ();
 		}
+
 	}
 
 	void lose() {
@@ -172,16 +181,31 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 	
 	void win() {
+		print("You Win!");
+
+		// update high score
+		int highScore = PlayerPrefs.GetInt ("HighScore");
+		if (Manager.Instance.score > highScore) 
+			PlayerPrefs.SetInt ("HighScore", Manager.Instance.score);
 
 		print("You Win");
-		if (!sounds.audioSources[1].isPlaying && !playedWin && sounds.playSoundEffects) { //if that sound is not playing, and we have not played it
+
+		string starPoints = "Level" + (Manager.Instance.levelIndex + 1).ToString() + "Stars";
+		if(lifePoints > PlayerPrefs.GetInt(starPoints)) {
+			PlayerPrefs.SetInt(starPoints, lifePoints);
+		}
+
+		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[1].Play();
 			playedWin = true;
 		}
-		else if ((playedWin && !sounds.audioSources[1].isPlaying) || !sounds.playSoundEffects) { //if that sound is not playing, and we have played it
-			Application.LoadLevel("EndGameScene");
+
+		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
+			// Get HUDScript from Main Camera 
+			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
+			hud.displayWin = true;
 		}
 	}
-	
+
 }

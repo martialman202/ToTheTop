@@ -1,4 +1,6 @@
 ﻿/*
+ * For all audio sources that are music, make sure they have gapless looping enabled.
+ * 
  * This script should be attached to the main camera in the main menu.
  * For any music that needs to loop:
  * 		-When you click on the audiosource file in the unity navigator, chage the compression from WAV to MPEG
@@ -21,7 +23,7 @@ public class SoundMainMenu : MonoBehaviour {
 	public bool playMusic;
 	public bool playSoundFX;
 
-	private bool changedSettings; //set to true if any sound settings changed
+	public bool changedSettings = false; //set to true if any sound settings changed
 
 	private bool playedIntro; //have we played the portion of the music that is not to be looped?
 	
@@ -48,13 +50,13 @@ public class SoundMainMenu : MonoBehaviour {
 		}
 
 		//Music
-		/*if (playMusic && !playedIntro) {
+		if (playMusic && !playedIntro) {
 			if (!audioSources[0].isPlaying) {
 				audioSources[0].Play();
 				playedIntro = true;
 			}
 		}
-		else*/ playedIntro = true; if (playMusic && playedIntro && !audioSources[0].isPlaying) {
+		else playedIntro = true; if (playMusic && playedIntro && !audioSources[0].isPlaying) {
 			if (!audioSources[1].isPlaying) {
 				audioSources[1].Play();
 			}
@@ -74,6 +76,6 @@ public class SoundMainMenu : MonoBehaviour {
 	//if changes are made to player prefs then we need to update sound settings
 	void updatePrefs() {
 		playMusic = PlayerPrefs.GetInt ("PlayMusic") == 1 ? true : false;
-		playSoundFX = PlayerPrefs.GetInt ("PlaySoundEffects") == 1 ? true : false;
+		playSoundFX = PlayerPrefs.GetInt ("PlaySoundFX") == 1 ? true : false;
 	}
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
+	public bool classicMode = false;
 
 	//TODO: We need to let the monkeyScript know if the camera is doing shit ot not. some bool or something;
 
@@ -55,6 +56,9 @@ public class CameraController : MonoBehaviour {
 	private bool set_FM_start = false;
 	private float FM_start; //start time
 
+	public bool hasFoundBananas() {
+		return foundBananas;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -75,23 +79,23 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void findBananas() {
-		//The camera starts at the monkey's position but really high up
-		if (!foundBananas) { //this is kind of a hack
-			bananas = GameObject.FindGameObjectWithTag ("Goal");
-			transform.position = (new Vector3(monkey.transform.position.x,
+		if (!classicMode) {
+			//The camera starts at the monkey's position but really high up
+			if (!foundBananas) { //this is kind of a hack
+				bananas = GameObject.FindGameObjectWithTag ("Goal");
+				transform.position = (new Vector3 (monkey.transform.position.x,
 			                                  bananas.transform.position.y,
 			                                  monkey.transform.position.z));
-			transform.LookAt (bananas.transform);
-			foundBananas = true;
-		}
-		else {
-			if(!set_LB_start) {
-				LB_start = Time.time;
-				set_LB_start = true;
-			}
-			else {//if LB_start was already set
-				if ((Time.time - LB_start) / secondsLookingAtBananas >= 1)
-					lookedAtBananas = true;
+				transform.LookAt (bananas.transform);
+				foundBananas = true;
+			} else {
+				if (!set_LB_start) {
+					LB_start = Time.time;
+					set_LB_start = true;
+				} else {//if LB_start was already set
+					if ((Time.time - LB_start) / secondsLookingAtBananas >= 1)
+						lookedAtBananas = true;
+				}
 			}
 		}
 	}
@@ -176,7 +180,6 @@ public class CameraController : MonoBehaviour {
 			this.transform.parent = monkey.transform;
 		}*/
 
-		//Was I going to use this for something?
 		if (beforeTree) {
 		this.transform.parent = monkey.transform;
 		this.transform.position = Vector3.Lerp(pos, monkey.transform.position + finalPosition, (Time.time - FM_start) /1);
@@ -186,17 +189,16 @@ public class CameraController : MonoBehaviour {
 				beforeTree = false;
 			}
 		}
+		
+	} //end void followMonkey()
 
-		//Make camera lookAt smoother and easier
-		/*void LerpLookAt(Vector3 Start, Vector3 End, float StartTime, float duration) {
+	//for when monkey loses
+	void loseCam() {
 
-		}*/
+	}
 
-		//old
-		/*if ((transform.position - monkey.transform.position).magnitude >= distanceFromMonkey) {
-			if (!this.transform.parent)
-				this.transform.parent = monkey.transform;
-			this.transform.LookAt(monkey.transform.position + new Vector3(0,4,0));
-		}*/
+	//for when monkey wins
+	void winCam() {
+
 	}
 }
