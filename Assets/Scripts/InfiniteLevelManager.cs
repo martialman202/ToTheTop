@@ -465,5 +465,6 @@ public class InfiniteLevelManager : MonoBehaviour {
 		speedFactor = Manager.Instance.monkeyHeight / 100000;
 		if (obstacleSpawnTime > obstacleSpawnMin)
 			obstacleSpawnTime -= speedFactor;
+		Manager.Instance.monkeySpeed += speedFactor;
 	}
 }

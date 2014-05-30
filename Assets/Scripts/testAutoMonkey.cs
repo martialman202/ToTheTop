@@ -14,7 +14,8 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 20.0f; 
+	public float moveSpeed = 20.0f;
+	private float monkeySpeed;
 	public bool onTree = false;
 
 	private GameObject mainCam;
@@ -54,6 +55,9 @@ public class testAutoMonkey : MonoBehaviour {
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
 		}
+
+		monkeySpeed = moveSpeed;
+		Manager.Instance.monkeySpeed = monkeySpeed;
 
 		//print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
@@ -112,6 +116,9 @@ public class testAutoMonkey : MonoBehaviour {
 				origPos = this.gameObject.transform.position;
 			}
 		}
+
+		if (classicMode)
+			monkeySpeed = Manager.Instance.monkeySpeed;
 	}
 
 	void FixedUpdate () {
@@ -127,7 +134,7 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 		else if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
-			Vector3 dir = moveDirection*moveSpeed;
+			Vector3 dir = moveDirection*monkeySpeed;
 
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
@@ -153,7 +160,7 @@ public class testAutoMonkey : MonoBehaviour {
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
 		} else if (monkeyState == MonkeyState.win) {
-			Vector3 dir = moveDirection*moveSpeed;
+			Vector3 dir = moveDirection*monkeySpeed;
 			if (isJumping) { // finish jumping before winning
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
