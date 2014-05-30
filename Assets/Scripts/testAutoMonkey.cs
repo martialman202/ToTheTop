@@ -15,6 +15,8 @@ public class testAutoMonkey : MonoBehaviour {
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
 	public float moveSpeed = 20.0f;
+	public float accelerationFactor = 10; // how fast the monkey should accelerate, in relation to Time.deltaTime
+	public float slowFactor = 0.4f; // slow factor 0-1, 0 for full speed, 1 for stop
 	private float monkeySpeed;
 	public bool onTree = false;
 
@@ -96,6 +98,7 @@ public class testAutoMonkey : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Obstacle") {
 			lifePoints--;
+			monkeySpeed -= Manager.Instance.monkeySpeed * slowFactor;
 			if (sounds != null && sounds.playSoundEffects)
 				sounds.audioSources[3].Play ();
 		}
@@ -116,8 +119,9 @@ public class testAutoMonkey : MonoBehaviour {
 				origPos = this.gameObject.transform.position;
 			}
 		}
-
-		if (classicMode)
+		if (monkeySpeed < Manager.Instance.monkeySpeed)
+			monkeySpeed += Time.deltaTime * accelerationFactor;
+		else
 			monkeySpeed = Manager.Instance.monkeySpeed;
 	}
 

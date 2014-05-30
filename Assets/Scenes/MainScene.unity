@@ -111,6 +111,8 @@ MonoBehaviour:
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 20
+  accelerationFactor: 10
+  slowFactor: .400000006
   onTree: 0
   isJumping: 0
   jumpVel: 0
