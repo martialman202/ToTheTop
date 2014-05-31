@@ -198,7 +198,7 @@ public class testAutoMonkey : MonoBehaviour {
 		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[1].Play();
-			playedWin = true;
+			playedLose = true;
 		}
 
 		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it

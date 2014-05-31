@@ -214,6 +214,14 @@ Prefab:
       propertyPath: classicMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: simGravity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: jumpImpulse
+      value: -45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_RootGameObject: {fileID: 894901733}
@@ -355,8 +363,8 @@ MonoBehaviour:
   onTree: 0
   isJumping: 0
   jumpVel: 0
-  simGravity: 3
-  jumpImpulse: -50
+  simGravity: 4
+  jumpImpulse: -45
   jumpDir: {x: 0, y: 0, z: 1}
   Clips: []
   cameraPermission: 0
