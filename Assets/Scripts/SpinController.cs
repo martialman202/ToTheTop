@@ -17,8 +17,14 @@ public class SpinController : MonoBehaviour {
 	private testAutoMonkey monkey;
 	private MonkeyMouse mmouse;
 
+	private GameObject mainCam;
+	private SoundMainScene sounds;
+
 	// Use this for initialization
 	void Start () {
+
+		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
+
 		spawner = this.gameObject;
 		
 		rotations = new float[3];
@@ -29,6 +35,9 @@ public class SpinController : MonoBehaviour {
 		monkeyObject = GameObject.Find ("Monkey");
 		monkey = monkeyObject.GetComponent<testAutoMonkey> ();
 		mmouse = this.GetComponent<MonkeyMouse> ();
+
+		//Audio
+		sounds = mainCam.GetComponent<SoundMainScene> ();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +45,9 @@ public class SpinController : MonoBehaviour {
 		onTree = monkey.onTree;
 		if ((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
+
+			if (sounds.playSoundEffects)
+				sounds.audioSources[4].Play();
 
 			if( currentRotation >= 2 ) {
 				currentRotation = 0;
@@ -46,6 +58,9 @@ public class SpinController : MonoBehaviour {
 		}
 		else if((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
+
+			if (sounds.playSoundEffects)
+				sounds.audioSources[4].Play();
 
 			if( currentRotation <= 0 ) {
 				currentRotation = 2;

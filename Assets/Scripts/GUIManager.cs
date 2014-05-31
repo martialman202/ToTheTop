@@ -15,6 +15,9 @@ public class GUIManager : MonoBehaviour {
 	private MenuState prevMenu = MenuState.Main;
 	private int levelIndex = 0;
 
+	//Audio
+	private SoundMainMenu sounds;
+
 	// Use this for initialization
 	void Start () {
 		Manager.Instance.levelIndex = 0;
@@ -22,6 +25,8 @@ public class GUIManager : MonoBehaviour {
 			PlayerPrefs.SetInt("PlaySoundFX", 1);
 		if(!PlayerPrefs.HasKey("PlayMusic"))
 			PlayerPrefs.SetInt("PlayMusic", 1);
+
+		sounds = GetComponent<SoundMainMenu> ();
 	}
 
 	void OnGUI () {
@@ -123,19 +128,23 @@ public class GUIManager : MonoBehaviour {
 		if(PlayerPrefs.GetInt("PlaySoundFX") == 1) {
 			if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Sound FX On"))
 				PlayerPrefs.SetInt("PlaySoundFX", 0);
+				sounds.changedSettings = true;
 		}
 		else if(PlayerPrefs.GetInt("PlaySoundFX") == 0) {
 			if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Sound FX Off"))
 				PlayerPrefs.SetInt("PlaySoundFX", 1);
+				sounds.changedSettings = true;
 		}
 
 		if(PlayerPrefs.GetInt("PlayMusic") == 1) {
 			if(GUI.Button(new Rect(0, betweenButton, buttonWidth, buttonHeight), "Music On"))
 				PlayerPrefs.SetInt("PlayMusic", 0);
+				sounds.changedSettings = true;
 		}
 		else if(PlayerPrefs.GetInt("PlayMusic") == 0) {
 			if(GUI.Button(new Rect(0, betweenButton, buttonWidth, buttonHeight), "Music Off"))
 				PlayerPrefs.SetInt("PlayMusic", 1);
+				sounds.changedSettings = true;
 		}
 
 		if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Main Menu")) {
@@ -146,4 +155,5 @@ public class GUIManager : MonoBehaviour {
 		// End the group we started above. This is very important to remember!
 		GUI.EndGroup ();
 	}
+	
 }
