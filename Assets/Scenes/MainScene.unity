@@ -112,7 +112,7 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 20
   accelerationFactor: 10
-  slowFactor: .400000006
+  slowFactor: .5
   onTree: 0
   isJumping: 0
   jumpVel: 0
@@ -576,7 +576,7 @@ MonoBehaviour:
   brushSawBlade: {fileID: 400002, guid: 2f5d5caa6bc174f49aa132f92aa7522b, type: 2}
   camOffset: 2
   obstacleSpawnMin: .5
-  obstacleSpawnMax: 1.5
+  obstacleSpawnMax: 3
   obstacleSpawnTime: 0
 --- !u!1 &1697772359
 GameObject:

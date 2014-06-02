@@ -181,12 +181,12 @@ public class testAutoMonkey : MonoBehaviour {
 	void lose() {
 		print("You Lose.");
 
-		if (!sounds.audioSources[2].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
+		if (!sounds.audioSources[2].isPlaying && !playedLose && sounds.playSoundEffects) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[2].Play();
 			playedLose = true;
 		}
-		else if (playedLose && !sounds.audioSources[2].isPlaying) { //if that sound is not playing, and we have played it
+		else if ((playedLose && !sounds.audioSources[2].isPlaying) || !sounds.playSoundEffects) { //if that sound is not playing, and we have played it
 			Application.LoadLevel("EndGameScene");
 		}
 	}
@@ -200,6 +200,7 @@ public class testAutoMonkey : MonoBehaviour {
 			PlayerPrefs.SetInt ("HighScore", Manager.Instance.score);
 
 		print("You Win");
+
 		string starPoints = "Level" + (Manager.Instance.levelIndex + 1).ToString() + "Stars";
 		if(lifePoints > PlayerPrefs.GetInt(starPoints)) {
 			PlayerPrefs.SetInt(starPoints, lifePoints);
@@ -210,6 +211,7 @@ public class testAutoMonkey : MonoBehaviour {
 			sounds.audioSources[1].Play();
 			playedLose = true;
 		}
+
 		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();

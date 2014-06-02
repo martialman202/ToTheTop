@@ -35,9 +35,13 @@ public class BuildLevel : MonoBehaviour {
 	public float treeHeight = 0;
 	public Texture2D progressBarEmpty;
 	public Texture2D progressBarFull;
+	public Texture2D topLeaves;
 	public Vector2 size;
 	private float barDisplay = 0.0f;
 
+	//Tree progress bar resources
+	public Texture2D progressTree;
+	public Texture2D treeFiller;
 
 	private GameObject spawner;
 
@@ -61,14 +65,19 @@ public class BuildLevel : MonoBehaviour {
 		
 		// progress bar
 		// draw the background:
-		GUI.BeginGroup (new Rect (Screen.width*0.90f, Screen.height*0.1f, size.x, size.y+(Screen.width*0.25f)));
+		//GUI.Label(new Rect(0.82f * Screen.width, 0.06f * Screen.height, 0.25f * Screen.width, 0.2f * Screen.height), topLeaves);
+		GUI.BeginGroup (new Rect (Screen.width*0.91f, 0.14f * Screen.height, size.x, size.y+(Screen.width*0.25f)));
 			GUI.DrawTexture (new Rect (0, 0, size.x, size.y), progressBarEmpty);
 			
 			// draw the filled-in part:
 			GUI.BeginGroup (new Rect (0, 0, size.x, size.y));
 				GUI.DrawTexture (new Rect (0, size.y, size.x, -(size.y * barDisplay)), progressBarFull);
 			GUI.EndGroup ();
+			
 		GUI.EndGroup ();
+
+		//Draw TreeTop
+		GUI.Label(new Rect(0.8f * Screen.width, 0.06f * Screen.height, 0.25f * Screen.width, 0.2f * Screen.height), topLeaves);
 		//print (Manager.Instance.treeHeight);
 	}
 
@@ -236,7 +245,7 @@ public class BuildLevel : MonoBehaviour {
 		LoadLevel (levelFileName+Manager.Instance.levelFileName);
 		LoadOutro ();
 
-		size = new Vector2(Screen.width*0.06f,Screen.height*0.25f);
+		size = new Vector2(Screen.width*0.04f,Screen.height*0.25f);
 	}
 	
 	// Update is called once per frame
