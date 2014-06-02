@@ -77,7 +77,7 @@ public class BuildLevel : MonoBehaviour {
 		GUI.EndGroup ();
 
 		//Draw TreeTop
-		GUI.Label(new Rect(0.82f * Screen.width, 0.06f * Screen.height, 0.25f * Screen.width, 0.2f * Screen.height), topLeaves);
+		GUI.Label(new Rect(0.8f * Screen.width, 0.06f * Screen.height, 0.25f * Screen.width, 0.2f * Screen.height), topLeaves);
 		//print (Manager.Instance.treeHeight);
 	}
 
