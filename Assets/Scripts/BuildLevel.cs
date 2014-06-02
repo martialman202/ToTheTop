@@ -38,6 +38,9 @@ public class BuildLevel : MonoBehaviour {
 	public Vector2 size;
 	private float barDisplay = 0.0f;
 
+	//Tree progress bar resources
+	public Texture2D progressTree;
+	public Texture2D treeFiller;
 
 	private GameObject spawner;
 
@@ -62,12 +65,15 @@ public class BuildLevel : MonoBehaviour {
 		// progress bar
 		// draw the background:
 		GUI.BeginGroup (new Rect (Screen.width*0.90f, Screen.height*0.1f, size.x, size.y+(Screen.width*0.25f)));
+			GUI.DrawTexture(new Rect(0, 0, size.x, size.y/2), progressTree);
+			/*
 			GUI.DrawTexture (new Rect (0, 0, size.x, size.y), progressBarEmpty);
 			
 			// draw the filled-in part:
 			GUI.BeginGroup (new Rect (0, 0, size.x, size.y));
 				GUI.DrawTexture (new Rect (0, size.y, size.x, -(size.y * barDisplay)), progressBarFull);
 			GUI.EndGroup ();
+			*/
 		GUI.EndGroup ();
 		//print (Manager.Instance.treeHeight);
 	}
