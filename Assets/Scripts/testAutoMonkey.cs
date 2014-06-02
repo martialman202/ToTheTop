@@ -14,11 +14,14 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 18.0f;
+	public float moveSpeed = 15.0f;
+	public float maxMonkeySpeed = 25.0f;
 	public float accelerationFactor = 15; // how fast the monkey should accelerate, in relation to Time.deltaTime
 	public float slowFactor = 0.5f; // slow factor 0-1, 0 for full speed, 1 for stop
-	private float monkeySpeed;
+	public float monkeySpeed;
 	public bool onTree = false;
+
+	public float checkpointHeight = 250.0f;
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -98,7 +101,7 @@ public class testAutoMonkey : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Obstacle") {
 			lifePoints--;
-			monkeySpeed -= Manager.Instance.monkeySpeed * slowFactor;
+			monkeySpeed = moveSpeed * slowFactor;
 			if (sounds != null && sounds.playSoundEffects)
 				sounds.audioSources[3].Play ();
 		}
@@ -119,6 +122,17 @@ public class testAutoMonkey : MonoBehaviour {
 				origPos = this.gameObject.transform.position;
 			}
 		}
+
+		if (classicMode) {
+			if (Manager.Instance.monkeySpeed < maxMonkeySpeed) {
+				if (Manager.Instance.monkeyHeight >= checkpointHeight) {
+					Manager.Instance.monkeySpeed++;
+					checkpointHeight += checkpointHeight;
+					print(Manager.Instance.monkeySpeed);
+				}
+			}
+		}
+
 		if (monkeySpeed < Manager.Instance.monkeySpeed)
 			monkeySpeed += Time.deltaTime * accelerationFactor;
 		else

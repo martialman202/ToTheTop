@@ -110,10 +110,13 @@ MonoBehaviour:
   classicMode: 1
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
-  moveSpeed: 18
+  moveSpeed: 15
+  maxMonkeySpeed: 25
   accelerationFactor: 15
   slowFactor: .5
+  monkeySpeed: 0
   onTree: 0
+  checkpointHeight: 250
   isJumping: 0
   jumpVel: 0
   simGravity: 4
