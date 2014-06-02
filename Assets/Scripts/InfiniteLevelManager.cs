@@ -30,8 +30,8 @@ public class InfiniteLevelManager : MonoBehaviour {
 	private int numTrunks;
 	private int emptyStartIdx, emptyEndIdx, beeStartIdx, beeEndIdx, snakeStartIdx, snakeEndIdx, brushStartIdx, brushEndIdx;
 
-	public float obstacleSpawnMin = 0.5f;
-	public float obstacleSpawnMax = 1.5f;
+	public float obstacleSpawnMin = 0.75f;
+	public float obstacleSpawnMax = 3.0f;
 	public float obstacleSpawnTime;
 	private float speedFactor; // factor to increase/decrease time for difficulty
 	private bool spawnObstacle = false;
@@ -423,7 +423,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	void SpawnObstacle () {
 		if (!spawnObstacle)
 			spawnObstacle = true;
-		Invoke ("SpawnObstacle", Random.Range (obstacleSpawnTime, obstacleSpawnMax));
+		Invoke ("SpawnObstacle", obstacleSpawnTime); //Random.Range (obstacleSpawnTime, obstacleSpawnMax));
 	}
 	
 	// Update is called once per frame
@@ -462,7 +462,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 			//extendCustomRow(1,0,2);
 		}
 
-		speedFactor = Manager.Instance.monkeyHeight / 100000;
+		speedFactor = 0.001f;
 		if (obstacleSpawnTime > obstacleSpawnMin)
 			obstacleSpawnTime -= speedFactor;
 	}

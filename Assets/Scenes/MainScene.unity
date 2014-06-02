@@ -110,14 +110,14 @@ MonoBehaviour:
   classicMode: 1
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
-  moveSpeed: 20
-  accelerationFactor: 10
+  moveSpeed: 18
+  accelerationFactor: 15
   slowFactor: .5
   onTree: 0
   isJumping: 0
   jumpVel: 0
   simGravity: 4
-  jumpImpulse: -45
+  jumpImpulse: -50
   jumpDir: {x: 0, y: 0, z: 1}
   Clips: []
   cameraPermission: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   snakeTrunk: {fileID: 400058, guid: abaa185c9d3e84828884aab81209dd50, type: 2}
   brushSawBlade: {fileID: 400002, guid: 2f5d5caa6bc174f49aa132f92aa7522b, type: 2}
   camOffset: 2
-  obstacleSpawnMin: .5
+  obstacleSpawnMin: .75
   obstacleSpawnMax: 3
   obstacleSpawnTime: 0
 --- !u!1 &1697772359
@@ -620,7 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRotation: 0
   rotations: []
-  moveSpeed: 250
+  moveSpeed: 175
   moveRight: 0
   moveLeft: 0
 --- !u!114 &1697772362
