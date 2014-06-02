@@ -15,6 +15,8 @@ public class Manager : Singleton<Manager> {
 	public int levelIndex = 0;
 	public string [] levels;
 
+	public int score;
+
 	void Start() {
 		levels = new string[numLevels];
 		levels [0] = "easy0";

@@ -69,13 +69,16 @@ public class HUDScript : MonoBehaviour {
 					//paused = false;
 					Manager.Instance.levelIndex++;
 					Manager.Instance.levelFileName = Manager.Instance.levels[Manager.Instance.levelIndex];
+					PlayerPrefs.Save();
 					Application.LoadLevel ("LevelFromFile");
 				}
 			}
 			if (GUI.Button (new Rect (0, betweenButton, buttonWidth, buttonHeight), "Play Again")) {
+				PlayerPrefs.Save();
 				Application.LoadLevel(Manager.Instance.prevLevel);
 			}
 			if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Main Menu")) {
+				PlayerPrefs.Save();
 				Application.LoadLevel ("TitleScene");
 			}
 			
