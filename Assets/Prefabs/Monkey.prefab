@@ -162,12 +162,15 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 20
   onTree: 0
+<<<<<<< HEAD
   coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
   coconutInterval: 1.5
+=======
+>>>>>>> 79e0a6650672c5142858a37f324ba7fefb43e19c
   isJumping: 0
   jumpVel: 0
-  simGravity: 3
-  jumpImpulse: -50
+  simGravity: 4
+  jumpImpulse: -45
   jumpDir: {x: 0, y: 0, z: 1}
   Clips: []
   cameraPermission: 0

@@ -15,6 +15,9 @@ public class GUIManager : MonoBehaviour {
 	private MenuState prevMenu = MenuState.Main;
 	private int levelIndex = 0;
 
+	//Audio
+	private SoundMainMenu sounds;
+
 	// Use this for initialization
 	void Start () {
 		Manager.Instance.levelIndex = 0;
@@ -22,11 +25,20 @@ public class GUIManager : MonoBehaviour {
 			PlayerPrefs.SetInt("PlaySoundFX", 1);
 		if(!PlayerPrefs.HasKey("PlayMusic"))
 			PlayerPrefs.SetInt("PlayMusic", 1);
+
+		sounds = GetComponent<SoundMainMenu> ();
 	}
 
 	void OnGUI () {
 		if(Input.GetKey(KeyCode.Escape))
-			Application.Quit();
+		{
+			if((prevMenu == currMenu) && (currMenu == MenuState.Main))
+				Application.Quit();
+			else
+				currMenu = prevMenu;
+				prevMenu = MenuState.Main;
+				
+		}	
 
 		GUI.skin = menuSkin;
 		// Make a group on the center of the screen
@@ -81,23 +93,16 @@ public class GUIManager : MonoBehaviour {
 			string starPoints = "Level" + (i+1).ToString() + "Stars";
 			if(PlayerPrefs.HasKey(starPoints)) {
 				// Select correct star label
-				GUI.Label(new Rect(0.32f * (i % numPerRow) * Screen.width, (currRow * 0.36f) * Screen.width,
-				                   0.22f * Screen.width, 0.1f * Screen.width), stars[(int) (PlayerPrefs.GetInt(starPoints))]);
+				GUI.Label(new Rect((0.01f + 0.29f * (i % numPerRow)) * Screen.width, (0.02f + currRow * 0.36f) * Screen.width,
+				                   0.19f * Screen.width, 0.1f * Screen.width), stars[(int) (PlayerPrefs.GetInt(starPoints))]);
 			}
 			else {
 				//Set the label to 0 and draw
 				PlayerPrefs.SetInt(starPoints, 0);
-				GUI.Label(new Rect(0.32f * (i % numPerRow) * Screen.width, (currRow * 0.36f) * Screen.width,
+				GUI.Label(new Rect((0.01f + 0.29f * (i % numPerRow)) * Screen.width, (0.02f + currRow * 0.36f) * Screen.width,
 				                   0.22f * Screen.width, 0.1f * Screen.width), stars[0]);
 			}
 		}
-
-		/*
-		//Star labels
-		GUI.Label(new Rect(0.03f * Screen.width, 0, 0.22f * Screen.width, 0.08f * Screen.width), stars[1]);
-		GUI.Label(new Rect(0.31f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[2]);
-		GUI.Label(new Rect(0.60f * Screen.width, 0, 0.22f * Screen.width, 0.1f * Screen.width), stars[3]);
-		*/
 
 		//Draw levels
 		for(int i = 0; i < Manager.Instance.numLevels; i++) {
@@ -123,19 +128,23 @@ public class GUIManager : MonoBehaviour {
 		if(PlayerPrefs.GetInt("PlaySoundFX") == 1) {
 			if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Sound FX On"))
 				PlayerPrefs.SetInt("PlaySoundFX", 0);
+				sounds.changedSettings = true;
 		}
 		else if(PlayerPrefs.GetInt("PlaySoundFX") == 0) {
 			if(GUI.Button(new Rect(0, 0, buttonWidth, buttonHeight), "Sound FX Off"))
 				PlayerPrefs.SetInt("PlaySoundFX", 1);
+				sounds.changedSettings = true;
 		}
 
 		if(PlayerPrefs.GetInt("PlayMusic") == 1) {
 			if(GUI.Button(new Rect(0, betweenButton, buttonWidth, buttonHeight), "Music On"))
 				PlayerPrefs.SetInt("PlayMusic", 0);
+				sounds.changedSettings = true;
 		}
 		else if(PlayerPrefs.GetInt("PlayMusic") == 0) {
 			if(GUI.Button(new Rect(0, betweenButton, buttonWidth, buttonHeight), "Music Off"))
 				PlayerPrefs.SetInt("PlayMusic", 1);
+				sounds.changedSettings = true;
 		}
 
 		if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Main Menu")) {
@@ -146,4 +155,5 @@ public class GUIManager : MonoBehaviour {
 		// End the group we started above. This is very important to remember!
 		GUI.EndGroup ();
 	}
+	
 }

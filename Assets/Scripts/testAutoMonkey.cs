@@ -55,7 +55,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void Start () {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
-			coconutInterval *= 2;
+			Manager.Instance.score = 0;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
@@ -157,6 +157,9 @@ public class testAutoMonkey : MonoBehaviour {
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 			}
 
+			if ( classicMode )
+				Manager.Instance.score += (int)(Time.deltaTime * 100);
+
 			controller.Move(dir * Time.deltaTime);
 
 		} else if (monkeyState == MonkeyState.lose) {
@@ -173,29 +176,43 @@ public class testAutoMonkey : MonoBehaviour {
 			else if(onTree)
 				win ();
 		}
+
 	}
 
 	void lose() {
 		print("You Lose.");
 
-		if (!sounds.audioSources[2].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
+		if (!sounds.audioSources[2].isPlaying && !playedLose && sounds.playSoundEffects) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[2].Play();
 			playedLose = true;
 		}
-		else if (playedLose && !sounds.audioSources[2].isPlaying) { //if that sound is not playing, and we have played it
+		else if ((playedLose && !sounds.audioSources[2].isPlaying) || !sounds.playSoundEffects) { //if that sound is not playing, and we have played it
 			Application.LoadLevel("EndGameScene");
 		}
 	}
 	
 	void win() {
+		print("You Win!");
+
+		// update high score
+		int highScore = PlayerPrefs.GetInt ("HighScore");
+		if (Manager.Instance.score > highScore) 
+			PlayerPrefs.SetInt ("HighScore", Manager.Instance.score);
 
 		print("You Win");
+
+		string starPoints = "Level" + (Manager.Instance.levelIndex + 1).ToString() + "Stars";
+		if(lifePoints > PlayerPrefs.GetInt(starPoints)) {
+			PlayerPrefs.SetInt(starPoints, lifePoints);
+		}
+
 		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[1].Play();
 			playedLose = true;
 		}
+
 		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();

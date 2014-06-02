@@ -16,6 +16,7 @@ public class Manager : Singleton<Manager> {
 	public string [] levels;
 
 	public bool onTree;
+	public int score;
 
 	void Start() {
 		levels = new string[numLevels];

@@ -555,11 +555,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c0d2530ae682a43960aa77392c42bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
   emptyTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
   beehiveTrunk: {fileID: 400004, guid: ff33c9efcc3ec024ea1d7408178cf3c1, type: 2}
   snakeTrunk: {fileID: 400058, guid: abaa185c9d3e84828884aab81209dd50, type: 2}
   brushSawBlade: {fileID: 400002, guid: 2f5d5caa6bc174f49aa132f92aa7522b, type: 2}
   camOffset: 2
+  obstacleSpawnMin: .5
+  obstacleSpawnMax: 1.25
 --- !u!1 &1697772359
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class InfiniteLevelManager : MonoBehaviour {
-
+	public GUISkin menuSkin;
+	
 	private Transform[] trunks;
 
 	public Transform emptyTrunk;
@@ -26,6 +27,21 @@ public class InfiniteLevelManager : MonoBehaviour {
 
 	private int numTrunks;
 	private int emptyStartIdx, emptyEndIdx, beeStartIdx, beeEndIdx, snakeStartIdx, snakeEndIdx, brushStartIdx, brushEndIdx;
+
+	public float obstacleSpawnMin = 0.5f;
+	public float obstacleSpawnMax = 1.25f;
+	private bool spawnObstacle = false;
+
+	void OnGUI () {
+		GUI.skin = menuSkin;
+		
+		// score
+		int originalSize = GUI.skin.box.fontSize;
+		int boxSize = originalSize / 2;
+		GUI.skin.box.fontSize = boxSize;
+		GUI.Box(new Rect(Screen.width*0.80f, Screen.width*0.01f, Screen.width*0.18f, Screen.width*0.1f), (Manager.Instance.score).ToString());
+		GUI.skin.box.fontSize = originalSize;
+	}
 
 	// creates the pool of trunks that will be managed by this system
 	void instantiateTrunkPool() {
@@ -395,6 +411,13 @@ public class InfiniteLevelManager : MonoBehaviour {
 
 		instantiateTrunkPool();
 		createIntro ();
+		Invoke ("SpawnObstacle", 2);
+	}
+
+	void SpawnObstacle () {
+		if (!spawnObstacle)
+			spawnObstacle = true;
+		Invoke ("SpawnObstacle", Random.Range (obstacleSpawnMin, obstacleSpawnMax));
 	}
 	
 	// Update is called once per frame
@@ -402,9 +425,32 @@ public class InfiniteLevelManager : MonoBehaviour {
 		// run clean up to recycle any trunks that are no longer on scene
 		bool wasRowRecycled = cleanUp();
 
+		// 0 == empty trunk
+		// 1 == beehive obstacle
+		// 2 == snake obstacle
+		// 3 == deathvine
 		// create a new row if a row was just recycled back into the trunk pool
 		if( wasRowRecycled ) {
-			extendEmptyTrunks();
+			if( spawnObstacle ) {
+				bool spawnUnclimbable = false;
+				int whichObstacle = Random.Range (1, 4); // choose which obstacle to spawn, either 1 (beehive), 2 (snake), or 3 (deathvine)
+				if (whichObstacle == 3)
+					spawnUnclimbable = true;
+				
+				if (spawnUnclimbable) 
+					extendWBrush();
+				else {
+					int [] trees = new int[3];
+					trees[0] = Random.Range (0, 3);
+					trees[1] = Random.Range (0, 3);
+					trees[2] = Random.Range (0, 3);
+					extendCustomRow(trees[0],trees[1],trees[2]);
+				}
+
+				spawnObstacle =  false;
+			}
+			else
+				extendEmptyTrunks();
 			//extendWBeehivesOrSnakes(2,2,1);
 			//extendWBrush();
 			//extendCustomRow(1,0,2);
