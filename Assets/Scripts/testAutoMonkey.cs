@@ -113,7 +113,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void Update() {
 		Manager.Instance.onTree = onTree;
 		if (onTree) {
-			if (Time.time > timeCounter + coconutInterval) {
+			if ((Time.time > timeCounter + coconutInterval) &&  classicMode) {
 				SpawnCoconut();
 				print ("spawning coconut!");
 				timeCounter = Time.time;
@@ -132,8 +132,8 @@ public class testAutoMonkey : MonoBehaviour {
 					sounds.audioSources[4].Play();
 
 				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
 			}
+				origPos = this.gameObject.transform.position;
 		}
 	}
 
@@ -204,9 +204,9 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void SpawnCoconut() {
-		float height = origPos.y + (Screen.height / Camera.main.orthographicSize);
-		if ((height < Manager.Instance.treeHeight || classicMode) && monkeyState == MonkeyState.climbing) {
-			coconutClone = (GameObject)Instantiate (coconut, new Vector3 (origPos.x, height, origPos.z), Quaternion.identity);
+		float height = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+		if (monkeyState == MonkeyState.climbing) {
+			coconutClone = (GameObject)Instantiate (coconut, new Vector3 (this.transform.position.x, height, origPos.z), Quaternion.identity);
 			coconutClone.name = coconut.name;
 			coconutClone.transform.parent = this.transform.parent; //make sibling to monkey
 		}
