@@ -5,7 +5,7 @@ public class SpinController : MonoBehaviour {
 
 	public int currentRotation = 0;
 	public float[] rotations;
-	public float moveSpeed = 250.0f;
+	public float moveSpeed = 175.0f;
 	
 	public bool moveRight = false;
 	public bool moveLeft = false;

@@ -14,7 +14,11 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 20.0f; 
+	public float moveSpeed = 15.0f;
+	public float maxMonkeySpeed = 25.0f;
+	public float accelerationFactor = 15; // how fast the monkey should accelerate, in relation to Time.deltaTime
+	public float slowFactor = 0.5f; // slow factor 0-1, 0 for full speed, 1 for stop
+	public float monkeySpeed;
 	public bool onTree = false;
 
 	public GameObject coconut;
@@ -22,6 +26,8 @@ public class testAutoMonkey : MonoBehaviour {
 	public float coconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
 	private float timeCounter = 0.0f;
 	private GameObject coconutClone;
+
+	public float checkpointHeight = 250.0f;
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -32,7 +38,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
 	public float simGravity = 4.0f;
-	public float jumpImpulse = -45.0f;
+	public float jumpImpulse = -50.0f;
 	public Vector3 jumpDir = new Vector3(0,0,1);
 
 	private Vector3 origPos = Vector3.zero;
@@ -62,6 +68,8 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 
 		timeCounter = coconutInterval;
+		monkeySpeed = moveSpeed;
+		Manager.Instance.monkeySpeed = monkeySpeed;
 
 		//print (gameObject.name + " has been started.");
 		mainCam = GameObject.FindGameObjectWithTag("MainCamera");
@@ -100,6 +108,7 @@ public class testAutoMonkey : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Obstacle") {
 			lifePoints--;
+			monkeySpeed = moveSpeed * slowFactor;
 			if (sounds != null && sounds.playSoundEffects)
 				sounds.audioSources[3].Play ();
 		}
@@ -135,6 +144,21 @@ public class testAutoMonkey : MonoBehaviour {
 			}
 				origPos = this.gameObject.transform.position;
 		}
+
+		if (classicMode) {
+			if (Manager.Instance.monkeySpeed < maxMonkeySpeed) {
+				if (Manager.Instance.monkeyHeight >= checkpointHeight) {
+					Manager.Instance.monkeySpeed++;
+					checkpointHeight += checkpointHeight;
+					print(Manager.Instance.monkeySpeed);
+				}
+			}
+		}
+
+		if (monkeySpeed < Manager.Instance.monkeySpeed)
+			monkeySpeed += Time.deltaTime * accelerationFactor;
+		else
+			monkeySpeed = Manager.Instance.monkeySpeed;
 	}
 
 	void FixedUpdate () {
@@ -150,7 +174,7 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 		else if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
-			Vector3 dir = moveDirection*moveSpeed;
+			Vector3 dir = moveDirection*monkeySpeed;
 
 			if (isJumping) {
 				jumpVel += simGravity;
@@ -165,7 +189,7 @@ public class testAutoMonkey : MonoBehaviour {
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
 		} else if (monkeyState == MonkeyState.win) {
-			Vector3 dir = moveDirection*moveSpeed;
+			Vector3 dir = moveDirection*monkeySpeed;
 			if (isJumping) { // finish jumping before winning
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
