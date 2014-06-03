@@ -114,8 +114,14 @@ public class GUIManager : MonoBehaviour {
 				Application.LoadLevel("LevelFromFile");
 			}
 		}
-
 		GUI.EndGroup ();
+		int prevFontSize = GUI.skin.button.fontSize;
+		GUI.skin.button.fontSize = (int)0.75f * prevFontSize; 
+		if(GUI.Button (new Rect (0.1f * Screen.width, 0.8f * Screen.height, 0.22f * Screen.width, 0.11f * Screen.width), "Back")) {
+			currMenu = MenuState.Main;
+			prevMenu = MenuState.Main;
+		}
+		GUI.skin.button.fontSize = prevFontSize;
 	}
 
 	//Draw the Options Menu
