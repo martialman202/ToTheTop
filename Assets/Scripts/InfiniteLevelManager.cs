@@ -6,6 +6,8 @@ public class InfiniteLevelManager : MonoBehaviour {
 	
 	private Transform[] trunks;
 
+	public bool empty; // check to spawn only empty trunks
+
 	public Transform emptyTrunk;
 	public Transform beehiveTrunk;
 	public Transform snakeTrunk;
@@ -28,8 +30,10 @@ public class InfiniteLevelManager : MonoBehaviour {
 	private int numTrunks;
 	private int emptyStartIdx, emptyEndIdx, beeStartIdx, beeEndIdx, snakeStartIdx, snakeEndIdx, brushStartIdx, brushEndIdx;
 
-	public float obstacleSpawnMin = 0.5f;
-	public float obstacleSpawnMax = 1.25f;
+	public float obstacleSpawnMin = 0.75f;
+	public float obstacleSpawnMax = 3.0f;
+	public float obstacleSpawnTime;
+	private float speedFactor; // factor to increase/decrease time for difficulty
 	private bool spawnObstacle = false;
 
 	void OnGUI () {
@@ -412,12 +416,14 @@ public class InfiniteLevelManager : MonoBehaviour {
 		instantiateTrunkPool();
 		createIntro ();
 		Invoke ("SpawnObstacle", 2);
+
+		obstacleSpawnTime = obstacleSpawnMax;
 	}
 
 	void SpawnObstacle () {
 		if (!spawnObstacle)
 			spawnObstacle = true;
-		Invoke ("SpawnObstacle", Random.Range (obstacleSpawnMin, obstacleSpawnMax));
+		Invoke ("SpawnObstacle", obstacleSpawnTime); //Random.Range (obstacleSpawnTime, obstacleSpawnMax));
 	}
 	
 	// Update is called once per frame
@@ -431,7 +437,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 		// 3 == deathvine
 		// create a new row if a row was just recycled back into the trunk pool
 		if( wasRowRecycled ) {
-			if( spawnObstacle ) {
+			if( spawnObstacle && !empty ) {
 				bool spawnUnclimbable = false;
 				int whichObstacle = Random.Range (1, 4); // choose which obstacle to spawn, either 1 (beehive), 2 (snake), or 3 (deathvine)
 				if (whichObstacle == 3)
@@ -455,5 +461,9 @@ public class InfiniteLevelManager : MonoBehaviour {
 			//extendWBrush();
 			//extendCustomRow(1,0,2);
 		}
+
+		speedFactor = 0.001f;
+		if (obstacleSpawnTime > obstacleSpawnMin)
+			obstacleSpawnTime -= speedFactor;
 	}
 }

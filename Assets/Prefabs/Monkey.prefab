@@ -162,12 +162,14 @@ MonoBehaviour:
   classicMode: 0
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
-  moveSpeed: 20
+  moveSpeed: 18
+  accelerationFactor: 15
+  slowFactor: .5
   onTree: 0
   isJumping: 0
   jumpVel: 0
   simGravity: 4
-  jumpImpulse: -45
+  jumpImpulse: -50
   jumpDir: {x: 0, y: 0, z: 1}
   Clips: []
   cameraPermission: 0

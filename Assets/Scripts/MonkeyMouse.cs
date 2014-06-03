@@ -4,7 +4,7 @@ using System.Collections;
 public class MonkeyMouse : MonoBehaviour {
 
 	private Vector3 prevMousePos;
-	private float threshhold = 0.001f;
+	private float threshhold = 1;
 	private bool dragging;
 	private int frameCount;
 	private int frameWait = 3;
