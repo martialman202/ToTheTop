@@ -14,7 +14,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public int lifePoints = 3;
 
 	public Vector3 moveDirection = new Vector3(0,0,1); //starts forward, when hits tree, is up
-	public float moveSpeed = 20.0f; 
+	public float moveSpeed = 15.0f; 
 	public bool onTree = false;
 
 	private GameObject mainCam;
@@ -26,7 +26,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
 	public float simGravity = 4.0f;
-	public float jumpImpulse = -45.0f;
+	public float jumpImpulse = -50.0f;
 	public Vector3 jumpDir = new Vector3(0,0,1);
 
 	private Vector3 origPos = Vector3.zero;
