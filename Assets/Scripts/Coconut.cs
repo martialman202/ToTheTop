@@ -62,7 +62,6 @@ public class Coconut : MonoBehaviour {
 
 	// Coroutine to flicker coconut is warning
 	IEnumerator Flicker() {
-		print ("test");
 		coroutineStarted = true;
 		for (int i = 0; i < 10; i++) {
 			switch (i % 2) {

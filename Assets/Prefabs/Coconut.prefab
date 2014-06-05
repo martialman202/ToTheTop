@@ -70,9 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ed1c933bfc984d9ef854a318b62f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
+  offset: 25
   mainCam: {fileID: 0}
-  thisObstacle: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
