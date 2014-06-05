@@ -22,8 +22,12 @@ public class testAutoMonkey : MonoBehaviour {
 	public bool onTree = false;
 
 	public GameObject coconut;
+	private GameObject coconutObject;
 	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
-	public float coconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
+	private float coconutInterval; // the time interval for coconuts to fall if monkey is on same tree
+	private Vector3 coconutSpawnPosition;
+	public float minCoconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
+	public float maxCoconutInterval = 3f; // the time interval for coconuts to fall if monkey is on same tree
 	private float timeCounter = 0.0f;
 	private GameObject coconutClone;
 
@@ -95,7 +99,7 @@ public class testAutoMonkey : MonoBehaviour {
 			isClimbing = true; //this variable is for the CameraController
 			//print ("collision detected!");
 		}
-		else if( hit.gameObject.tag == "Tree" && isJumping) {
+		else if (hit.gameObject.tag == "Tree" && isJumping) {
 			isJumping = false;
 			jumpVel = 0;
 			Vector3 resetPos = origPos;
@@ -121,15 +125,25 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void Update() {
 		Manager.Instance.onTree = onTree;
+
+		// coconut
 		if (onTree) {
+			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval);
 			if ((Time.time > timeCounter + coconutInterval) &&  classicMode) {
-				SpawnCoconut();
-				print ("spawning coconut!");
-				timeCounter = Time.time;
+				coconutObject = GameObject.Find ("Coconut");
+				if( coconutObject == null) {
+					SpawnCoconut();
+					print ("spawning coconut!");
+					timeCounter = Time.time;
+				}
 			}
-		} else {
+		}
+		else {
 			timeCounter = Time.time + coconutInterval;
 		}
+
+		if( onTree && !isJumping )
+			coconutSpawnPosition = this.transform.position;
 
 		Manager.Instance.monkeyHeight = this.transform.position.y;
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
@@ -142,7 +156,9 @@ public class testAutoMonkey : MonoBehaviour {
 
 				mmouse.ResetPos();
 			}
-				origPos = this.gameObject.transform.position;
+
+			origPos = this.gameObject.transform.position;
+
 		}
 
 		if (classicMode) {
@@ -245,11 +261,10 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void SpawnCoconut() {
-		float height = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
 		if (monkeyState == MonkeyState.climbing) {
-			coconutClone = (GameObject)Instantiate (coconut, new Vector3 (this.transform.position.x, height, origPos.z), Quaternion.identity);
+			coconutSpawnPosition.y  = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+			coconutClone = (GameObject)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
 			coconutClone.name = coconut.name;
-			coconutClone.transform.parent = this.transform.parent; //make sibling to monkey
 		}
 	}
 }
