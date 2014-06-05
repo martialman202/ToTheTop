@@ -86,7 +86,6 @@ GameObject:
   - 23: {fileID: 338260381}
   - 143: {fileID: 338260380}
   - 114: {fileID: 338260382}
-  - 114: {fileID: 338260386}
   - 114: {fileID: 338260379}
   - 114: {fileID: 338260385}
   m_Layer: 0
@@ -116,6 +115,8 @@ MonoBehaviour:
   slowFactor: .5
   monkeySpeed: 0
   onTree: 0
+  coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
+  coconutInterval: 1.5
   checkpointHeight: 250
   isJumping: 0
   jumpVel: 0
@@ -198,18 +199,6 @@ Transform:
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 338260378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cce543ee908184123b7c31388c89fa68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &338260386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 28459d0063949484c9028ea5b83b4a6e,
-    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 338260378}
   m_Enabled: 1

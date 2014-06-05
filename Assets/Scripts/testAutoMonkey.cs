@@ -21,6 +21,12 @@ public class testAutoMonkey : MonoBehaviour {
 	public float monkeySpeed;
 	public bool onTree = false;
 
+	public GameObject coconut;
+	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
+	public float coconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
+	private float timeCounter = 0.0f;
+	private GameObject coconutClone;
+
 	public float checkpointHeight = 250.0f;
 
 	private GameObject mainCam;
@@ -61,6 +67,7 @@ public class testAutoMonkey : MonoBehaviour {
 			monkeyState = MonkeyState.sceneStart;
 		}
 
+		timeCounter = coconutInterval;
 		monkeySpeed = moveSpeed;
 		Manager.Instance.monkeySpeed = monkeySpeed;
 
@@ -113,14 +120,29 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
+		Manager.Instance.onTree = onTree;
+		if (onTree) {
+			if ((Time.time > timeCounter + coconutInterval) &&  classicMode) {
+				SpawnCoconut();
+				print ("spawning coconut!");
+				timeCounter = Time.time;
+			}
+		} else {
+			timeCounter = Time.time + coconutInterval;
+		}
+
 		Manager.Instance.monkeyHeight = this.transform.position.y;
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
+
+				if (sounds != null && sounds.playSoundEffects)
+					sounds.audioSources[4].Play();
+
 				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
 			}
+				origPos = this.gameObject.transform.position;
 		}
 
 		if (classicMode) {
@@ -153,17 +175,6 @@ public class testAutoMonkey : MonoBehaviour {
 		else if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*monkeySpeed;
-
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[4].Play();
-
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
-			}
 
 			if (isJumping) {
 				jumpVel += simGravity;
@@ -233,4 +244,12 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
+	void SpawnCoconut() {
+		float height = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+		if (monkeyState == MonkeyState.climbing) {
+			coconutClone = (GameObject)Instantiate (coconut, new Vector3 (this.transform.position.x, height, origPos.z), Quaternion.identity);
+			coconutClone.name = coconut.name;
+			coconutClone.transform.parent = this.transform.parent; //make sibling to monkey
+		}
+	}
 }
