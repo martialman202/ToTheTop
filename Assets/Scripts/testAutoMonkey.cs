@@ -32,6 +32,7 @@ public class testAutoMonkey : MonoBehaviour {
 	private GameObject coconutClone;
 
 	public float checkpointHeight = 250.0f;
+	private float height;
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -66,6 +67,7 @@ public class testAutoMonkey : MonoBehaviour {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
 			Manager.Instance.score = 0;
+			height = checkpointHeight;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
@@ -163,9 +165,9 @@ public class testAutoMonkey : MonoBehaviour {
 
 		if (classicMode) {
 			if (Manager.Instance.monkeySpeed < maxMonkeySpeed) {
-				if (Manager.Instance.monkeyHeight >= checkpointHeight) {
+				if (Manager.Instance.monkeyHeight >= height) {
 					Manager.Instance.monkeySpeed++;
-					checkpointHeight += checkpointHeight;
+					height += checkpointHeight;
 					print(Manager.Instance.monkeySpeed);
 				}
 			}
