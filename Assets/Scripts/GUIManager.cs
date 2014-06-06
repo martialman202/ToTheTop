@@ -9,6 +9,7 @@ public class GUIManager : MonoBehaviour {
 	private float buttonWidth = 0.7f * Screen.width;
 	private float buttonHeight = 0.17f * Screen.width;
 	private float betweenButton = 0.22f * Screen.width;
+	private int fSize = (int)(0.1f * Screen.width);
 
 	private enum MenuState {Main=0, Options=1, Levels=2, Play=3};
 	private MenuState currMenu = MenuState.Main;
@@ -60,6 +61,7 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw the main menu
 	void DrawMain() {
+		GUI.skin.button.fontSize = (int) fSize;
 		GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);
 		GUI.BeginGroup (new Rect (0.15f * Screen.width, 0.3f * Screen.height, buttonWidth, buttonHeight*6));
 		// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
@@ -84,6 +86,7 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw level selector
 	void DrawLevels() {
+		GUI.skin.button.fontSize = (int) fSize;
 		GUI.BeginGroup(new Rect(0.1f * Screen.width, 0.1f * Screen.height, 0.9f * Screen.width, 0.8f * Screen.height));
 
 		//Test drawing star labels
@@ -116,7 +119,7 @@ public class GUIManager : MonoBehaviour {
 		}
 		GUI.EndGroup ();
 		int prevFontSize = GUI.skin.button.fontSize;
-		GUI.skin.button.fontSize = (int)0.75f * prevFontSize; 
+		GUI.skin.button.fontSize = (int) (0.75f * prevFontSize); 
 		if(GUI.Button (new Rect (0.1f * Screen.width, 0.8f * Screen.height, 0.22f * Screen.width, 0.11f * Screen.width), "Back")) {
 			currMenu = MenuState.Main;
 			prevMenu = MenuState.Main;
@@ -126,6 +129,7 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw the Options Menu
 	void DrawOptions() {
+		GUI.skin.button.fontSize = (int)fSize;
 		GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);
 		GUI.BeginGroup (new Rect (0.15f * Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 		// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
