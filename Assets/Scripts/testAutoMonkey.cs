@@ -21,7 +21,18 @@ public class testAutoMonkey : MonoBehaviour {
 	public float monkeySpeed;
 	public bool onTree = false;
 
+	public GameObject coconut;
+	private GameObject coconutObject;
+	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
+	private float coconutInterval = 7.5f; // the time interval for coconuts to fall if monkey is on same tree and initial delay to activate
+	private Vector3 coconutSpawnPosition;
+	public float minCoconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
+	public float maxCoconutInterval = 3f; // the time interval for coconuts to fall if monkey is on same tree
+	private float timeCounter = 0.0f;
+	private GameObject coconutClone;
+
 	public float checkpointHeight = 250.0f;
+	private float height;
 
 	private GameObject mainCam;
 	private Color origColor;
@@ -56,11 +67,13 @@ public class testAutoMonkey : MonoBehaviour {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
 			Manager.Instance.score = 0;
+			height = checkpointHeight;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
 		}
 
+		timeCounter = coconutInterval;
 		monkeySpeed = moveSpeed;
 		Manager.Instance.monkeySpeed = monkeySpeed;
 
@@ -88,7 +101,7 @@ public class testAutoMonkey : MonoBehaviour {
 			isClimbing = true; //this variable is for the CameraController
 			//print ("collision detected!");
 		}
-		else if( hit.gameObject.tag == "Tree" && isJumping) {
+		else if (hit.gameObject.tag == "Tree" && isJumping) {
 			isJumping = false;
 			jumpVel = 0;
 			Vector3 resetPos = origPos;
@@ -113,22 +126,49 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
+		Manager.Instance.onTree = onTree;
+
+		// coconut
+		if (onTree && classicMode) {
+			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval);
+			if ((Time.time > timeCounter + coconutInterval)) {
+				coconutObject = GameObject.Find ("Coconut");
+				if( coconutObject == null) {
+					SpawnCoconut();
+					print ("coconut!");
+					timeCounter = Time.time;
+				}
+			}
+		}
+		else {
+			timeCounter = Time.time + coconutInterval;
+		}
+
+		if( onTree && !isJumping )
+			coconutSpawnPosition = this.transform.position;
+
 		Manager.Instance.monkeyHeight = this.transform.position.y;
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
+
+				if (sounds != null && sounds.playSoundEffects)
+					sounds.audioSources[4].Play();
+
 				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
 			}
+
+			origPos = this.gameObject.transform.position;
+
 		}
 
 		if (classicMode) {
 			if (Manager.Instance.monkeySpeed < maxMonkeySpeed) {
-				if (Manager.Instance.monkeyHeight >= checkpointHeight) {
+				if (Manager.Instance.monkeyHeight >= height) {
 					Manager.Instance.monkeySpeed++;
-					checkpointHeight += checkpointHeight;
-					print(Manager.Instance.monkeySpeed);
+					height += checkpointHeight;
+					print("Speed: " + Manager.Instance.monkeySpeed);
 				}
 			}
 		}
@@ -153,17 +193,6 @@ public class testAutoMonkey : MonoBehaviour {
 		else if (monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*monkeySpeed;
-
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[4].Play();
-
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
-			}
 
 			if (isJumping) {
 				jumpVel += simGravity;
@@ -231,4 +260,11 @@ public class testAutoMonkey : MonoBehaviour {
 		}
 	}
 
+	void SpawnCoconut() {
+		if (monkeyState == MonkeyState.climbing) {
+			coconutSpawnPosition.y  = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+			coconutClone = (GameObject)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
+			coconutClone.name = coconut.name;
+		}
+	}
 }

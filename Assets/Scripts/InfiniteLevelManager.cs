@@ -36,15 +36,20 @@ public class InfiniteLevelManager : MonoBehaviour {
 	private float speedFactor; // factor to increase/decrease time for difficulty
 	protected bool spawnObstacle = false;
 
+	private int fSize = (int)(0.05f * Screen.width);
+
 	void OnGUI () {
 		GUI.skin = menuSkin;
 		
 		// score
+		GUI.skin.box.fontSize = fSize;
+		/*
 		int originalSize = GUI.skin.box.fontSize;
 		int boxSize = originalSize / 2;
 		GUI.skin.box.fontSize = boxSize;
+		*/
 		GUI.Box(new Rect(Screen.width*0.80f, Screen.width*0.01f, Screen.width*0.18f, Screen.width*0.1f), (Manager.Instance.score).ToString());
-		GUI.skin.box.fontSize = originalSize;
+		//GUI.skin.box.fontSize = originalSize;
 	}
 
 	// creates the pool of trunks that will be managed by this system
