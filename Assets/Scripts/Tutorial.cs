@@ -10,7 +10,7 @@ public class Tutorial : InfiniteLevelManager {
 	public enum TutorialState {Begin,Active,Inactive,End};
 	public TutorialState state = TutorialState.Active;
 	
-	public int outroHeight = 25;
+	public int outroHeight = 10;
 
 	// Use this for initialization
 	public override void Start () {

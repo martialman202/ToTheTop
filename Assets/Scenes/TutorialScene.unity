@@ -116,6 +116,9 @@ MonoBehaviour:
   slowFactor: .5
   monkeySpeed: 0
   onTree: 0
+  coconut: {fileID: 0}
+  minCoconutInterval: 1.5
+  maxCoconutInterval: 3
   checkpointHeight: 250
   isJumping: 0
   jumpVel: 0
@@ -585,7 +588,7 @@ MonoBehaviour:
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
   state: 1
-  outroHeight: 25
+  outroHeight: 10
 --- !u!1 &1697772359
 GameObject:
   m_ObjectHideFlags: 0
