@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
-  empty: 0
+  empty: 1
   emptyTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
   beehiveTrunk: {fileID: 400004, guid: ff33c9efcc3ec024ea1d7408178cf3c1, type: 2}
   snakeTrunk: {fileID: 400058, guid: abaa185c9d3e84828884aab81209dd50, type: 2}

@@ -8,12 +8,13 @@ public class Coconut : MonoBehaviour {
 
 	public GUISkin menuSkin;
 
+	public Texture2D coconutCaution;
 	public Texture2D coconutWarning;
+	private Texture2D current;
 
 	private enum CoconutState {Initial,Caution, Warning};
 	CoconutState state;
 
-	private bool blink = false;
 	private int counter = 0;
 	private int blinkSpeed = 25;
 
@@ -25,15 +26,16 @@ public class Coconut : MonoBehaviour {
 		
 		//Coconut warning
 		if (state == CoconutState.Caution)
-			GUI.Label (new Rect (0.4f * Screen.width, 0.50f * Screen.height, 0.2f*Screen.width, 0.2f*Screen.width), coconutWarning);
+			GUI.Label (new Rect (0.4f * Screen.width, 0.50f * Screen.height, 0.2f*Screen.width, 0.2f*Screen.width), coconutCaution);
 
-		else if (blink && state == CoconutState.Warning)
-			GUI.Label (new Rect (0.4f * Screen.width, 0.50f * Screen.height, 0.2f*Screen.width, 0.2f*Screen.width), coconutWarning);
+		else if (state == CoconutState.Warning)
+			GUI.Label (new Rect (0.4f * Screen.width, 0.50f * Screen.height, 0.2f*Screen.width, 0.2f*Screen.width), current);
 	}
 
 	// Use this for initialization
 	void Start () {
 		state = CoconutState.Initial;
+		current = coconutWarning;
 	}
 	
 	// Update is called once per frame
@@ -66,10 +68,10 @@ public class Coconut : MonoBehaviour {
 		for (int i = 0; i < 10; i++) {
 			switch (i % 2) {
 			case 0:
-				blink = false;
+				current = coconutWarning;
 				break;
 			case 1:
-				blink = true;
+				current = coconutCaution;
 				break;
 			default:
 				break;
