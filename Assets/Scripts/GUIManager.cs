@@ -93,13 +93,13 @@ public class GUIManager : MonoBehaviour {
 			string starPoints = "Level" + (i+1).ToString() + "Stars";
 			if(PlayerPrefs.HasKey(starPoints)) {
 				// Select correct star label
-				GUI.Label(new Rect((0.03f + 0.29f * (i % numPerRow)) * Screen.width, (currRow * 0.36f) * Screen.width,
-				                   0.22f * Screen.width, 0.1f * Screen.width), stars[(int) (PlayerPrefs.GetInt(starPoints))]);
+				GUI.Label(new Rect((0.01f + 0.29f * (i % numPerRow)) * Screen.width, (0.02f + currRow * 0.36f) * Screen.width,
+				                   0.19f * Screen.width, 0.1f * Screen.width), stars[(int) (PlayerPrefs.GetInt(starPoints))]);
 			}
 			else {
 				//Set the label to 0 and draw
 				PlayerPrefs.SetInt(starPoints, 0);
-				GUI.Label(new Rect((0.03f + 0.29f * (i % numPerRow)) * Screen.width, (currRow * 0.36f) * Screen.width,
+				GUI.Label(new Rect((0.01f + 0.29f * (i % numPerRow)) * Screen.width, (0.02f + currRow * 0.36f) * Screen.width,
 				                   0.22f * Screen.width, 0.1f * Screen.width), stars[0]);
 			}
 		}
@@ -114,8 +114,14 @@ public class GUIManager : MonoBehaviour {
 				Application.LoadLevel("LevelFromFile");
 			}
 		}
-
 		GUI.EndGroup ();
+		int prevFontSize = GUI.skin.button.fontSize;
+		GUI.skin.button.fontSize = (int)0.75f * prevFontSize; 
+		if(GUI.Button (new Rect (0.1f * Screen.width, 0.8f * Screen.height, 0.22f * Screen.width, 0.11f * Screen.width), "Back")) {
+			currMenu = MenuState.Main;
+			prevMenu = MenuState.Main;
+		}
+		GUI.skin.button.fontSize = prevFontSize;
 	}
 
 	//Draw the Options Menu
