@@ -168,7 +168,7 @@ public class testAutoMonkey : MonoBehaviour {
 				if (Manager.Instance.monkeyHeight >= height) {
 					Manager.Instance.monkeySpeed++;
 					height += checkpointHeight;
-					print(Manager.Instance.monkeySpeed);
+					print("Speed: " + Manager.Instance.monkeySpeed);
 				}
 			}
 		}
