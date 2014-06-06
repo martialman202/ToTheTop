@@ -1,5 +1,5 @@
 ﻿/*
- *  To be used in scenes with a finite level.
+ *  Can be used in both classic and arcade modes.
  */
 
 using UnityEngine;
@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour {
 	public float distanceFromMonkey = 5;
 	public float secondsLookingAtBananas = 2;
 	public float secondsGoingDownTree = 3;
+	public float secondsWinLerping = 0.7f;
 
 	//play with these until it looks right. Mostly postion y and z, and rotation x.
 	//If you need to change them, change them in the scene editor.
@@ -56,6 +57,15 @@ public class CameraController : MonoBehaviour {
 	private bool set_FM_start = false;
 	private float FM_start; //start time
 
+	//for win cam
+	private bool set_WC_start = false;
+	private float WC_start; //start time
+	private Vector3 WC_initialPosition;
+	private Vector3 WC_finalPosition;
+	private Quaternion WC_initialRotation;
+	private Quaternion WC_finalRotation;
+	private Transform CamHelper;
+
 	public bool hasFoundBananas() {
 		return foundBananas;
 	}
@@ -64,17 +74,30 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 		monkey = GameObject.FindGameObjectWithTag ("Player");
 		monkeyScript = monkey.GetComponent<testAutoMonkey> ();
+		CamHelper = this.transform.GetChild (0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (monkeyScript.lost) {
+			loseCam ();
+		}
+		else if (monkeyScript.won) {
+			winCam (secondsWinLerping);
+		}
+		else { //if monkey has not lost
+			mainUpdate ();
+		}
+	}
+
+	void mainUpdate () {
 		if (!lookedAtBananas) //if we havent looked at the bananas, go do that
 			findBananas ();
 		else if (!wentToMonkey) //then if we havent gotten down to the monkey, do that
 			gotoMonkey(secondsGoingDownTree);
 		else if (!behindMonkey) //then if we havent gotten behind the monkey and let it move, do that
 			getBehindMonkey(); //should make monkey move after this
-		else 
+		else if (behindMonkey && !monkeyScript.lost)
 			followMonkey();
 	}
 
@@ -97,7 +120,7 @@ public class CameraController : MonoBehaviour {
 						lookedAtBananas = true;
 				}
 			}
-		}
+		} //end if classic mode
 	}
 
 	//camera view rotates from banana to monkey
@@ -162,11 +185,6 @@ public class CameraController : MonoBehaviour {
 		/*
 		 * Follow monkey to tree, 
 		 * 	then freeze in place once monkey makes contact.
-		 * 
-		 * Once distance between monkey and camera is large enough.
-		 * 	Follow monkey as it's climbing. 
-		 * 	Freeze in place if monkey loses.
-		 * 	Readjust position if monkey wins.
 		 */
 	void followMonkey(){
 		if (!set_FM_start) {
@@ -194,11 +212,27 @@ public class CameraController : MonoBehaviour {
 
 	//for when monkey loses
 	void loseCam() {
-
+		print ("cam says monkey lost");
+		this.transform.parent = null;
 	}
 
 	//for when monkey wins
-	void winCam() {
+	void winCam(float time) {
+		if (!set_WC_start) {
+			WC_start = Time.time;
+			WC_initialPosition = transform.position;
+			WC_initialRotation = transform.rotation;
+			WC_finalPosition = transform.position + new Vector3(0, distanceFromMonkey, 0); //above monkey
+			CamHelper.LookAt(monkey.transform);
+			WC_finalRotation = CamHelper.rotation;
 
+			set_WC_start = true;
+		}
+
+		if (transform.position != WC_finalPosition) {
+			transform.position = Vector3.Lerp (WC_initialPosition, WC_finalPosition, (Time.time - WC_start) / time);
+			//transform.LookAt(monkey.transform);
+			transform.rotation = Quaternion.Lerp (WC_initialRotation, WC_finalRotation, (Time.time - WC_start) / time);
+		}
 	}
 }

@@ -22,7 +22,7 @@ public class SoundMainScene : MonoBehaviour {
 	public AudioClip [] Clips;
 	public AudioSource[] audioSources;
 
-	public bool changedSettings; //this is set by another script if player prefs change
+	public bool changedSettings = false; //this is set by another script if player prefs change
 
 	private bool playedIntro;
 	private bool playedLose;
@@ -57,7 +57,8 @@ public class SoundMainScene : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (changedSettings) {
-		//	updatePrefs();
+			updatePrefs();
+			changedSettings = false;
 		}
 
 		if (playMusic && !playedIntro) {

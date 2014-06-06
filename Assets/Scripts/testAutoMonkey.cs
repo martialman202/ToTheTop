@@ -37,6 +37,8 @@ public class testAutoMonkey : MonoBehaviour {
 	//Camera stuff
 	public bool cameraPermission = false; //Let the monkey move when the camera gives it permission.
 	public bool isClimbing = false; //for use with CameraController only
+	public bool lost = false; //set to true if you lose.
+	public bool won = false;
 
 	//Audio
 	private SoundMainScene sounds;
@@ -161,34 +163,39 @@ public class testAutoMonkey : MonoBehaviour {
 
 				controller.Move(dir * Time.deltaTime);
 			}
-			else if(onTree)
+			else if(onTree) {
+				won = true; //for camera
 				win ();
+			}
 		}
 
 	}
 
 	void lose() {
-		print("You Lose.");
+		//print("You Lose.");
+		lost = true;
 
+		rigidbody.useGravity = true;
+		rigidbody.AddForce (2, 0, 2);
+
+		//audio
 		if (!sounds.audioSources[2].isPlaying && !playedLose && sounds.playSoundEffects) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[2].Play();
 			playedLose = true;
 		}
 		else if ((playedLose && !sounds.audioSources[2].isPlaying) || !sounds.playSoundEffects) { //if that sound is not playing, and we have played it
-			Application.LoadLevel("EndGameScene");
+			Application.LoadLevel("EndGameScene"); //scene change
 		}
 	}
 	
 	void win() {
-		print("You Win!");
+		//print("You Win!");
 
 		// update high score
 		int highScore = PlayerPrefs.GetInt ("HighScore");
 		if (Manager.Instance.score > highScore) 
 			PlayerPrefs.SetInt ("HighScore", Manager.Instance.score);
-
-		print("You Win");
 
 		string starPoints = "Level" + (Manager.Instance.levelIndex + 1).ToString() + "Stars";
 		if(lifePoints > PlayerPrefs.GetInt(starPoints)) {
@@ -204,7 +211,7 @@ public class testAutoMonkey : MonoBehaviour {
 		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
-			hud.displayWin = true;
+			//hud.displayWin = true;
 		}
 	}
 
