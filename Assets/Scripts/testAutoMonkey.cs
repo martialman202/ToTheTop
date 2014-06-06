@@ -244,7 +244,7 @@ public class testAutoMonkey : MonoBehaviour {
 		else if (playedWin && !sounds.audioSources[1].isPlaying && winJump) { //if that sound is not playing, and we have played it
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
-			//hud.displayWin = true; //TODO this should be uncommented later I think
+			hud.displayWin = true; //TODO this should be uncommented later I think
 		}
 
 		//monkey jumps up on top of tree //win jumping
