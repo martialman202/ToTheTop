@@ -24,7 +24,7 @@ public class testAutoMonkey : MonoBehaviour {
 	public GameObject coconut;
 	private GameObject coconutObject;
 	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
-	private float coconutInterval; // the time interval for coconuts to fall if monkey is on same tree
+	private float coconutInterval = 7.5f; // the time interval for coconuts to fall if monkey is on same tree and initial delay to activate
 	private Vector3 coconutSpawnPosition;
 	public float minCoconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree
 	public float maxCoconutInterval = 3f; // the time interval for coconuts to fall if monkey is on same tree
@@ -135,7 +135,7 @@ public class testAutoMonkey : MonoBehaviour {
 				coconutObject = GameObject.Find ("Coconut");
 				if( coconutObject == null) {
 					SpawnCoconut();
-					print ("spawning coconut!");
+					print ("coconut!");
 					timeCounter = Time.time;
 				}
 			}
