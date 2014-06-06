@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Coconut : MonoBehaviour {
 	public float speed = 20.0f;
-	private float warningDistance = (Screen.height / Camera.main.orthographicSize)/3;
-	private float cautionDistance = (Screen.height / Camera.main.orthographicSize);
+	private float warningDistance;
+	private float cautionDistance;
 
 	public GUISkin menuSkin;
 
@@ -36,6 +36,9 @@ public class Coconut : MonoBehaviour {
 	void Start () {
 		state = CoconutState.Initial;
 		current = coconutWarning;
+
+		warningDistance = (Screen.height / Camera.main.orthographicSize) / 3;
+		cautionDistance = (Screen.height / Camera.main.orthographicSize);
 	}
 	
 	// Update is called once per frame

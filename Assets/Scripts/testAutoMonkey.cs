@@ -129,9 +129,9 @@ public class testAutoMonkey : MonoBehaviour {
 		Manager.Instance.onTree = onTree;
 
 		// coconut
-		if (onTree) {
+		if (onTree && classicMode) {
 			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval);
-			if ((Time.time > timeCounter + coconutInterval) &&  classicMode) {
+			if ((Time.time > timeCounter + coconutInterval)) {
 				coconutObject = GameObject.Find ("Coconut");
 				if( coconutObject == null) {
 					SpawnCoconut();

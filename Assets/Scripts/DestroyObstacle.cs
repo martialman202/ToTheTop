@@ -5,7 +5,7 @@ public class DestroyObstacle : MonoBehaviour {
 	
 	public float offset = 25.0f;
 	
-	public GameObject mainCam;
+	private GameObject mainCam;
 	
 	// Use this for initialization
 	void Start () {
