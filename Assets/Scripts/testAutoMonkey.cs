@@ -38,8 +38,11 @@ public class testAutoMonkey : MonoBehaviour {
 	private GameObject mainCam;
 	private Color origColor;
 	private MonkeyMouse mmouse;
-	private enum MonkeyState {sceneStart = 0, initial=1, climbing=2, lose=3, win=4, pause=5};
-	MonkeyState monkeyState;
+	public enum MonkeyState {sceneStart = 0, initial=1, climbing=2, lose=3, win=4, pause=5};
+	public MonkeyState monkeyState;
+
+	public enum JumpState { none = 0, up = 1, left = 2, right = 3 };
+	public JumpState jumpState;
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
@@ -63,6 +66,8 @@ public class testAutoMonkey : MonoBehaviour {
 
 	private CharacterController controller;
 
+	private Animation animation;
+
 	// Use this for initialization
 	void Start () {
 		if (classicMode) {
@@ -73,6 +78,7 @@ public class testAutoMonkey : MonoBehaviour {
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
 		}
+		jumpState = JumpState.none;
 
 		timeCounter = coconutInterval;
 		monkeySpeed = moveSpeed;
@@ -87,7 +93,8 @@ public class testAutoMonkey : MonoBehaviour {
 		//Set position
 		//TODO: have the monkey start relative to the tree spawners spawn distance
 		
-		origColor = gameObject.renderer.material.color;
+		//origColor = gameObject.renderer.material.color;
+
 		mmouse = this.GetComponent<MonkeyMouse> ();
 		Manager.Instance.prevLevel = Application.loadedLevel;
 		controller = GetComponent<CharacterController>();
@@ -108,6 +115,7 @@ public class testAutoMonkey : MonoBehaviour {
 			Vector3 resetPos = origPos;
 			resetPos.y = this.gameObject.transform.position.y;
 			this.gameObject.transform.position = resetPos;
+			jumpState = JumpState.none;
 		}
 	}
 
@@ -158,6 +166,10 @@ public class testAutoMonkey : MonoBehaviour {
 					sounds.audioSources[4].Play();
 
 				mmouse.ResetPos();
+				jumpState = JumpState.up;
+
+				if (sounds != null && sounds.playSoundEffects)
+					sounds.audioSources[4].Play();
 			}
 
 			origPos = this.gameObject.transform.position;
@@ -202,6 +214,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 			if ( classicMode )
 				Manager.Instance.score += (int)(Time.deltaTime * 100);
+
 
 			controller.Move(dir * Time.deltaTime);
 

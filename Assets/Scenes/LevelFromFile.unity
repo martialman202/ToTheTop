@@ -129,8 +129,11 @@ MonoBehaviour:
   monkeySpeed: 0
   onTree: 0
   coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
-  coconutInterval: 1.5
+  minCoconutInterval: 1.5
+  maxCoconutInterval: 3
   checkpointHeight: 250
+  monkeyState: 0
+  jumpState: 0
   isJumping: 0
   jumpVel: 0
   simGravity: 4
@@ -297,10 +300,10 @@ MonoBehaviour:
   introHeight: 25
   outroHeight: 25
   fillHeight: 2
-  emptyTrunk: {fileID: 400000, guid: fdbd6b9923be38647990f008c0f2f005, type: 2}
-  beehiveTrunk: {fileID: 400004, guid: ff33c9efcc3ec024ea1d7408178cf3c1, type: 2}
-  snakeTrunk: {fileID: 400058, guid: 601cf8e17c4b5a0498170170d48df283, type: 2}
-  brushSawBlade: {fileID: 400002, guid: 2f5d5caa6bc174f49aa132f92aa7522b, type: 2}
+  emptyTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
+  beehiveTrunk: {fileID: 400004, guid: 7228ca998646441be80b30275985947a, type: 2}
+  snakeTrunk: {fileID: 400058, guid: aeeb4d6e2107f4e1d819a9f7458ae340, type: 2}
+  brushSawBlade: {fileID: 400002, guid: 97416a3e2a8464ea7a0a261235f1faff, type: 2}
   treeTop: {fileID: 400002, guid: dfe7e92b501244b4f8864a9c1767b459, type: 2}
   bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
   bananasHeightOffset: 5
