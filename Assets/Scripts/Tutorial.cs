@@ -2,21 +2,55 @@
 using System.Collections;
 
 public class Tutorial : InfiniteLevelManager {
-	private MonkeyMouse mmouse;
 	public Transform treeTop;
 	public Transform bananas;
 	public float bananasHeightOffset = 5.0f;
-	
-	public enum TutorialState {Begin,Active,Inactive,End};
-	public TutorialState state = TutorialState.Active;
+
+	public Texture2D arrowMove;
+	public Texture2D arrowJump;
+	private float arrowWidth = 0.7f * Screen.width;
+	private float arrowHeight = 0.17f * Screen.width;
+
+	private enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine};
+	private TutorialState state = TutorialState.Begin;
+	private TutorialState mode = TutorialState.Begin;
+
+	private enum Arrows {None,Move,Jump,Swipe};
+	private Arrows arrow = Arrows.None;
 	
 	public int outroHeight = 10;
+
+	private MonkeyMouse mmouse;
+	private int counter = 0;
+	private GameObject monkey;
+	private testAutoMonkey monkeyController;
+	void OnGUI () {
+		switch (arrow) {
+		case Arrows.None:
+			break;
+		case Arrows.Move:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowMove);
+			break;
+		case Arrows.Jump:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowJump);
+			break;
+		case Arrows.Swipe:
+			break;
+		default:
+			break;
+		}
+	}
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
 		mmouse = this.GetComponent<MonkeyMouse> ();
+		monkey = GameObject.FindWithTag ("Player");
+		monkeyController = monkey.GetComponent<testAutoMonkey> ();
 		empty = true;
+		state = TutorialState.Active;
+		mode = TutorialState.Inactive;
+		Invoke("ActivateTutorial",2);
 	}
 
 	// Update is called once per frame
@@ -37,6 +71,40 @@ public class Tutorial : InfiniteLevelManager {
 		} else if (state == TutorialState.End) {
 			LoadOutro();
 			state = TutorialState.Inactive;
+		}
+
+		switch (mode) {
+		case TutorialState.Inactive:
+			break;
+		case TutorialState.Active:
+			ActiveTutorial ();
+			break;
+		case TutorialState.BeeHive:
+			break;
+		case TutorialState.Snake:
+			break;
+		case TutorialState.Deathvine:
+			break;
+		default:
+			break;
+		}
+	}
+
+	void ActiveTutorial () {
+		arrow = Arrows.Move;
+		if (monkeyController.onTree && ListenForMove () && counter < 3)
+			counter++;
+
+		if (counter >= 3 && counter < 6) {
+			arrow = Arrows.Jump;
+			if (monkeyController.onTree && ListenForJump ()) {
+				counter++;
+			}
+		}
+		print (counter);
+		if (counter >= 6) {
+			arrow = Arrows.None;
+			mode = TutorialState.BeeHive;
 		}
 	}
 
@@ -88,5 +156,9 @@ public class Tutorial : InfiniteLevelManager {
 		    Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown ("right") || mmouse.MoveLeft ())
 			return true;
 		return false;
+	}
+
+	void ActivateTutorial () {
+		mode = TutorialState.Active;
 	}
 }

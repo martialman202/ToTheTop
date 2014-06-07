@@ -10,6 +10,7 @@ using System.Collections;
 public class testAutoMonkey : MonoBehaviour {
 
 	public bool classicMode = false;
+	public bool tutorialMode = false;
 
 	public int lifePoints = 3;
 
@@ -129,7 +130,7 @@ public class testAutoMonkey : MonoBehaviour {
 		Manager.Instance.onTree = onTree;
 
 		// coconut
-		if (onTree && classicMode) {
+		if (onTree && classicMode && !tutorialMode) {
 			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval);
 			if ((Time.time > timeCounter + coconutInterval)) {
 				coconutObject = GameObject.Find ("Coconut");
@@ -163,7 +164,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 		}
 
-		if (classicMode) {
+		if (classicMode && !tutorialMode) {
 			if (Manager.Instance.monkeySpeed < maxMonkeySpeed) {
 				if (Manager.Instance.monkeyHeight >= height) {
 					Manager.Instance.monkeySpeed++;
