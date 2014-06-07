@@ -82,6 +82,9 @@ public class Tutorial : InfiniteLevelManager {
 				case TutorialState.Deathvine:
 					SpawnDeathvine();
 					break;
+				case TutorialState.End:
+					state = mode;
+					break;
 				default:
 					base.extendEmptyTrunks ();
 					break;
