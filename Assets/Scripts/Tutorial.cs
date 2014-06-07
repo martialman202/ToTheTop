@@ -53,8 +53,8 @@ public class Tutorial : InfiniteLevelManager {
 		empty = true;
 		state = TutorialState.Active;
 		mode = TutorialState.Inactive;
-		deltaMove = (Screen.height / Camera.main.orthographicSize) * 0.25f;
-		deltaJump = (Screen.height / Camera.main.orthographicSize) * 0.25f;
+		deltaMove = (Screen.height / Camera.main.orthographicSize) * 0.05f;
+		deltaJump = (Screen.height / Camera.main.orthographicSize) * 0.05f;
 		Invoke("ActivateTutorial",2);
 	}
 
@@ -121,17 +121,16 @@ public class Tutorial : InfiniteLevelManager {
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter == 0) {
 			if (hit.collider.tag == "Obstacle") {
-				print("cast " + counter);
-				arrow = Arrows.Move;
+				arrow = Arrows.Jump;
 			}
 		} else if (Physics.Raycast (ray, out hit, deltaJump) && counter == 1) {
 			if (hit.collider.tag == "Obstacle") {
-				print("cast " + counter);
-				arrow = Arrows.Jump;
+				arrow = Arrows.Move;
 			}
-		}
+		} else
+			arrow = Arrows.None;
 		
-		float interval = 2;
+		float interval = 3.5f;
 		if ((Time.time > timeCounter + interval) && counter == 0) {
 			SpawnBeeHive();
 			timeCounter = Time.time;
@@ -146,9 +145,9 @@ public class Tutorial : InfiniteLevelManager {
 			counter = 0;
 		}
 
-		if (monkeyController.onTree && ListenForMove () && counter == 0)
+		if (monkeyController.onTree && ListenForJump () && counter == 0)
 			counter++;
-		else if (monkeyController.onTree && ListenForJump () && counter == 1)
+		else if (monkeyController.onTree && ListenForMove () && counter == 1)
 			counter++;
 	}
 
