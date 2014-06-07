@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour {
 
 	//play with these until it looks right. Mostly postion y and z, and rotation x.
 	//If you need to change them, change them in the scene editor.
-	public Vector3 finalPosition = new Vector3(0.0f,-0.6f,-10f); 
+	public Vector3 finalPosition = new Vector3(0.0f,1.42f,-10f); 
 	public Vector3 finalRotation= new Vector3(333.2337f, 0.0f, 0.0f);
 
 	//other objects
@@ -146,7 +146,7 @@ public class CameraController : MonoBehaviour {
 		if (!set_BH_start) {
 			BH_start = Time.time;
 			BH_initialPosition = transform.position;
-			BH_finalPosition = monkey.transform.position + new Vector3(0,-0.2888703f, -distanceFromMonkey); //above monkey
+			BH_finalPosition = monkey.transform.position + new Vector3(0,-0.2888703f, -distanceFromMonkey) + new Vector3(0,1.42f,0); //above monkey // third vector added for offset of new monkey model
 			set_BH_start = true;
 		}
 		float t = Time.time - BH_start;
