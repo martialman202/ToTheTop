@@ -161,11 +161,17 @@ MonoBehaviour:
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 18
+  maxMonkeySpeed: 25
   accelerationFactor: 15
   slowFactor: .5
+  monkeySpeed: 0
   onTree: 0
   coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
-  coconutInterval: 1.5
+  minCoconutInterval: 1.5
+  maxCoconutInterval: 3
+  checkpointHeight: 250
+  monkeyState: 0
+  jumpState: 0
   isJumping: 0
   jumpVel: 0
   simGravity: 4
