@@ -122,7 +122,7 @@ public class testAutoMonkey : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			if (!tutorialMode) lifePoints--;
+			/*if (!tutorialMode)*/ lifePoints--;
 			monkeySpeed = moveSpeed * slowFactor;
 			if (sounds != null && sounds.playSoundEffects)
 				sounds.audioSources[3].Play ();

@@ -13,9 +13,9 @@ public class Tutorial : InfiniteLevelManager {
 	private float deltaMove;
 	private float deltaJump;
 	
-	private enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine};
-	private TutorialState state = TutorialState.Begin;
-	private TutorialState mode = TutorialState.Begin;
+	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine};
+	public TutorialState state = TutorialState.Begin;
+	public TutorialState mode = TutorialState.Begin;
 
 	private enum Arrows {None,Move,Jump,Swipe};
 	private Arrows arrow = Arrows.None;
@@ -27,6 +27,8 @@ public class Tutorial : InfiniteLevelManager {
 	private GameObject monkey;
 	private testAutoMonkey monkeyController;
 	private float timeCounter = 0.0f;
+	private bool spawned = false;
+	private bool nextTutorial = false;
 	void OnGUI () {
 		switch (arrow) {
 		case Arrows.None:
@@ -53,8 +55,9 @@ public class Tutorial : InfiniteLevelManager {
 		empty = true;
 		state = TutorialState.Active;
 		mode = TutorialState.Inactive;
-		deltaMove = (Screen.height / Camera.main.orthographicSize) * 0.05f;
-		deltaJump = (Screen.height / Camera.main.orthographicSize) * 0.05f;
+
+		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 3;
+		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 3;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
 		Invoke("ActivateTutorial",2);
 	}
 
@@ -65,8 +68,26 @@ public class Tutorial : InfiniteLevelManager {
 
 		// create a new row if a row was just recycled back into the trunk pool
 		if (wasRowRecycled && state == TutorialState.Active) {
-			if (!empty) {
-
+			if (spawnObstacle && !empty) {
+				switch (mode) {
+				case TutorialState.Inactive:
+					base.extendEmptyTrunks ();
+					break;
+				case TutorialState.BeeHive:
+					SpawnBeeHive();
+					break;
+				case TutorialState.Snake:
+					SpawnSnakes();
+					break;
+				case TutorialState.Deathvine:
+					SpawnDeathvine();
+					break;
+				default:
+					base.extendEmptyTrunks ();
+					break;
+				}
+				empty = false;
+				spawnObstacle = false;
 			} else {
 				base.extendEmptyTrunks ();
 			}
@@ -88,11 +109,24 @@ public class Tutorial : InfiniteLevelManager {
 			BeeHiveTutorial ();
 			break;
 		case TutorialState.Snake:
+			if (nextTutorial)
+				SnakeTutorial ();
 			break;
 		case TutorialState.Deathvine:
+			if (nextTutorial)
+				DeathvineTutorial ();
 			break;
 		default:
 			break;
+		}
+
+		print (counter);
+
+		if (monkeyController.lifePoints < 3) {
+			//counter = counter - (3 - monkeyController.lifePoints);
+			//if (counter < 0)
+			//	counter = 0;
+			monkeyController.lifePoints = 3;
 		}
 	}
 
@@ -107,7 +141,7 @@ public class Tutorial : InfiniteLevelManager {
 				counter++;
 			}
 		}
-		print (counter);
+
 		if (counter >= 6) {
 			arrow = Arrows.None;
 			mode = TutorialState.BeeHive;
@@ -119,36 +153,81 @@ public class Tutorial : InfiniteLevelManager {
 		RaycastHit hit;
 		Ray ray = new Ray (monkey.transform.position, Vector3.up);
 		
-		if (Physics.Raycast (ray, out hit, deltaMove) && counter == 0) {
-			if (hit.collider.tag == "Obstacle") {
+		if (Physics.Raycast (ray, out hit, deltaJump) && counter == 0 && monkeyController.onTree) {
+			if (hit.collider.name == "ReducedCartoonBeehive") {
 				arrow = Arrows.Jump;
 			}
-		} else if (Physics.Raycast (ray, out hit, deltaJump) && counter == 1) {
-			if (hit.collider.tag == "Obstacle") {
+			if (monkeyController.onTree && ListenForJump ())
+				counter++;
+		} else if (Physics.Raycast (ray, out hit, deltaMove) && counter == 1 && !monkeyController.isJumping) {
+			if (hit.collider.name == "ReducedCartoonBeehive") {
 				arrow = Arrows.Move;
 			}
+			if (monkeyController.onTree && ListenForMove ())
+				counter++;
 		} else
 			arrow = Arrows.None;
-		
-		float interval = 3.5f;
-		if ((Time.time > timeCounter + interval) && counter == 0) {
-			SpawnBeeHive();
-			timeCounter = Time.time;
-		}
-		else if ((Time.time > timeCounter + interval) && counter == 1) {
-			SpawnBeeHive();
-			timeCounter = Time.time;
+
+		if (counter <= 1 && !spawned) {
+			empty = false;
+			StartCoroutine (SpawnObstacle ());
 		}
 		else if (counter > 1) {
 			arrow = Arrows.None;
 			mode = TutorialState.Snake;
 			counter = 0;
+			StartCoroutine (TutorialTransition());
 		}
+	}
 
-		if (monkeyController.onTree && ListenForJump () && counter == 0)
-			counter++;
-		else if (monkeyController.onTree && ListenForMove () && counter == 1)
-			counter++;
+	void SnakeTutorial () {
+		RaycastHit hit;
+		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		
+		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
+			if (hit.collider.name == "CartoonSnakePrefab") {
+				arrow = Arrows.Move;
+			}
+			if (monkeyController.onTree && ListenForMove ())
+				counter++;
+		} else
+			arrow = Arrows.None;
+
+		if (counter <= 1 && !spawned) {
+			empty = false;
+			StartCoroutine (SpawnObstacle ());
+		}
+		else if (counter > 1) {
+			arrow = Arrows.None;
+			mode = TutorialState.Deathvine;
+			counter = 0;
+			StartCoroutine (TutorialTransition());
+		}
+	}
+
+	void DeathvineTutorial () {
+		RaycastHit hit;
+		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		
+		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
+			if (hit.collider.name == "Prefab_DeathVine(Clone)") {
+				arrow = Arrows.Jump;
+			}
+			if (monkeyController.onTree && ListenForJump ())
+				counter++;
+		} else
+			arrow = Arrows.None;
+		
+		if (counter <= 1 && !spawned) {
+			empty = false;
+			StartCoroutine (SpawnObstacle ());
+		}
+		else if (counter > 1) {
+			arrow = Arrows.None;
+			mode = TutorialState.End;
+			counter = 0;
+			StartCoroutine (TutorialTransition());
+		}
 	}
 
 	private void LoadOutro()
@@ -203,5 +282,19 @@ public class Tutorial : InfiniteLevelManager {
 
 	void ActivateTutorial () {
 		mode = TutorialState.Active;
+	}
+
+	IEnumerator SpawnObstacle () {
+		spawned = true;
+		yield return new WaitForSeconds (2.0f);
+		if (!spawnObstacle)
+			spawnObstacle = true;
+		spawned = false;
+	}
+
+	IEnumerator TutorialTransition() {
+		nextTutorial = false;
+		yield return new WaitForSeconds (1.0f);
+		nextTutorial = true;
 	}
 }

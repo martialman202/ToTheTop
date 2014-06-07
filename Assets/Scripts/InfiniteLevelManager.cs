@@ -425,7 +425,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 		obstacleSpawnTime = obstacleSpawnMax;
 	}
 
-	void SpawnObstacle () {
+	protected virtual void SpawnObstacle () {
 		if (!spawnObstacle)
 			spawnObstacle = true;
 		Invoke ("SpawnObstacle", obstacleSpawnTime); //Random.Range (obstacleSpawnTime, obstacleSpawnMax));
