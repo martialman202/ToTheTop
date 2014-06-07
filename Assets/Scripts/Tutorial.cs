@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Tutorial : InfiniteLevelManager {
 	public Transform treeTop;
+	public Transform coconut;
 	public Transform bananas;
 	public float bananasHeightOffset = 5.0f;
 
@@ -13,7 +14,7 @@ public class Tutorial : InfiniteLevelManager {
 	private float deltaMove;
 	private float deltaJump;
 	
-	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine};
+	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine,Coconut};
 	public TutorialState state = TutorialState.Begin;
 	public TutorialState mode = TutorialState.Begin;
 
@@ -23,12 +24,14 @@ public class Tutorial : InfiniteLevelManager {
 	public int outroHeight = 10;
 
 	private MonkeyMouse mmouse;
+	private float coconutSpawnHeight;
 	private int counter = 0;
 	private GameObject monkey;
 	private testAutoMonkey monkeyController;
 	private float timeCounter = 0.0f;
 	private bool spawned = false;
 	private bool nextTutorial = false;
+
 	void OnGUI () {
 		switch (arrow) {
 		case Arrows.None:
@@ -58,6 +61,9 @@ public class Tutorial : InfiniteLevelManager {
 
 		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 3;
 		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 3;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
+
+		coconutSpawnHeight = emptyTrunk.gameObject.renderer.bounds.size.y * 50;
+
 		Invoke("ActivateTutorial",2);
 	}
 
@@ -74,13 +80,16 @@ public class Tutorial : InfiniteLevelManager {
 					base.extendEmptyTrunks ();
 					break;
 				case TutorialState.BeeHive:
-					SpawnBeeHive();
+					SpawnBeeHive ();
 					break;
 				case TutorialState.Snake:
-					SpawnSnakes();
+					SpawnSnakes ();
 					break;
 				case TutorialState.Deathvine:
-					SpawnDeathvine();
+					SpawnDeathvine ();
+					break;
+				case TutorialState.Coconut:
+					SpawnCoconut ();
 					break;
 				case TutorialState.End:
 					state = mode;
@@ -118,6 +127,10 @@ public class Tutorial : InfiniteLevelManager {
 		case TutorialState.Deathvine:
 			if (nextTutorial)
 				DeathvineTutorial ();
+			break;
+		case TutorialState.Coconut:
+			if (nextTutorial)
+				CoconutTutorial ();
 			break;
 		default:
 			break;
@@ -227,6 +240,31 @@ public class Tutorial : InfiniteLevelManager {
 		}
 		else if (counter > 1) {
 			arrow = Arrows.None;
+			mode = TutorialState.Coconut;
+			counter = 0;
+			StartCoroutine (TutorialTransition());
+		}
+	}
+
+	void CoconutTutorial () {
+		RaycastHit hit;
+		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		
+		if (Physics.Raycast (ray, out hit, coconutSpawnHeight/2) && counter <= 1) {
+			if (hit.collider.name == "Coconut(Clone)") {
+				arrow = Arrows.Move;
+			}
+			if (monkeyController.onTree && ListenForJump ())
+				counter++;
+		} else
+			arrow = Arrows.None;
+
+		if (counter <= 1 && !spawned) {
+			empty = false;
+			StartCoroutine (SpawnObstacle ());
+		}
+		else if (counter > 1) {
+			arrow = Arrows.None;
 			mode = TutorialState.End;
 			counter = 0;
 			StartCoroutine (TutorialTransition());
@@ -260,6 +298,15 @@ public class Tutorial : InfiniteLevelManager {
 
 	void SpawnDeathvine () {
 		base.extendWBrush();
+	}
+
+	void SpawnCoconut() {
+		if (monkeyController.monkeyState == testAutoMonkey.MonkeyState.climbing) {
+			Vector3 coconutSpawnPosition = monkey.transform.position;
+			coconutSpawnPosition.y  += coconutSpawnHeight;
+			Transform coconutClone = (Transform)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
+			coconutClone.name = coconut.name;
+		}
 	}
 
 	bool ListenForJump () { // returns true if player jumps
