@@ -211,6 +211,10 @@ public class testAutoMonkey : MonoBehaviour {
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 			}
 
+			if ( classicMode )
+				Manager.Instance.score += (int)(Time.deltaTime * 100);
+
+
 			controller.Move(dir * Time.deltaTime);
 
 		} else if (monkeyState == MonkeyState.lose) {
