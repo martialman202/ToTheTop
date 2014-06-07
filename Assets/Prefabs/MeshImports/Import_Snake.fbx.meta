@@ -1,0 +1,304 @@
+fileFormatVersion: 2
+guid: a9217ab81aa8a404081ff8c40ce755f6
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: body_curler
+    100004: body_parent
+    100006: Bone
+    100008: Bone_001
+    100010: Bone_002
+    100012: Bone_003
+    100014: Bone_004
+    100016: Bone_005
+    100018: Bone_006
+    100020: Bone_007
+    100022: Bone_008
+    100024: Bone_009
+    100026: Bone_010
+    100028: Bone_011
+    100030: Bone_012
+    100032: Bone_013
+    100034: Bone_014
+    100036: Bone_015
+    100038: Bone_016
+    100040: Bone_017
+    100042: Bone_018
+    100044: Bone_019
+    100046: Bone_020
+    100048: Bone_021
+    100050: Bone_022
+    100052: Camera
+    100054: //RootNode
+    100056: Cube
+    100058: headIK
+    100060: Lamp
+    400000: Armature
+    400002: body_curler
+    400004: body_parent
+    400006: Bone
+    400008: Bone_001
+    400010: Bone_002
+    400012: Bone_003
+    400014: Bone_004
+    400016: Bone_005
+    400018: Bone_006
+    400020: Bone_007
+    400022: Bone_008
+    400024: Bone_009
+    400026: Bone_010
+    400028: Bone_011
+    400030: Bone_012
+    400032: Bone_013
+    400034: Bone_014
+    400036: Bone_015
+    400038: Bone_016
+    400040: Bone_017
+    400042: Bone_018
+    400044: Bone_019
+    400046: Bone_020
+    400048: Bone_021
+    400050: Bone_022
+    400052: Camera
+    400054: //RootNode
+    400056: Cube
+    400058: headIK
+    400060: Lamp
+    4300000: Cube
+    7400000: Default Take
+    7400002: attack
+    7400004: Idle
+    7400006: Idle_001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Cube
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: attack
+      takeName: attack
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/body_parent
+        weight: 1
+      - path: Armature/body_parent/body_curler
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009/Bone_008
+        weight: 1
+      - path: Armature/body_parent/Bone
+        weight: 1
+      - path: Armature/body_parent/Bone/Bone_007
+        weight: 1
+      - path: Armature/body_parent/Bone/Bone_007/Bone_021
+        weight: 1
+      - path: Armature/body_parent/Bone/Bone_007/Bone_021/Bone_022
+        weight: 1
+      - path: Armature/headIK
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Cube
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/body_parent
+        weight: 1
+      - path: Armature/body_parent/body_curler
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009
+        weight: 1
+      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009/Bone_008
+        weight: 1
+      - path: Armature/body_parent/Bone
+        weight: 1
+      - path: Armature/body_parent/Bone/Bone_007
+        weight: 1
+      - path: Armature/body_parent/Bone/Bone_007/Bone_021
+        weight: 1
+      - path: Armature/body_parent/Bone/Bone_007/Bone_021/Bone_022
+        weight: 1
+      - path: Armature/headIK
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Cube
+        weight: 1
+      - path: Lamp
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .25
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
