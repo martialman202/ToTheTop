@@ -20,7 +20,7 @@ public class HUDScript : MonoBehaviour {
 	private float heartSize = 16.0f;
 
 	public bool displayWin = false;
-
+	public bool tutorialMode = false;
 
 
 	// Use this for initialization
@@ -69,7 +69,7 @@ public class HUDScript : MonoBehaviour {
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 			
 			// We'll make a box so you can see where the group is on-screen.
-			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length) {
+			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length && !tutorialMode) {
 				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Next Level")) {
 					//paused = false;
 					Manager.Instance.levelIndex++;
