@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   classicMode: 1
+  tutorialMode: 0
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 15
@@ -556,6 +557,7 @@ MonoBehaviour:
   heartScale: 1
   pauseTexture: {fileID: 2800000, guid: 75ae3edc8c77a439197afbd1bccec8d4, type: 3}
   displayWin: 0
+  tutorialMode: 0
 --- !u!114 &995751111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,8 +576,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 02b422d5deefc5e4e850ac03da063618, type: 3}
   - {fileID: 8300000, guid: 589dedc41ad924744894e301dc5f4b33, type: 3}
   - {fileID: 8300000, guid: c5041fe5b5effed47a971efdddf30944, type: 3}
-  - {fileID: 8300000, guid: e2842b451a082a54285abe861494938d, type: 3}
-  - {fileID: 8300000, guid: 6019c1debb9454c46a3b0f893e694400, type: 3}
+  - {fileID: 8300000, guid: 4a82cbe146aed2a45b095c9f2cf30cca, type: 3}
+  - {fileID: 8300000, guid: 62f332fc08ebf57419c9b6c27156829f, type: 3}
   - {fileID: 8300000, guid: 91712c3b02a60b940a850be7674a3867, type: 3}
   audioSources: []
   changedSettings: 0
