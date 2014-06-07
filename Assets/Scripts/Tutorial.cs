@@ -10,7 +10,9 @@ public class Tutorial : InfiniteLevelManager {
 	public Texture2D arrowJump;
 	private float arrowWidth = 0.7f * Screen.width;
 	private float arrowHeight = 0.17f * Screen.width;
-
+	private float deltaMove;
+	private float deltaJump;
+	
 	private enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine};
 	private TutorialState state = TutorialState.Begin;
 	private TutorialState mode = TutorialState.Begin;
@@ -24,6 +26,7 @@ public class Tutorial : InfiniteLevelManager {
 	private int counter = 0;
 	private GameObject monkey;
 	private testAutoMonkey monkeyController;
+	private float timeCounter = 0.0f;
 	void OnGUI () {
 		switch (arrow) {
 		case Arrows.None:
@@ -50,6 +53,8 @@ public class Tutorial : InfiniteLevelManager {
 		empty = true;
 		state = TutorialState.Active;
 		mode = TutorialState.Inactive;
+		deltaMove = (Screen.height / Camera.main.orthographicSize) * 0.25f;
+		deltaJump = (Screen.height / Camera.main.orthographicSize) * 0.25f;
 		Invoke("ActivateTutorial",2);
 	}
 
@@ -80,6 +85,7 @@ public class Tutorial : InfiniteLevelManager {
 			ActiveTutorial ();
 			break;
 		case TutorialState.BeeHive:
+			BeeHiveTutorial ();
 			break;
 		case TutorialState.Snake:
 			break;
@@ -105,7 +111,45 @@ public class Tutorial : InfiniteLevelManager {
 		if (counter >= 6) {
 			arrow = Arrows.None;
 			mode = TutorialState.BeeHive;
+			counter = 0;
 		}
+	}
+
+	void BeeHiveTutorial () {
+		RaycastHit hit;
+		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		
+		if (Physics.Raycast (ray, out hit, deltaMove) && counter == 0) {
+			if (hit.collider.tag == "Obstacle") {
+				print("cast " + counter);
+				arrow = Arrows.Move;
+			}
+		} else if (Physics.Raycast (ray, out hit, deltaJump) && counter == 1) {
+			if (hit.collider.tag == "Obstacle") {
+				print("cast " + counter);
+				arrow = Arrows.Jump;
+			}
+		}
+		
+		float interval = 2;
+		if ((Time.time > timeCounter + interval) && counter == 0) {
+			SpawnBeeHive();
+			timeCounter = Time.time;
+		}
+		else if ((Time.time > timeCounter + interval) && counter == 1) {
+			SpawnBeeHive();
+			timeCounter = Time.time;
+		}
+		else if (counter > 1) {
+			arrow = Arrows.None;
+			mode = TutorialState.Snake;
+			counter = 0;
+		}
+
+		if (monkeyController.onTree && ListenForMove () && counter == 0)
+			counter++;
+		else if (monkeyController.onTree && ListenForJump () && counter == 1)
+			counter++;
 	}
 
 	private void LoadOutro()
