@@ -7,6 +7,7 @@ public class Tutorial : InfiniteLevelManager {
 	public Transform bananas;
 	public float bananasHeightOffset = 5.0f;
 
+	public Texture2D arrowSwipe;
 	public Texture2D arrowMove;
 	public Texture2D arrowJump;
 	private float arrowWidth = 0.7f * Screen.width;
@@ -36,13 +37,14 @@ public class Tutorial : InfiniteLevelManager {
 		switch (arrow) {
 		case Arrows.None:
 			break;
+		case Arrows.Swipe:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowSwipe);
+			break;
 		case Arrows.Move:
 			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowMove);
 			break;
 		case Arrows.Jump:
 			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowJump);
-			break;
-		case Arrows.Swipe:
 			break;
 		default:
 			break;
@@ -132,16 +134,18 @@ public class Tutorial : InfiniteLevelManager {
 			if (nextTutorial)
 				CoconutTutorial ();
 			break;
+		case TutorialState.End:
+			state = mode;
+			mode = TutorialState.Inactive;
+			break;
 		default:
 			break;
 		}
 
-		print (counter);
-
 		if (monkeyController.lifePoints < 3) {
-			//counter = counter - (3 - monkeyController.lifePoints);
-			//if (counter < 0)
-			//	counter = 0;
+			counter = counter - (3 - monkeyController.lifePoints);
+			if (counter < 0)
+				counter = 0;
 			monkeyController.lifePoints = 3;
 		}
 	}
@@ -169,17 +173,11 @@ public class Tutorial : InfiniteLevelManager {
 		RaycastHit hit;
 		Ray ray = new Ray (monkey.transform.position, Vector3.up);
 		
-		if (Physics.Raycast (ray, out hit, deltaJump) && counter == 0 && monkeyController.onTree) {
+		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
 			if (hit.collider.name == "ReducedCartoonBeehive") {
-				arrow = Arrows.Jump;
+				arrow = Arrows.Swipe;
 			}
-			if (monkeyController.onTree && ListenForJump ())
-				counter++;
-		} else if (Physics.Raycast (ray, out hit, deltaMove) && counter == 1 && !monkeyController.isJumping) {
-			if (hit.collider.name == "ReducedCartoonBeehive") {
-				arrow = Arrows.Move;
-			}
-			if (monkeyController.onTree && ListenForMove ())
+			if (monkeyController.onTree && (ListenForMove () || ListenForJump ()))
 				counter++;
 		} else
 			arrow = Arrows.None;
@@ -250,16 +248,18 @@ public class Tutorial : InfiniteLevelManager {
 		RaycastHit hit;
 		Ray ray = new Ray (monkey.transform.position, Vector3.up);
 		
-		if (Physics.Raycast (ray, out hit, coconutSpawnHeight/2) && counter <= 1) {
-			if (hit.collider.name == "Coconut(Clone)") {
+		if (Physics.Raycast (ray, out hit) && counter <= 1) {
+			if (hit.collider.name == "Coconut") {
 				arrow = Arrows.Move;
 			}
-			if (monkeyController.onTree && ListenForJump ())
+			if (monkeyController.onTree && ListenForMove ())
 				counter++;
+		print (counter);
 		} else
 			arrow = Arrows.None;
 
-		if (counter <= 1 && !spawned) {
+		GameObject c = GameObject.Find ("Coconut");
+		if (counter <= 1 && !spawned && c == null) {
 			empty = false;
 			StartCoroutine (SpawnObstacle ());
 		}
@@ -301,7 +301,7 @@ public class Tutorial : InfiniteLevelManager {
 	}
 
 	void SpawnCoconut() {
-		if (monkeyController.monkeyState == testAutoMonkey.MonkeyState.climbing) {
+		if (monkeyController.onTree) {
 			Vector3 coconutSpawnPosition = monkey.transform.position;
 			coconutSpawnPosition.y  += coconutSpawnHeight;
 			Transform coconutClone = (Transform)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
@@ -344,7 +344,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	IEnumerator TutorialTransition() {
 		nextTutorial = false;
-		yield return new WaitForSeconds (1.0f);
+		yield return new WaitForSeconds (2.0f);
 		nextTutorial = true;
 	}
 }
