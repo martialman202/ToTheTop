@@ -15,13 +15,13 @@ public class CollisionWPlayer : MonoBehaviour {
 		monkey = GameObject.FindGameObjectWithTag("Player");
 		string thisObstacle = this.name;
 
-		if( thisObstacle == "ReducedCartoonBeehive" ) {
+		if( thisObstacle == "Model_Beehive" ) {
 			obstacleID = 0;
 			bees = new Transform[2];
 			bees[0] = this.transform.GetChild(0);
 			bees[1] = this.transform.GetChild(2);
 		}
-		else if( thisObstacle == "CartoonSnakePrefab" ) {
+		else if( thisObstacle == "Model_Snake" ) {
 			obstacleID = 1;
 			animation = this.GetComponent<Animation> ();
 		}
