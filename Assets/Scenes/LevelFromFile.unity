@@ -142,6 +142,8 @@ MonoBehaviour:
   Clips: []
   cameraPermission: 0
   isClimbing: 0
+  lost: 0
+  won: 0
 --- !u!114 &63598622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +269,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74b3bd668a1c4e488a3966b7fa9d4e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &507621982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 507621983}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &507621983
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507621982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1560417527}
 --- !u!1 &618506409
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +539,7 @@ MonoBehaviour:
   distanceFromMonkey: 5
   secondsLookingAtBananas: 2
   secondsGoingDownTree: 3
+  secondsWinLerping: .699999988
   finalPosition: {x: 0, y: -.600000024, z: -10}
   finalRotation: {x: 333.233704, y: 0, z: 0}
 --- !u!114 &1560417521
@@ -603,7 +632,8 @@ Transform:
   m_LocalRotation: {x: 1.01175246e-08, y: .972843945, z: .231461987, w: -4.25243556e-08}
   m_LocalPosition: {x: 1.52416396e-06, y: -.288870335, z: 9.56778336}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 507621983}
   m_Father: {fileID: 63598620}
 --- !u!114 &1560417528
 MonoBehaviour:
