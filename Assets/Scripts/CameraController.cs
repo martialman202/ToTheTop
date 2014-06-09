@@ -212,7 +212,7 @@ public class CameraController : MonoBehaviour {
 
 	//for when monkey loses
 	void loseCam() {
-		print ("cam says monkey lost");
+		//print ("cam says monkey lost");
 		this.transform.parent = null;
 	}
 
