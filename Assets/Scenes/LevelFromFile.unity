@@ -600,6 +600,7 @@ GameObject:
   - 114: {fileID: 63598622}
   - 114: {fileID: 63598623}
   - 114: {fileID: 63598621}
+  - 54: {fileID: 913501871}
   m_Layer: 0
   m_Name: Monkey
   m_TagString: Player
@@ -648,6 +649,21 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!54 &913501871
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 913501868}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &990891208
 GameObject:
   m_ObjectHideFlags: 0
