@@ -24,6 +24,7 @@ public class CollisionWPlayer : MonoBehaviour {
 		else if( thisObstacle == "Model_Snake" ) {
 			obstacleID = 1;
 			animation = this.GetComponent<Animation> ();
+			animation.Play("Idle");
 		}
 	}
 
@@ -39,8 +40,8 @@ public class CollisionWPlayer : MonoBehaviour {
 		else if( obstacleID == 1 && monkey.transform.position.y >= this.transform.position.y + 15.0f ) {
 			if( animation != null ) animation.Stop();
 		}
-		else if( obstacleID == 1 && monkey.transform.position.y >= this.transform.position.y - 7.0f ) {
-			if( animation != null ) animation.CrossFade("attack",0.2f);
+		else if( obstacleID == 1 && monkey.transform.position.y >= this.transform.position.y - 10.0f ) {
+			if( animation != null ) animation.CrossFade("Attack",0.2f);
 		}
 	}
 }
