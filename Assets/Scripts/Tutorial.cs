@@ -42,13 +42,13 @@ public class Tutorial : InfiniteLevelManager {
 		case Arrows.None:
 			break;
 		case Arrows.Swipe:
-			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowSwipe);
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), arrowSwipe);
 			break;
 		case Arrows.Move:
-			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowMove);
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), arrowMove);
 			break;
 		case Arrows.Jump:
-			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowJump);
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), arrowJump);
 			break;
 		default:
 			break;
