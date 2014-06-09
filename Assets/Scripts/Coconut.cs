@@ -58,13 +58,13 @@ public class Coconut : MonoBehaviour {
 		RaycastHit hit;
 		Ray coconutRay = new Ray (transform.position, Vector3.down);
 
-		if (Physics.Raycast(coconutRay, out hit, warningDistance)) {
+		if (Physics.Raycast(coconutRay, out hit, alertDistance)) {
 			if (hit.collider.tag == "Player" || hit.collider.name == "Coconut_Collision_Plane")
-				state = CoconutState.Warning;
+				state = CoconutState.Alert;
 		}
-		else if (Physics.Raycast(coconutRay, out hit, cautionDistance)) {
+		else if (Physics.Raycast(coconutRay, out hit, warningDistance)) {
 			if (hit.collider.tag == "Player"|| hit.collider.name == "Coconut_Collision_Plane")
-				state = CoconutState.Caution;
+				state = CoconutState.Warning;
 		}
 		else
 			state = CoconutState.Initial;
