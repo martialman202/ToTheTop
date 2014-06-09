@@ -157,7 +157,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 		Manager.Instance.monkeyHeight = this.transform.position.y;
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
+			if (jumpState == JumpState.none && !isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
 
@@ -166,9 +166,6 @@ public class testAutoMonkey : MonoBehaviour {
 
 				mmouse.ResetPos();
 				jumpState = JumpState.up;
-
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[4].Play();
 			}
 
 			origPos = this.gameObject.transform.position;
