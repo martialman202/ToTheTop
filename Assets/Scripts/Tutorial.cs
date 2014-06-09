@@ -33,6 +33,8 @@ public class Tutorial : InfiniteLevelManager {
 	private bool spawned = false;
 	private bool nextTutorial = false;
 
+	private GameObject [] obstacles;
+
 	void OnGUI () {
 		switch (arrow) {
 		case Arrows.None:
@@ -61,8 +63,8 @@ public class Tutorial : InfiniteLevelManager {
 		state = TutorialState.Active;
 		mode = TutorialState.Inactive;
 
-		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 3;
-		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 3;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
+		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 5;
+		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 5;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
 
 		coconutSpawnHeight = emptyTrunk.gameObject.renderer.bounds.size.y * 50;
 
@@ -148,6 +150,13 @@ public class Tutorial : InfiniteLevelManager {
 				counter = 0;
 			monkeyController.lifePoints = 3;
 		}
+
+		// remove IgnoreRaycast layer
+		obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+		
+		foreach (GameObject obstacle in obstacles) {
+			obstacle.gameObject.layer = 0;
+		}
 	}
 
 	void ActiveTutorial () {
@@ -177,7 +186,9 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "ReducedCartoonBeehive") {
 				arrow = Arrows.Swipe;
 			}
-			if (monkeyController.onTree && (ListenForMove () || ListenForJump ()))
+			if (monkeyController.onTree && ListenForJump ())
+				counter++;
+			else if (monkeyController.onTree && ListenForMove ())
 				counter++;
 		} else
 			arrow = Arrows.None;
@@ -192,6 +203,7 @@ public class Tutorial : InfiniteLevelManager {
 			counter = 0;
 			StartCoroutine (TutorialTransition());
 		}
+		print (counter);
 	}
 
 	void SnakeTutorial () {
