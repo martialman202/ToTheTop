@@ -204,6 +204,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: heart
+      value: 
+      objectReference: {fileID: 2800000, guid: 6905e5ba7bf7d43579d0550a7edba983, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_RootGameObject: {fileID: 898491488}
@@ -451,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
   displayLife: 1
-  heart: {fileID: 2800000, guid: ee6f4ff62d7585347ba35d0339429426, type: 3}
+  heart: {fileID: 2800000, guid: 6905e5ba7bf7d43579d0550a7edba983, type: 3}
   heartScale: 1
   pauseTexture: {fileID: 2800000, guid: 75ae3edc8c77a439197afbd1bccec8d4, type: 3}
   displayWin: 0
