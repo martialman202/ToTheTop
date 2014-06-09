@@ -74,76 +74,6 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
---- !u!1 &30105430
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 30105434}
-  - 33: {fileID: 30105433}
-  - 64: {fileID: 30105432}
-  - 23: {fileID: 30105431}
-  m_Layer: 0
-  m_Name: RayDetector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &30105431
-Renderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 30105430}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
---- !u!64 &30105432
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 30105430}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_SmoothSphereCollisions: 0
-  m_Convex: 0
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!33 &30105433
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 30105430}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &30105434
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 30105430}
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 0, y: -2, z: -3.87980461}
-  m_LocalScale: {x: .5, y: .5, z: 1}
-  m_Children: []
-  m_Father: {fileID: 338260384}
 --- !u!1 &338260378
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +88,6 @@ GameObject:
   - 114: {fileID: 338260382}
   - 114: {fileID: 338260379}
   - 114: {fileID: 338260385}
-  - 54: {fileID: 338260386}
   m_Layer: 0
   m_Name: Monkey
   m_TagString: Player
@@ -178,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   classicMode: 1
-  tutorialMode: 0
+  tutorialMode: 1
   lifePoints: 3
   moveDirection: {x: 0, y: 0, z: 1}
   moveSpeed: 15
@@ -193,7 +122,7 @@ MonoBehaviour:
   checkpointHeight: 250
   monkeyState: 0
   jumpState: 0
-  isJumping: 1
+  isJumping: 0
   jumpVel: 0
   simGravity: 4
   jumpImpulse: -50
@@ -271,7 +200,6 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 995751108}
-  - {fileID: 30105434}
   m_Father: {fileID: 1697772360}
 --- !u!114 &338260385
 MonoBehaviour:
@@ -284,21 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce543ee908184123b7c31388c89fa68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &338260386
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 338260378}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &662639549
 Prefab:
   m_ObjectHideFlags: 0
@@ -575,7 +488,7 @@ MonoBehaviour:
   heartScale: 1
   pauseTexture: {fileID: 2800000, guid: 75ae3edc8c77a439197afbd1bccec8d4, type: 3}
   displayWin: 0
-  tutorialMode: 0
+  tutorialMode: 1
 --- !u!114 &995751111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +539,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1185485446}
   - 114: {fileID: 1185485447}
+  - 114: {fileID: 1185485448}
   m_Layer: 0
   m_Name: Tree Spawner
   m_TagString: TreeSpawner
@@ -652,7 +566,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1185485445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38c0d2530ae682a43960aa77392c42bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3160f4f4a65ea4db3b27233c4d99b4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
@@ -665,6 +579,27 @@ MonoBehaviour:
   obstacleSpawnMin: .75
   obstacleSpawnMax: 3
   obstacleSpawnTime: 0
+  treeTop: {fileID: 400002, guid: dfe7e92b501244b4f8864a9c1767b459, type: 2}
+  coconut: {fileID: 400000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
+  bananas: {fileID: 400002, guid: a12a244899c5fc941b5f4a714b042ee9, type: 2}
+  bananasHeightOffset: 5
+  arrowSwipe: {fileID: 2800000, guid: 33914dd6b2a644c8b944ed6bd383712a, type: 3}
+  arrowMove: {fileID: 2800000, guid: 14cd7fd7e2a01446fa51f0bb3cffdbe1, type: 3}
+  arrowJump: {fileID: 2800000, guid: 754236a0f0e244867a8efcc47238b4c4, type: 3}
+  state: 0
+  mode: 0
+  outroHeight: 10
+--- !u!114 &1185485448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1185485445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74b3bd668a1c4e488a3966b7fa9d4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1697772359
 GameObject:
   m_ObjectHideFlags: 0
