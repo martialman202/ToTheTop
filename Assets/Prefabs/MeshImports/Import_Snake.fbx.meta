@@ -1,78 +1,86 @@
 fileFormatVersion: 2
-guid: a9217ab81aa8a404081ff8c40ce755f6
+guid: daee5410a0ded014fb785696ae59198e
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: Armature
-    100002: body_curler
-    100004: body_parent
-    100006: Bone
-    100008: Bone_001
-    100010: Bone_002
-    100012: Bone_003
-    100014: Bone_004
-    100016: Bone_005
-    100018: Bone_006
-    100020: Bone_007
-    100022: Bone_008
-    100024: Bone_009
-    100026: Bone_010
-    100028: Bone_011
-    100030: Bone_012
-    100032: Bone_013
-    100034: Bone_014
-    100036: Bone_015
-    100038: Bone_016
-    100040: Bone_017
-    100042: Bone_018
-    100044: Bone_019
-    100046: Bone_020
-    100048: Bone_021
-    100050: Bone_022
-    100052: Camera
-    100054: //RootNode
-    100056: Cube
-    100058: headIK
-    100060: Lamp
+    100002: Body1
+    100004: Body1_1
+    100006: Body1_2
+    100008: Body1_3
+    100010: Body2
+    100012: Body2_1
+    100014: Body2_2
+    100016: Body2_3
+    100018: Body3
+    100020: Body3_1
+    100022: Body3_2
+    100024: Body3_3
+    100026: Body4
+    100028: Body4_1
+    100030: Body4_2
+    100032: Body4_3
+    100034: Body5
+    100036: Body5_1
+    100038: Body5_2
+    100040: Body5_3
+    100042: Body6
+    100044: Body6_1
+    100046: Body6_2
+    100048: Body6_3
+    100050: Camera
+    100052: Head
+    100054: Head_1
+    100056: Lamp
+    100058: Mesh
+    100060: Neck
+    100062: Neck_1
+    100064: Neck_2
+    100066: Neck_3
+    100068: Neck_4
+    100070: //RootNode
     400000: Armature
-    400002: body_curler
-    400004: body_parent
-    400006: Bone
-    400008: Bone_001
-    400010: Bone_002
-    400012: Bone_003
-    400014: Bone_004
-    400016: Bone_005
-    400018: Bone_006
-    400020: Bone_007
-    400022: Bone_008
-    400024: Bone_009
-    400026: Bone_010
-    400028: Bone_011
-    400030: Bone_012
-    400032: Bone_013
-    400034: Bone_014
-    400036: Bone_015
-    400038: Bone_016
-    400040: Bone_017
-    400042: Bone_018
-    400044: Bone_019
-    400046: Bone_020
-    400048: Bone_021
-    400050: Bone_022
-    400052: Camera
-    400054: //RootNode
-    400056: Cube
-    400058: headIK
-    400060: Lamp
-    4300000: Cube
-    7400000: Default Take
-    7400002: attack
-    7400004: Idle
-    7400006: Idle_001
+    400002: Body1
+    400004: Body1_1
+    400006: Body1_2
+    400008: Body1_3
+    400010: Body2
+    400012: Body2_1
+    400014: Body2_2
+    400016: Body2_3
+    400018: Body3
+    400020: Body3_1
+    400022: Body3_2
+    400024: Body3_3
+    400026: Body4
+    400028: Body4_1
+    400030: Body4_2
+    400032: Body4_3
+    400034: Body5
+    400036: Body5_1
+    400038: Body5_2
+    400040: Body5_3
+    400042: Body6
+    400044: Body6_1
+    400046: Body6_2
+    400048: Body6_3
+    400050: Camera
+    400052: Head
+    400054: Head_1
+    400056: Lamp
+    400058: Mesh
+    400060: Neck
+    400062: Neck_1
+    400064: Neck_2
+    400066: Neck_3
+    400068: Neck_4
+    400070: //RootNode
+    4300000: Mesh
+    7400000: Attack
+    7400002: Idle
     9500000: //RootNode
     11100000: //RootNode
-    13700000: Cube
+    13700000: Mesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -89,10 +97,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: attack
-      takeName: attack
+      name: Attack
+      takeName: Attack
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 24
       wrapMode: 1
       orientationOffsetY: 0
       level: 0
@@ -116,63 +124,73 @@ ModelImporter:
         weight: 1
       - path: Armature
         weight: 1
-      - path: Armature/body_parent
+      - path: Armature/Body1
         weight: 1
-      - path: Armature/body_parent/body_curler
+      - path: Armature/Body1/Body1_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020
+      - path: Armature/Body1/Body1_1/Body1_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009/Bone_008
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6
         weight: 1
-      - path: Armature/body_parent/Bone
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1
         weight: 1
-      - path: Armature/body_parent/Bone/Bone_007
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2
         weight: 1
-      - path: Armature/body_parent/Bone/Bone_007/Bone_021
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2/Body6_3
         weight: 1
-      - path: Armature/body_parent/Bone/Bone_007/Bone_021/Bone_022
+      - path: Armature/Body1/Neck
         weight: 1
-      - path: Armature/headIK
+      - path: Armature/Body1/Neck/Neck_1
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head/Head_1
         weight: 1
       - path: Camera
         weight: 1
-      - path: Cube
-        weight: 1
       - path: Lamp
+        weight: 1
+      - path: Mesh
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
@@ -180,7 +198,7 @@ ModelImporter:
       name: Idle
       takeName: Idle
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 15
       wrapMode: 2
       orientationOffsetY: 0
       level: 0
@@ -204,70 +222,80 @@ ModelImporter:
         weight: 1
       - path: Armature
         weight: 1
-      - path: Armature/body_parent
+      - path: Armature/Body1
         weight: 1
-      - path: Armature/body_parent/body_curler
+      - path: Armature/Body1/Body1_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020
+      - path: Armature/Body1/Body1_1/Body1_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3
         weight: 1
-      - path: Armature/body_parent/body_curler/Bone_020/Bone_006/Bone_019/Bone_018/Bone_005/Bone_017/Bone_016/Bone_004/Bone_015/Bone_014/Bone_003/Bone_013/Bone_012/Bone_002/Bone_011/Bone_010/Bone_001/Bone_009/Bone_008
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6
         weight: 1
-      - path: Armature/body_parent/Bone
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1
         weight: 1
-      - path: Armature/body_parent/Bone/Bone_007
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2
         weight: 1
-      - path: Armature/body_parent/Bone/Bone_007/Bone_021
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2/Body6_3
         weight: 1
-      - path: Armature/body_parent/Bone/Bone_007/Bone_021/Bone_022
+      - path: Armature/Body1/Neck
         weight: 1
-      - path: Armature/headIK
+      - path: Armature/Body1/Neck/Neck_1
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head/Head_1
         weight: 1
       - path: Camera
         weight: 1
-      - path: Cube
-        weight: 1
       - path: Lamp
+        weight: 1
+      - path: Mesh
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .25
+    globalScale: .5
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
