@@ -20,6 +20,10 @@ public class HUDScript : MonoBehaviour {
 	private float heartSize = 16.0f;
 
 	public bool displayWin = false;
+
+	public AudioClip winAudioClip;
+	private AudioSource winAudioSource;
+	private bool startAudioLoop = false;
 	public bool tutorialMode = false;
 
 
@@ -27,6 +31,10 @@ public class HUDScript : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		monkeyScript = player.GetComponent<testAutoMonkey>();
+
+		winAudioSource = this.gameObject.AddComponent ("AudioSource") as AudioSource;
+		winAudioSource.clip = winAudioClip;
+		winAudioSource.loop = true;
 	}
 	
 	// Update is called once per frame
@@ -67,7 +75,13 @@ public class HUDScript : MonoBehaviour {
 			Time.timeScale = 0;
 			GUI.BeginGroup (new Rect (0.15f*Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
-			
+
+			//play win audio loop
+			if( !startAudioLoop ) {
+				startAudioLoop = true;
+				winAudioSource.Play();
+			}
+
 			// We'll make a box so you can see where the group is on-screen.
 			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length && !tutorialMode) {
 				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Next Level")) {

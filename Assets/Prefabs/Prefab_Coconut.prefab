@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Coconut
+  m_Name: Prefab_Coconut
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ed1c933bfc984d9ef854a318b62f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 25
+  offset: 2
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
