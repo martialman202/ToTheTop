@@ -2,6 +2,9 @@
  * Note on the audio sources:
  * SoundMainScene is a script attached to the camera.
  * Read comments there for details about array of sounds.
+ * 
+ * Note on Monkey's win behavior: to change the behavior of the monkey's 
+ * jump at the end, check the NOTE inside win()
  * */
 
 using UnityEngine;
@@ -58,11 +61,17 @@ public class testAutoMonkey : MonoBehaviour {
 	//Camera stuff
 	public bool cameraPermission = false; //Let the monkey move when the camera gives it permission.
 	public bool isClimbing = false; //for use with CameraController only
+	public bool lost = false; //set to true if you lose.
+	public bool won = false;
 
 	//Audio
 	private SoundMainScene sounds;
 	private bool playedWin;
 	private bool playedLose; 
+
+	//Win
+	private bool winJump = false; //for end jump
+	private Vector3 winPos;
 
 	private CharacterController controller;
 
@@ -207,6 +216,18 @@ public class testAutoMonkey : MonoBehaviour {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*monkeySpeed;
 
+			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
+				isJumping = true;
+				jumpVel = jumpImpulse;
+
+				//Audio
+				if (sounds != null && sounds.playSoundEffects)
+					sounds.audioSources[4].Play();
+
+				mmouse.ResetPos();
+				origPos = this.gameObject.transform.position;
+			}
+
 			if (isJumping) {
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
@@ -220,36 +241,43 @@ public class testAutoMonkey : MonoBehaviour {
 
 		} else if (monkeyState == MonkeyState.lose) {
 			lose ();
-		} else if (monkeyState == MonkeyState.win) {
-			Vector3 dir = moveDirection*monkeySpeed;
-			if (isJumping) { // finish jumping before winning
+		} else if (monkeyState == MonkeyState.win ) { //TODO might have to change some things here for win jump
+			if (isJumping && winPos == new Vector3 ()) { // finish jumping before winning. Do this if winPos still not set
+				Vector3 dir = moveDirection*monkeySpeed;
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
 				//dir = new Vector3(0,0,jumpVel);
 
 				controller.Move(dir * Time.deltaTime);
 			}
-			else if(onTree)
+			else if(onTree || winPos != new Vector3 ()) {
+				won = true; //for camera
 				win ();
+			}
 		}
 
 	}
 
 	void lose() {
-		print("You Lose.");
+		//print("You Lose.");
+		lost = true;
 
+		rigidbody.useGravity = true;
+		rigidbody.AddForce (2, 0, 2);
+
+		//audio
 		if (!sounds.audioSources[2].isPlaying && !playedLose && sounds.playSoundEffects) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[2].Play();
 			playedLose = true;
 		}
 		else if ((playedLose && !sounds.audioSources[2].isPlaying) || !sounds.playSoundEffects) { //if that sound is not playing, and we have played it
-			Application.LoadLevel("EndGameScene");
+			Application.LoadLevel("EndGameScene"); //scene change
 		}
 	}
 	
 	void win() {
-		print("You Win!");
+		//print("You Win!");
 
 		// update high score
 		int highScore = PlayerPrefs.GetInt ("HighScore");
@@ -261,17 +289,49 @@ public class testAutoMonkey : MonoBehaviour {
 			PlayerPrefs.SetInt(starPoints, lifePoints);
 		}
 
-		if (!sounds.audioSources[1].isPlaying && !playedLose) { //if that sound is not playing, and we have not played it
+		if (!sounds.audioSources[1].isPlaying && !playedWin) { //if that sound is not playing, and we have not played it
 			sounds.playMusic = false;
 			sounds.audioSources[1].Play();
-			playedLose = true;
+			playedWin = true;
 		}
 
-		else if (playedLose && !sounds.audioSources[1].isPlaying) { //if that sound is not playing, and we have played it
+		else if (playedWin && !sounds.audioSources[1].isPlaying && winJump) { //if that sound is not playing, and we have played it
 			// Get HUDScript from Main Camera 
 			HUDScript hud = Camera.main.gameObject.GetComponent<HUDScript>();
-			hud.displayWin = true;
+			hud.displayWin = true; //TODO this should be uncommented later I think
 		}
+
+		//monkey jumps up on top of tree //win jumping
+		if (winPos == new Vector3 ()) { //if winPos hasnt been assigned, initialize things for the jump
+			winPos = this.gameObject.transform.position; //monkey's current position. need it so we know when to stop falling.
+			isJumping = true;	//is it jumping? As of now, yes.
+			simGravity = -4.0f; //negative for downwards
+			jumpImpulse = 120; //jump impulse.
+			jumpVel = jumpImpulse;
+		}
+		else { //if winPos has already been assigned
+			Vector3 dir = moveDirection*1.3f; //forward*speed
+
+			//NOTE: To change behavior of the jump, play with jumpImpulse, dir
+
+			if (isJumping) { //if jumping
+				jumpDir = new Vector3(0,1,0); //direction of jump, should be +y
+				moveDirection = -this.transform.forward; //Should be towards center of trees
+
+				jumpVel += simGravity;	//decrement the jump velocity
+				dir += jumpDir * jumpVel; 
+
+				controller.Move(dir * Time.deltaTime);
+
+				if (this.gameObject.transform.position.y < winPos.y+2.5 && jumpVel <= 0) //if we are lower than when we started, stop jumping
+					isJumping = false;
+			}
+			else { //when finished jumping
+				winJump = true;
+			}
+		} //end win jumping
+		
+
 	}
 
 	void SpawnCoconut() {
