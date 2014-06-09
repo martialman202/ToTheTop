@@ -87,9 +87,12 @@ GameObject:
   - 124: {fileID: 1927354088}
   - 81: {fileID: 1927354087}
   - 45: {fileID: 1927354092}
-  - 114: {fileID: 1927354093}
   - 114: {fileID: 1927354094}
+<<<<<<< HEAD
   - 114: {fileID: 1927354095}
+=======
+  - 114: {fileID: 1927354093}
+>>>>>>> 63e143e28d98f4c683712efecc61733b2cc811d0
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -172,13 +175,18 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1927354086}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a07e12d501334fce8835a319a8ea996, type: 3}
+  m_Script: {fileID: 11500000, guid: c0b7647d65be89e46a6ba17d7c42871d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
-  gameLogo: {fileID: 2800000, guid: e680be04f029a438b88aed3451b4a160, type: 3}
+  Clips:
+  - {fileID: 8300000, guid: 4db335cfc43858e468f6442b087f92a0, type: 3}
+  - {fileID: 8300000, guid: 404a65f51f5a12e4e85829610101ca80, type: 3}
+  audioSources: []
+  playMusic: 0
+  playSoundFX: 0
+  changedSettings: 0
 --- !u!114 &1927354094
 MonoBehaviour:
   m_ObjectHideFlags: 0

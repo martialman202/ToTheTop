@@ -4,7 +4,7 @@ using System.Collections;
 public class InfiniteLevelManager : MonoBehaviour {
 	public GUISkin menuSkin;
 	
-	private Transform[] trunks;
+	protected Transform[] trunks;
 
 	public bool empty; // check to spawn only empty trunks
 
@@ -18,9 +18,9 @@ public class InfiniteLevelManager : MonoBehaviour {
 
 	private int introHeight = 25;
 
-	private float distance = 5.0f;
-	private float heightOffset = 2.0f;
-	private int trunkCounter = 0;
+	protected float distance = 5.0f;
+	protected float heightOffset = 2.0f;
+	protected int trunkCounter = 0;
 
 	private const int numEmptyTrunks = 100;
 	private const int numBeehiveTrunks = 10;
@@ -34,7 +34,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	public float obstacleSpawnMax = 3.0f;
 	public float obstacleSpawnTime;
 	private float speedFactor; // factor to increase/decrease time for difficulty
-	private bool spawnObstacle = false;
+	protected bool spawnObstacle = false;
 
 	private int fSize = (int)(0.05f * Screen.width);
 
@@ -53,7 +53,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	}
 
 	// creates the pool of trunks that will be managed by this system
-	void instantiateTrunkPool() {
+	protected void instantiateTrunkPool() {
 		numTrunks = numEmptyTrunks+numBeehiveTrunks+numSnakeTrunks+numBrushModels;
 		trunks = new Transform[numTrunks];
 
@@ -88,7 +88,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	}
 
 	// creates an intro of empty tree trunks
-	void createIntro() {
+	protected void createIntro() {
 		for( int i = emptyStartIdx; i < introHeight*3; i += 3 ) {
 			trunks[i].transform.position = new Vector3 (distance * Mathf.Cos(Mathf.PI*150.0f/180.0f), heightOffset*trunkCounter, distance * Mathf.Sin(Mathf.PI*150.0f/180.0f));
 			trunks[i].gameObject.SetActive(true);
@@ -104,7 +104,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	}
 
 	// sets any neccessary trunks/obstacles to inactive
-	bool cleanUp() {
+	protected bool cleanUp() {
 		bool wasRowRecycled = false;
 		for( int i = 0; i < numTrunks; ++i ) {
 			if( trunks[i].gameObject.activeSelf && trunks[i].transform.position.y < mainCam.transform.position.y - camOffset ) {
@@ -116,7 +116,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	}
 
 	// add an empty row of tree trunks
-	void extendEmptyTrunks() {
+	protected void extendEmptyTrunks() {
 		bool tree1Set = false;
 		bool tree2Set = false;
 		bool tree3Set = false;
@@ -146,7 +146,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 		trunkCounter++;
 	}
 
-	void extendWBrush() {
+	protected void extendWBrush() {
 		// add a brush model to this row
 		for( int i = brushStartIdx; i < brushEndIdx; ++i ) {
 			if( !trunks[i].gameObject.activeSelf ) {
@@ -163,7 +163,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	// amount == amount of obstacles you want in that row 1-3
 	// treeIndex == tree index for the (first) obstacle
 	// obstacleID == 0 for beehives, 1 for snakes
-	void extendWBeehivesOrSnakes(int amount, int treeIndex, int obstacleID) {
+	protected void extendWBeehivesOrSnakes(int amount, int treeIndex, int obstacleID) {
 		bool[] treeSet;
 		treeSet = new bool[3];
 		treeSet[0] = false;
@@ -288,7 +288,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	// 0 == empty trunk
 	// 1 == beehive obstacle
 	// 2 == snake obstacle
-	void extendCustomRow(int obstacle1ID, int obstacle2ID, int obstacle3ID) {
+	protected void extendCustomRow(int obstacle1ID, int obstacle2ID, int obstacle3ID) {
 		int tree1StartIdx, tree1EndIdx, tree2StartIdx, tree2EndIdx, tree3StartIdx, tree3EndIdx;
 
 		bool[] treeSet;
@@ -415,7 +415,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 		mainCam = GameObject.FindGameObjectWithTag ("MainCamera");
 
 		instantiateTrunkPool();
@@ -425,7 +425,7 @@ public class InfiniteLevelManager : MonoBehaviour {
 		obstacleSpawnTime = obstacleSpawnMax;
 	}
 
-	void SpawnObstacle () {
+	protected virtual void SpawnObstacle () {
 		if (!spawnObstacle)
 			spawnObstacle = true;
 		Invoke ("SpawnObstacle", obstacleSpawnTime); //Random.Range (obstacleSpawnTime, obstacleSpawnMax));

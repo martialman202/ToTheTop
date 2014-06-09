@@ -284,8 +284,50 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!4 &316923446
 Transform:
+=======
+--- !u!114 &338260379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338260378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf2ba01bbb0a0b43a89692e5b578332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  classicMode: 1
+  tutorialMode: 0
+  lifePoints: 3
+  moveDirection: {x: 0, y: 0, z: 1}
+  moveSpeed: 15
+  maxMonkeySpeed: 25
+  accelerationFactor: 15
+  slowFactor: .5
+  monkeySpeed: 0
+  onTree: 0
+  coconut: {fileID: 100000, guid: d162cf130df1d445b803f05fb1ac505b, type: 2}
+  minCoconutInterval: 1.5
+  maxCoconutInterval: 3
+  checkpointHeight: 250
+  monkeyState: 0
+  jumpState: 0
+  isJumping: 1
+  jumpVel: 0
+  simGravity: 4
+  jumpImpulse: -50
+  jumpDir: {x: 0, y: 0, z: 1}
+  Clips: []
+  cameraPermission: 0
+  isClimbing: 0
+  lost: 0
+  won: 0
+--- !u!143 &338260380
+CharacterController:
+>>>>>>> 63e143e28d98f4c683712efecc61733b2cc811d0
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_PrefabInternal: {fileID: 201315710}
@@ -700,6 +742,7 @@ GameObject:
 --- !u!4 &1087563292
 Transform:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   m_PrefabParentObject: {fileID: 400018, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_PrefabInternal: {fileID: 201315710}
   m_GameObject: {fileID: 1087563291}
@@ -727,6 +770,48 @@ GameObject:
   m_IsActive: 1
 --- !u!137 &1164791551
 SkinnedMeshRenderer:
+=======
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995751103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14566e27ffdcd84f894949fe1a808a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
+  displayLife: 1
+  heart: {fileID: 2800000, guid: ee6f4ff62d7585347ba35d0339429426, type: 3}
+  heartScale: 1
+  pauseTexture: {fileID: 2800000, guid: 75ae3edc8c77a439197afbd1bccec8d4, type: 3}
+  displayWin: 0
+  tutorialMode: 0
+--- !u!114 &995751111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995751103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc37d24281a2e84aa8fdb08ddc42664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playMusic: 1
+  musicVolume: .699999988
+  playSoundEffects: 1
+  Clips:
+  - {fileID: 8300000, guid: 02b422d5deefc5e4e850ac03da063618, type: 3}
+  - {fileID: 8300000, guid: 589dedc41ad924744894e301dc5f4b33, type: 3}
+  - {fileID: 8300000, guid: c5041fe5b5effed47a971efdddf30944, type: 3}
+  - {fileID: 8300000, guid: 4a82cbe146aed2a45b095c9f2cf30cca, type: 3}
+  - {fileID: 8300000, guid: 62f332fc08ebf57419c9b6c27156829f, type: 3}
+  - {fileID: 8300000, guid: 91712c3b02a60b940a850be7674a3867, type: 3}
+  audioSources: []
+  changedSettings: 0
+--- !u!114 &995751112
+MonoBehaviour:
+>>>>>>> 63e143e28d98f4c683712efecc61733b2cc811d0
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 13700000, guid: 28459d0063949484c9028ea5b83b4a6e,
     type: 2}
@@ -832,7 +917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
-  empty: 0
+  empty: 1
   emptyTrunk: {fileID: 400000, guid: 01d076ee664744059ab50b13dd8d8a83, type: 2}
   beehiveTrunk: {fileID: 400004, guid: 7228ca998646441be80b30275985947a, type: 2}
   snakeTrunk: {fileID: 400000, guid: 09b177c55ef29bc4f9d80f04c75697a6, type: 2}

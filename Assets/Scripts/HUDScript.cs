@@ -20,10 +20,15 @@ public class HUDScript : MonoBehaviour {
 	private float heartSize = 16.0f;
 
 	public bool displayWin = false;
+<<<<<<< HEAD
 
 	public AudioClip winAudioClip;
 	private AudioSource winAudioSource;
 	private bool startAudioLoop = false;
+=======
+	public bool tutorialMode = false;
+
+>>>>>>> 63e143e28d98f4c683712efecc61733b2cc811d0
 
 	// Use this for initialization
 	void Start () {
@@ -81,7 +86,7 @@ public class HUDScript : MonoBehaviour {
 			}
 
 			// We'll make a box so you can see where the group is on-screen.
-			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length) {
+			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length && !tutorialMode) {
 				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Next Level")) {
 					//paused = false;
 					Manager.Instance.levelIndex++;
