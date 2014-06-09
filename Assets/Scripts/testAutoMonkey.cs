@@ -70,7 +70,7 @@ public class testAutoMonkey : MonoBehaviour {
 	private bool playedLose; 
 
 	//Win
-	private bool winJump = false; //for end jump
+	public bool winJump = false; //for end jump
 	private Vector3 winPos;
 
 	private CharacterController controller;
@@ -156,7 +156,7 @@ public class testAutoMonkey : MonoBehaviour {
 				coconutObject = GameObject.Find ("Coconut");
 				if( coconutObject == null) {
 					SpawnCoconut();
-					print ("coconut!");
+					//print ("coconut!");
 					timeCounter = Time.time;
 				}
 			}
@@ -190,7 +190,7 @@ public class testAutoMonkey : MonoBehaviour {
 				if (Manager.Instance.monkeyHeight >= height) {
 					Manager.Instance.monkeySpeed++;
 					height += checkpointHeight;
-					print("Speed: " + Manager.Instance.monkeySpeed);
+					//print("Speed: " + Manager.Instance.monkeySpeed);
 				}
 			}
 		}
@@ -303,13 +303,13 @@ public class testAutoMonkey : MonoBehaviour {
 			jumpVel = jumpImpulse;
 		}
 		else { //if winPos has already been assigned
-			Vector3 dir = moveDirection*1.3f; //forward*speed
+			Vector3 dir = moveDirection*1.5f; //forward*speed
 
 			//NOTE: To change behavior of the jump, play with jumpImpulse, dir
 
 			if (isJumping) { //if jumping
 				jumpDir = new Vector3(0,1,0); //direction of jump, should be +y
-				moveDirection = -this.transform.forward; //Should be towards center of trees
+				moveDirection = this.transform.forward; //Should be towards center of trees
 
 				jumpVel += simGravity;	//decrement the jump velocity
 				dir += jumpDir * jumpVel; 

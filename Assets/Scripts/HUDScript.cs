@@ -72,7 +72,7 @@ public class HUDScript : MonoBehaviour {
 		//Win Screen
 		if (displayWin) {
 			paused = false;
-			Time.timeScale = 0;
+			//Time.timeScale = 0;
 			GUI.BeginGroup (new Rect (0.15f*Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 
