@@ -19,8 +19,8 @@ public class Tutorial : InfiniteLevelManager {
 	public TutorialState state = TutorialState.Begin;
 	public TutorialState mode = TutorialState.Begin;
 
-	private enum Arrows {None,Move,Jump,Swipe};
-	private Arrows arrow = Arrows.None;
+	public enum Arrows {None,Move,Jump,Swipe};
+	public Arrows arrow = Arrows.None;
 	
 	public int outroHeight = 10;
 
@@ -32,6 +32,8 @@ public class Tutorial : InfiniteLevelManager {
 	private float timeCounter = 0.0f;
 	private bool spawned = false;
 	private bool nextTutorial = false;
+	private float trunkSize;
+	private Vector3 rayPosition;
 
 	private GameObject [] obstacles;
 
@@ -63,8 +65,10 @@ public class Tutorial : InfiniteLevelManager {
 		state = TutorialState.Active;
 		mode = TutorialState.Inactive;
 
-		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 5;
-		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 5;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
+
+		trunkSize = emptyTrunk.gameObject.renderer.bounds.size.y;
+		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 4;
+		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 4;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
 
 		coconutSpawnHeight = emptyTrunk.gameObject.renderer.bounds.size.y * 50;
 
@@ -73,6 +77,10 @@ public class Tutorial : InfiniteLevelManager {
 
 	// Update is called once per frame
 	void Update () {
+		// update ray position
+		rayPosition = monkey.transform.position;
+		rayPosition.y += trunkSize*2;
+
 		// run clean up to recycle any trunks that are no longer on scene
 		bool wasRowRecycled = base.cleanUp();
 
@@ -157,6 +165,8 @@ public class Tutorial : InfiniteLevelManager {
 		foreach (GameObject obstacle in obstacles) {
 			obstacle.gameObject.layer = 0;
 		}
+		print (counter);
+		
 	}
 
 	void ActiveTutorial () {
@@ -180,10 +190,11 @@ public class Tutorial : InfiniteLevelManager {
 
 	void BeeHiveTutorial () {
 		RaycastHit hit;
-		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		Ray ray = new Ray (rayPosition, Vector3.up);
+		Debug.DrawRay (rayPosition, Vector3.up, Color.red);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
-			if (hit.collider.name == "ReducedCartoonBeehive") {
+			if (hit.collider.name == "Model_Beehive") {
 				arrow = Arrows.Swipe;
 			}
 			if (monkeyController.onTree && ListenForJump ())
@@ -203,15 +214,14 @@ public class Tutorial : InfiniteLevelManager {
 			counter = 0;
 			StartCoroutine (TutorialTransition());
 		}
-		print (counter);
 	}
 
 	void SnakeTutorial () {
 		RaycastHit hit;
-		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
-			if (hit.collider.name == "CartoonSnakePrefab") {
+			if (hit.collider.name == "Model_Snake") {
 				arrow = Arrows.Move;
 			}
 			if (monkeyController.onTree && ListenForMove ())
@@ -233,7 +243,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	void DeathvineTutorial () {
 		RaycastHit hit;
-		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
 			if (hit.collider.name == "Prefab_DeathVine(Clone)") {
@@ -258,10 +268,10 @@ public class Tutorial : InfiniteLevelManager {
 
 	void CoconutTutorial () {
 		RaycastHit hit;
-		Ray ray = new Ray (monkey.transform.position, Vector3.up);
+		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit) && counter <= 1) {
-			if (hit.collider.name == "Coconut") {
+			if (hit.collider.name == "Prefab_Coconut") {
 				arrow = Arrows.Move;
 			}
 			if (monkeyController.onTree && ListenForMove ())
