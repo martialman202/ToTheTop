@@ -40,10 +40,6 @@ public class BuildLevel : MonoBehaviour {
 	private float barDisplay = 0.0f;
 	private int fSize = (int)(0.05f * Screen.width);
 
-	//Tree progress bar resources
-	public Texture2D progressTree;
-	public Texture2D treeFiller;
-
 	private GameObject spawner;
 
 	private bool startActiveManager;
