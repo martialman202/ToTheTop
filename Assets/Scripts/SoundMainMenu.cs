@@ -47,6 +47,7 @@ public class SoundMainMenu : MonoBehaviour {
 	void Update () {
 		if (changedSettings) {
 			updatePrefs ();
+			changedSettings = false;
 		}
 
 		//Music

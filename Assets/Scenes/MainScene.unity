@@ -199,6 +199,8 @@ MonoBehaviour:
   Clips: []
   cameraPermission: 0
   isClimbing: 0
+  lost: 0
+  won: 0
 --- !u!143 &338260380
 CharacterController:
   m_ObjectHideFlags: 0
@@ -594,6 +596,7 @@ MonoBehaviour:
   distanceFromMonkey: 5
   secondsLookingAtBananas: 2
   secondsGoingDownTree: 3
+  secondsWinLerping: .699999988
   finalPosition: {x: 0, y: -.600000024, z: -10}
   finalRotation: {x: 333.233704, y: 0, z: 0}
 --- !u!1 &1185485445
