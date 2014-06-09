@@ -90,6 +90,11 @@ public class SpinController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if (monkey.monkeyState == testAutoMonkey.MonkeyState.lose) {
+			moveLeft = false;
+			moveRight = false;
+			monkey.jumpState = testAutoMonkey.JumpState.none;
+		}
 		if (moveRight) {
 			monkey.onTree = false;
 			if( rotations[currentRotation] == 0.0f ) {

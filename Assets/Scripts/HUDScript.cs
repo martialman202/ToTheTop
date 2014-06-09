@@ -24,6 +24,8 @@ public class HUDScript : MonoBehaviour {
 	public AudioClip winAudioClip;
 	private AudioSource winAudioSource;
 	private bool startAudioLoop = false;
+	public bool tutorialMode = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -70,7 +72,7 @@ public class HUDScript : MonoBehaviour {
 		//Win Screen
 		if (displayWin) {
 			paused = false;
-			Time.timeScale = 0;
+			//Time.timeScale = 0;
 			GUI.BeginGroup (new Rect (0.15f*Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 
@@ -81,7 +83,7 @@ public class HUDScript : MonoBehaviour {
 			}
 
 			// We'll make a box so you can see where the group is on-screen.
-			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length) {
+			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length && !tutorialMode) {
 				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Next Level")) {
 					//paused = false;
 					Manager.Instance.levelIndex++;

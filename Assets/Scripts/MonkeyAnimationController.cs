@@ -4,7 +4,7 @@ using System.Collections;
 public class MonkeyAnimationController : MonoBehaviour {
 
 	private Animation animation;
-	private enum AnimIdx { idle = 0, run = 1, climb = 2, jump_up = 3, land_up = 4, jump_left = 5, land_left = 6, jump_right = 7, land_right = 8 };
+	private enum AnimIdx { idle = 0, run = 1, climb = 2, jump_up = 3, land_up = 4, jump_left = 5, land_left = 6, jump_right = 7, land_right = 8, fall = 9, winJump = 10, win = 11 };
 	private AnimIdx animIdx;
 
 	private GameObject monkey;
@@ -21,6 +21,7 @@ public class MonkeyAnimationController : MonoBehaviour {
 		animation["Land_Left"].speed = 10.0f;
 		animation["Jump_Right"].speed = 2.0f;
 		animation["Land_Right"].speed = 10.0f;
+		animation["Fall"].speed = 1.0f;
 	}
 
 	// Use this for initialization
@@ -40,6 +41,18 @@ public class MonkeyAnimationController : MonoBehaviour {
 		if( monkeyScript.monkeyState == testAutoMonkey.MonkeyState.initial && animIdx != AnimIdx.run ) {
 			animation.CrossFade("Run", 0.2f);
 			animIdx = AnimIdx.run;
+		}
+		else if( monkeyScript.monkeyState == testAutoMonkey.MonkeyState.lose && animIdx != AnimIdx.fall ) {
+			animation.CrossFade("Fall", 0.2f);
+			animIdx = AnimIdx.fall;
+		}
+		else if( monkeyScript.monkeyState == testAutoMonkey.MonkeyState.win && animIdx != AnimIdx.winJump && animIdx != AnimIdx.win ) {
+			animation.CrossFade("Jump_Up", 0.1f);
+			animIdx = AnimIdx.winJump;
+		}
+		else if( monkeyScript.winJump == true && animIdx != AnimIdx.win ) {
+			animation.CrossFade("Win", 0.2f);
+			animIdx = AnimIdx.win;
 		}
 		else if( monkeyScript.jumpState == testAutoMonkey.JumpState.up && animIdx != AnimIdx.jump_up ) {
 			animation.CrossFade("Jump_Up", 0.1f);
