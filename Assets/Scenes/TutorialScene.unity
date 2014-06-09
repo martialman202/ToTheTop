@@ -383,7 +383,8 @@ Transform:
   m_LocalRotation: {x: .231461987, y: -2.01020754e-07, z: -4.782747e-08, w: -.972843945}
   m_LocalPosition: {x: -0, y: 1.42225933, z: -9.56778145}
   m_LocalScale: {x: 1, y: 1.79718232, z: 1.20281756}
-  m_Children: []
+  m_Children:
+  - {fileID: 783762404}
   m_Father: {fileID: 1384412717}
 --- !u!114 &564703476
 MonoBehaviour:
@@ -447,7 +448,7 @@ MonoBehaviour:
   pauseTexture: {fileID: 2800000, guid: 75ae3edc8c77a439197afbd1bccec8d4, type: 3}
   displayWin: 0
   winAudioClip: {fileID: 0}
-  tutorialMode: 0
+  tutorialMode: 1
 --- !u!45 &564703479
 Skybox:
   m_ObjectHideFlags: 0
@@ -704,6 +705,32 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!1 &783762403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 783762404}
+  m_Layer: 0
+  m_Name: CamHelper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &783762404
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783762403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0, z: 1}
+  m_Children: []
+  m_Father: {fileID: 564703475}
 --- !u!1 &906410359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1111,18 @@ Prefab:
     - target: {fileID: 400046, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: m_LocalPosition.y
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: classicMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: classicMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: tutorialMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
