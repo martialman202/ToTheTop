@@ -8,7 +8,7 @@ public class CollisionWObstacle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//origColor = gameObject.renderer.material.color;
+		origColor = gameObject.renderer.material.color;
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -21,11 +21,11 @@ public class CollisionWObstacle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(lastHit < 15) {
-			//gameObject.renderer.material.color = Color.red;
+			gameObject.renderer.material.color = Color.red;
 			lastHit++;
 		}
 		else {
-			//gameObject.renderer.material.color = origColor;
+			gameObject.renderer.material.color = origColor;
 		}
 	} 
 }
