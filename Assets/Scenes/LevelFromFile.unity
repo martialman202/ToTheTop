@@ -419,8 +419,6 @@ MonoBehaviour:
   progressBarFull: {fileID: 2800000, guid: b20e7a8d3b9c245bc82402e943b1d39f, type: 3}
   topLeaves: {fileID: 2800000, guid: 424196424981b46ec9e853cdcfbd30b4, type: 3}
   size: {x: 0, y: 0}
-  progressTree: {fileID: 0}
-  treeFiller: {fileID: 0}
 --- !u!4 &618506411
 Transform:
   m_ObjectHideFlags: 0
@@ -976,7 +974,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1560417519}
-  - 114: {fileID: 1560417528}
   m_Layer: 0
   m_Name: Knee_IK_L
   m_TagString: Untagged
@@ -1101,21 +1098,6 @@ Transform:
   m_Children:
   - {fileID: 507621983}
   m_Father: {fileID: 1203756250}
---- !u!114 &1560417528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1560417518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfcdaa6a6646942909ad45d1173c6237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skyboxes:
-  - {fileID: 2100000, guid: d237db5429a4f49b88762fa90ae7f69d, type: 2}
-  - {fileID: 2100000, guid: 949db82812af54c6c999b38d6f840fdb, type: 2}
-  - {fileID: 2100000, guid: 409801b692f9349abafe51c22acbf1ea, type: 2}
 --- !u!1 &1636583999
 GameObject:
   m_ObjectHideFlags: 0

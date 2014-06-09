@@ -77,6 +77,9 @@ public class testAutoMonkey : MonoBehaviour {
 
 	private Animation animation;
 
+	private GameObject emptyTrunk;
+	private float coconutSpawnHeight;
+
 	// Use this for initialization
 	void Start () {
 		if (classicMode) {
@@ -196,6 +199,11 @@ public class testAutoMonkey : MonoBehaviour {
 			monkeySpeed += Time.deltaTime * accelerationFactor;
 		else
 			monkeySpeed = Manager.Instance.monkeySpeed;
+
+		if (emptyTrunk == null) {
+			emptyTrunk = GameObject.FindWithTag ("Tree");
+			coconutSpawnHeight = emptyTrunk.renderer.bounds.size.y * 50;
+		}
 	}
 
 	void FixedUpdate () {
@@ -321,7 +329,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void SpawnCoconut() {
 		if (monkeyState == MonkeyState.climbing) {
-			coconutSpawnPosition.y  = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+			coconutSpawnPosition.y  = this.transform.position.y + coconutSpawnHeight;
 			coconutClone = (GameObject)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
 			coconutClone.name = coconut.name;
 		}
