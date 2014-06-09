@@ -7,6 +7,7 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 	public bool classicMode = false;
+	public bool tutorialMode = false;
 
 	//TODO: We need to let the monkeyScript know if the camera is doing shit ot not. some bool or something;
 
@@ -74,7 +75,7 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 		monkey = GameObject.FindGameObjectWithTag ("Player");
 		monkeyScript = monkey.GetComponent<testAutoMonkey> ();
-		if (!classicMode) CamHelper = this.transform.GetChild (0);
+		if (!classicMode || tutorialMode) CamHelper = this.transform.GetChild (0);
 	}
 	
 	// Update is called once per frame
@@ -82,7 +83,7 @@ public class CameraController : MonoBehaviour {
 		if (monkeyScript.lost) {
 			loseCam ();
 		}
-		else if (monkeyScript.won && !classicMode) {
+		else if (monkeyScript.won && (!classicMode || tutorialMode)) {
 			winCam (secondsWinLerping);
 		}
 		else { //if monkey has not lost
@@ -102,7 +103,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void findBananas() {
-		if (!classicMode) {
+		if (!classicMode && !tutorialMode) {
 			//The camera starts at the monkey's position but really high up
 			if (!foundBananas) { //this is kind of a hack
 				bananas = GameObject.FindGameObjectWithTag ("Goal");
@@ -212,7 +213,7 @@ public class CameraController : MonoBehaviour {
 
 	//for when monkey loses
 	void loseCam() {
-		print ("cam says monkey lost");
+		//print ("cam says monkey lost");
 		this.transform.parent = null;
 	}
 

@@ -202,6 +202,7 @@ MonoBehaviour:
   isClimbing: 0
   lost: 0
   won: 0
+  winJump: 0
 --- !u!114 &63598623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,7 +520,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 6226d729f5c508f45a61da18bf625608, type: 2}
+  - {fileID: 2100000, guid: e8b3b72b3af745e4cbc7f9ba175034af, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1021,6 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   classicMode: 0
+  tutorialMode: 0
   distanceFromMonkey: 5
   secondsLookingAtBananas: 2
   secondsGoingDownTree: 3
