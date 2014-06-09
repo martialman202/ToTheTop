@@ -72,8 +72,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   menuSkin: {fileID: 11400000, guid: 3278e4c3407f445c3bf4a3014dc34d7a, type: 2}
-  coconutAlert: {fileID: 0}
-  coconutWarning: {fileID: 2800000, guid: b5ecf29ebd6e244408ed42e22c9a3f48, type: 3}
+  coconutAlert: {fileID: 2800000, guid: b5ecf29ebd6e244408ed42e22c9a3f48, type: 3}
+  coconutWarning: {fileID: 2800000, guid: 574e1f86b7d9147859407405028c70af, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26ed1c933bfc984d9ef854a318b62f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 25
+  offset: 2
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
