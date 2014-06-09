@@ -213,18 +213,6 @@ public class testAutoMonkey : MonoBehaviour {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*monkeySpeed;
 
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-
-				//Audio
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[4].Play();
-
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
-			}
-
 			if (isJumping) {
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);

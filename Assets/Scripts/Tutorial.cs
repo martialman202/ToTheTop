@@ -165,8 +165,6 @@ public class Tutorial : InfiniteLevelManager {
 		foreach (GameObject obstacle in obstacles) {
 			obstacle.gameObject.layer = 0;
 		}
-		print (counter);
-		
 	}
 
 	void ActiveTutorial () {
@@ -276,7 +274,6 @@ public class Tutorial : InfiniteLevelManager {
 			}
 			if (monkeyController.onTree && ListenForMove ())
 				counter++;
-		print (counter);
 		} else
 			arrow = Arrows.None;
 
