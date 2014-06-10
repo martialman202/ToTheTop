@@ -201,10 +201,13 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.transform.name == "Model_Beehive") {
 				arrow = Arrows.Swipe;
 			}
-			if (ListenForSwipe())
-				counter++;
 		} else
 			arrow = Arrows.None;
+
+		if (arrow != Arrows.None) {
+			if (ListenForSwipe ())
+				counter++;
+		}
 
 		if (counter <= 1 && !spawned) {
 			empty = false;
@@ -227,10 +230,13 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Model_Snake") {
 				arrow = Arrows.Move;
 			}
-			if (ListenForMove ())
-				counter++;
 		} else
 			arrow = Arrows.None;
+
+		if (arrow != Arrows.None) {
+			if (ListenForMove ())
+				counter++;
+		}
 
 		if (counter <= 1 && !spawned) {
 			empty = false;
@@ -252,10 +258,13 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Prefab_DeathVine(Clone)") {
 				arrow = Arrows.Jump;
 			}
-			if (ListenForJump ())
-				counter++;
 		} else
 			arrow = Arrows.None;
+
+		if (arrow != Arrows.None) {
+			if (ListenForJump ())
+				counter++;
+		}
 		
 		if (counter <= 1 && !spawned) {
 			empty = false;
@@ -271,7 +280,6 @@ public class Tutorial : InfiniteLevelManager {
 
 	void CoconutTutorial () {
 		RaycastHit hit;
-		rayPosition += monkey.transform.forward * 0.75f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit) && counter <= 1) {

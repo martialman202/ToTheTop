@@ -44,7 +44,7 @@ public class SpinController : MonoBehaviour {
 	void Update () {
 		//Transform coconut = this.transform.Find ("Coconut");
 		onTree = monkey.onTree;
-		if (monkey.jumpState == testAutoMonkey.JumpState.none && (Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		if (monkey.monkeyState != testAutoMonkey.MonkeyState.win && monkey.jumpState == testAutoMonkey.JumpState.none && (Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
 			monkey.jumpState = testAutoMonkey.JumpState.left;
 
@@ -60,7 +60,7 @@ public class SpinController : MonoBehaviour {
 			/*if (coconut != null)
 				coconut.transform.parent = null*/
 		}
-		else if(monkey.jumpState == testAutoMonkey.JumpState.none && (Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		else if(monkey.monkeyState != testAutoMonkey.MonkeyState.win && monkey.jumpState == testAutoMonkey.JumpState.none && (Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
 			monkey.jumpState = testAutoMonkey.JumpState.right;
 
