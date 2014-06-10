@@ -14,6 +14,12 @@ public class GameOverScript : MonoBehaviour {
 	
 	}
 
+	void Awake() {
+		if (PlayerPrefs.GetInt ("PlayMusic") == 1) {
+			audio.Play();		
+		}
+	}
+
 	void OnGUI() {
 		GUI.skin = menuSkin;
 		GUI.Label (new Rect (0.08f * Screen.width, Screen.width / 8, 0.84f * Screen.width, 3 * buttonHeight), gameOver);

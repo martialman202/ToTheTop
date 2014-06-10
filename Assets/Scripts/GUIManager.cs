@@ -117,13 +117,13 @@ public class GUIManager : MonoBehaviour {
 				Manager.Instance.levelIndex = i;
 				Manager.Instance.levelFileName = Manager.Instance.levels[i];
 				//MAGIC NUMBERS FOR LEVEL DIFFICULTY, check Manager.cs to see how many levels there are
-				if (i >= 0 && i < 5) {
+				if (i >= 0 && i <= 2) { //0, 1, 2
 					Manager.Instance.difficulty = "easy";
 				}
-				else if (i >= 5 && i < 8) {
+				else if (i >= 3 && i <= 5) { //3, 4, 5
 					Manager.Instance.difficulty = "med";
 				}
-				else {
+				else { //6, 7, 8
 					Manager.Instance.difficulty = "hard";
 				}
 

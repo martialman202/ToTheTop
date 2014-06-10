@@ -70,12 +70,17 @@ public class testAutoMonkey : MonoBehaviour {
 	private bool playedLose; 
 
 	//Win
-	private bool winJump = false; //for end jump
+	public bool winJump = false; //for end jump
 	private Vector3 winPos;
 
 	private CharacterController controller;
 
 	private Animation animation;
+
+	private GameObject emptyTrunk;
+	private float coconutSpawnHeight;
+
+	private bool winRotate = false;
 
 	// Use this for initialization
 	void Start () {
@@ -116,16 +121,15 @@ public class testAutoMonkey : MonoBehaviour {
 				maxCoconutInterval = 3f; 
 			}
 			else if (Manager.Instance.difficulty == "med") {
-				minCoconutInterval = 1.0f; 
-				maxCoconutInterval = 2.5f; 
+				minCoconutInterval = 1.5f; 
+				maxCoconutInterval = 2.25f; 
 			}
 
 			else if (Manager.Instance.difficulty == "hard"){
-				minCoconutInterval = 1.0f; 
-				maxCoconutInterval = 1.7f; 
+				minCoconutInterval = 0.9f; 
+				maxCoconutInterval = 1.0f; 
 			}
-		}
-
+		} //End coconut stuff
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
@@ -166,14 +170,14 @@ public class testAutoMonkey : MonoBehaviour {
 		Manager.Instance.onTree = onTree;
 
 		// coconut
-		if (onTree && /*classicMode &&*/ !tutorialMode) { //TODO uncomment after testing, keep it if its cool bro
-			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval);
+		if (onTree && /*classicMode &&*/ !tutorialMode) {
+			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval); //TODO I think this is getting reset all the time
 			if ((Time.time > timeCounter + coconutInterval)) {
 				coconutObject = GameObject.Find ("Coconut");
 				if( coconutObject == null) {
 					SpawnCoconut();
-					print ("coconut!");
-					timeCounter = Time.time;
+					//print ("coconut!");
+					timeCounter = Time.time; //reset counter for coconut
 				}
 			}
 		}
@@ -183,10 +187,11 @@ public class testAutoMonkey : MonoBehaviour {
 
 		if( onTree && !isJumping )
 			coconutSpawnPosition = this.transform.position;
+		// end coconut?
 
 		Manager.Instance.monkeyHeight = this.transform.position.y;
 		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
-			if (jumpState == JumpState.none && !isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
+			if (jumpState == JumpState.none && !isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp())) {
 				isJumping = true;
 				jumpVel = jumpImpulse;
 
@@ -208,7 +213,7 @@ public class testAutoMonkey : MonoBehaviour {
 					//checkpointHeight += checkpointHeight;
 					//print(Manager.Instance.monkeySpeed);
 					height += checkpointHeight;
-					print("Speed: " + Manager.Instance.monkeySpeed);
+					//print("Speed: " + Manager.Instance.monkeySpeed);
 				}
 			}
 		}
@@ -217,6 +222,11 @@ public class testAutoMonkey : MonoBehaviour {
 			monkeySpeed += Time.deltaTime * accelerationFactor;
 		else
 			monkeySpeed = Manager.Instance.monkeySpeed;
+
+		if (emptyTrunk == null) {
+			emptyTrunk = GameObject.FindWithTag ("Tree");
+			coconutSpawnHeight = emptyTrunk.renderer.bounds.size.y * 50;
+		}
 	}
 
 	void FixedUpdate () {
@@ -316,13 +326,25 @@ public class testAutoMonkey : MonoBehaviour {
 			jumpVel = jumpImpulse;
 		}
 		else { //if winPos has already been assigned
-			Vector3 dir = moveDirection*1.3f; //forward*speed
+			Vector3 dir = moveDirection*1.5f; //forward*speed
 
 			//NOTE: To change behavior of the jump, play with jumpImpulse, dir
 
 			if (isJumping) { //if jumping
 				jumpDir = new Vector3(0,1,0); //direction of jump, should be +y
-				moveDirection = this.transform.forward; //Should be towards center of trees
+
+				if (jumpVel < 0.0f) {
+					if (!winRotate) {
+						winRotate = true;
+						Camera.main.transform.parent = null;
+						this.transform.Rotate(0,180,0); //turn around
+						Camera.main.transform.parent = this.transform;
+					}
+					moveDirection = -this.transform.forward; //Should be towards center of trees
+				}
+				else {
+					moveDirection = this.transform.forward; //Should be towards center of trees
+				}
 
 				jumpVel += simGravity;	//decrement the jump velocity
 				dir += jumpDir * jumpVel; 
@@ -342,7 +364,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 	void SpawnCoconut() {
 		if (monkeyState == MonkeyState.climbing) {
-			coconutSpawnPosition.y  = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+			coconutSpawnPosition.y  = this.transform.position.y + coconutSpawnHeight;
 			coconutClone = (GameObject)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
 			coconutClone.name = coconut.name;
 		}

@@ -14,41 +14,67 @@ public class Tutorial : InfiniteLevelManager {
 	private float arrowHeight = 0.17f * Screen.width;
 	private float deltaMove;
 	private float deltaJump;
+
+	public Texture2D coconutDescription;
+	public Texture2D heart1;
+	public Texture2D heart2;
+	public Texture2D heart3;
 	
-	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine,Coconut};
+	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine,Coconut,CoconutDescription,Hearts};
 	public TutorialState state = TutorialState.Begin;
 	public TutorialState mode = TutorialState.Begin;
 
 	public enum Arrows {None,Move,Jump,Swipe};
 	public Arrows arrow = Arrows.None;
-	
-	public int outroHeight = 10;
 
-	private MonkeyMouse mmouse;
+	private enum Graphic {None,CoconutDescription, Hearts};
+	private Graphic graphic = Graphic.None;
+	
+	public int outroHeight = 5;
+
 	private float coconutSpawnHeight;
-	private int counter = 0;
+	public int counter = 0;
 	private GameObject monkey;
 	private testAutoMonkey monkeyController;
 	private float timeCounter = 0.0f;
 	private bool spawned = false;
 	private bool nextTutorial = false;
-	private float trunkSize;
+	private float trunkHeight;
+	private float trunkWidth;
 	private Vector3 rayPosition;
 
 	private GameObject [] obstacles;
+
+	private bool onTree = true;
+	private bool isJumping = false;
 
 	void OnGUI () {
 		switch (arrow) {
 		case Arrows.None:
 			break;
 		case Arrows.Swipe:
-			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowSwipe);
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), arrowSwipe);
 			break;
 		case Arrows.Move:
-			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowMove);
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), arrowMove);
 			break;
 		case Arrows.Jump:
-			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * arrowHeight), arrowJump);
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), arrowJump);
+			break;
+		default:
+			break;
+		}
+
+		switch (graphic) {
+		case Graphic.None:
+			break;
+		case Graphic.CoconutDescription:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), coconutDescription);
+			break;
+		case Graphic.Hearts:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.1f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), heart1);
+			GUI.Label (new Rect (0.05f * Screen.width, (0.1f * Screen.height) + arrowHeight, 0.9f*Screen.width, 4 * arrowHeight), heart2);
+			GUI.Label (new Rect (0.05f * Screen.width, (0.1f * Screen.height) + (2 * arrowHeight), 0.9f*Screen.width, 4 * arrowHeight), heart3);
 			break;
 		default:
 			break;
@@ -58,7 +84,6 @@ public class Tutorial : InfiniteLevelManager {
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
-		mmouse = this.GetComponent<MonkeyMouse> ();
 		monkey = GameObject.FindWithTag ("Player");
 		monkeyController = monkey.GetComponent<testAutoMonkey> ();
 		empty = true;
@@ -66,7 +91,8 @@ public class Tutorial : InfiniteLevelManager {
 		mode = TutorialState.Inactive;
 
 
-		trunkSize = emptyTrunk.gameObject.renderer.bounds.size.y;
+		trunkWidth = emptyTrunk.gameObject.renderer.bounds.size.z;
+		trunkHeight = emptyTrunk.gameObject.renderer.bounds.size.y;
 		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 4;
 		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 4;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
 
@@ -79,7 +105,7 @@ public class Tutorial : InfiniteLevelManager {
 	void Update () {
 		// update ray position
 		rayPosition = monkey.transform.position;
-		rayPosition.y += trunkSize*2;
+		rayPosition.y += trunkHeight * 2;
 
 		// run clean up to recycle any trunks that are no longer on scene
 		bool wasRowRecycled = base.cleanUp();
@@ -125,6 +151,8 @@ public class Tutorial : InfiniteLevelManager {
 
 		switch (mode) {
 		case TutorialState.Inactive:
+			arrow = Arrows.None;
+			graphic = Graphic.None;
 			break;
 		case TutorialState.Active:
 			ActiveTutorial ();
@@ -140,9 +168,16 @@ public class Tutorial : InfiniteLevelManager {
 			if (nextTutorial)
 				DeathvineTutorial ();
 			break;
+		case TutorialState.CoconutDescription:
+			if (!spawned)
+				StartCoroutine (CoconutDescriptionTransition ());
+			break;
 		case TutorialState.Coconut:
-			if (nextTutorial)
-				CoconutTutorial ();
+			CoconutTutorial ();
+			break;
+		case TutorialState.Hearts:
+			if (!spawned)
+				StartCoroutine (Hearts ());
 			break;
 		case TutorialState.End:
 			state = mode;
@@ -169,12 +204,12 @@ public class Tutorial : InfiniteLevelManager {
 
 	void ActiveTutorial () {
 		arrow = Arrows.Move;
-		if (monkeyController.onTree && ListenForMove () && counter < 3)
+		if (counter < 3 && ListenForMove())
 			counter++;
 
 		if (counter >= 3 && counter < 6) {
 			arrow = Arrows.Jump;
-			if (monkeyController.onTree && ListenForJump ()) {
+			if (ListenForJump()) {
 				counter++;
 			}
 		}
@@ -184,23 +219,25 @@ public class Tutorial : InfiniteLevelManager {
 			mode = TutorialState.BeeHive;
 			counter = 0;
 		}
+
 	}
 
 	void BeeHiveTutorial () {
 		RaycastHit hit;
+		rayPosition += monkey.transform.forward * 0.5f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
-		Debug.DrawRay (rayPosition, Vector3.up, Color.red);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
-			if (hit.collider.name == "Model_Beehive") {
+			if (hit.transform.name == "Model_Beehive") {
 				arrow = Arrows.Swipe;
 			}
-			if (monkeyController.onTree && ListenForJump ())
-				counter++;
-			else if (monkeyController.onTree && ListenForMove ())
-				counter++;
 		} else
 			arrow = Arrows.None;
+
+		if (arrow != Arrows.None) {
+			if (ListenForSwipe ())
+				counter++;
+		}
 
 		if (counter <= 1 && !spawned) {
 			empty = false;
@@ -216,16 +253,20 @@ public class Tutorial : InfiniteLevelManager {
 
 	void SnakeTutorial () {
 		RaycastHit hit;
+		//rayPosition += monkey.transform.forward * 0.75f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
 			if (hit.collider.name == "Model_Snake") {
 				arrow = Arrows.Move;
 			}
-			if (monkeyController.onTree && ListenForMove ())
-				counter++;
 		} else
 			arrow = Arrows.None;
+
+		if (arrow != Arrows.None) {
+			if (ListenForMove ())
+				counter++;
+		}
 
 		if (counter <= 1 && !spawned) {
 			empty = false;
@@ -247,10 +288,13 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Prefab_DeathVine(Clone)") {
 				arrow = Arrows.Jump;
 			}
-			if (monkeyController.onTree && ListenForJump ())
-				counter++;
 		} else
 			arrow = Arrows.None;
+
+		if (arrow != Arrows.None) {
+			if (ListenForJump ())
+				counter++;
+		}
 		
 		if (counter <= 1 && !spawned) {
 			empty = false;
@@ -258,8 +302,9 @@ public class Tutorial : InfiniteLevelManager {
 		}
 		else if (counter > 1) {
 			arrow = Arrows.None;
-			mode = TutorialState.Coconut;
+			mode = TutorialState.CoconutDescription;
 			counter = 0;
+			StartCoroutine (CoconutGUI());
 			StartCoroutine (TutorialTransition());
 		}
 	}
@@ -272,19 +317,22 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Prefab_Coconut") {
 				arrow = Arrows.Move;
 			}
-			if (monkeyController.onTree && ListenForMove ())
-				counter++;
 		} else
 			arrow = Arrows.None;
 
-		GameObject c = GameObject.Find ("Coconut");
+		if (arrow != Arrows.None) {
+			if (ListenForMove ())
+				counter++;
+		}
+
+		GameObject c = GameObject.Find ("Prefab_Coconut");
 		if (counter <= 1 && !spawned && c == null) {
 			empty = false;
 			StartCoroutine (SpawnObstacle ());
 		}
 		else if (counter > 1) {
 			arrow = Arrows.None;
-			mode = TutorialState.End;
+			mode = TutorialState.Hearts;
 			counter = 0;
 			StartCoroutine (TutorialTransition());
 		}
@@ -329,24 +377,19 @@ public class Tutorial : InfiniteLevelManager {
 	}
 
 	bool ListenForJump () { // returns true if player jumps
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp ())
-			return true;
-		return false;
+		bool ret = !isJumping && monkeyController.isJumping && (monkeyController.jumpState == testAutoMonkey.JumpState.up);
+		isJumping = monkeyController.isJumping;
+		return ret;
 	}
 	
 	bool ListenForMove () { // returns true if player moves to another tree
-		if (Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown("left") || mmouse.MoveRight() ||
-		    Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown("right") || mmouse.MoveLeft())
-			return true;
-		return false;
+		bool ret = onTree && !monkeyController.onTree && (monkeyController.jumpState == testAutoMonkey.JumpState.left || monkeyController.jumpState == testAutoMonkey.JumpState.right);
+		onTree = monkeyController.onTree;
+		return ret;
 	}
-	
+
 	bool ListenForSwipe () { // returns true if player swipes
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp () ||
-		    Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown ("left") || mmouse.MoveRight () || 
-		    Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown ("right") || mmouse.MoveLeft ())
-			return true;
-		return false;
+		return ListenForMove () || ListenForJump ();
 	}
 
 	void ActivateTutorial () {
@@ -365,5 +408,28 @@ public class Tutorial : InfiniteLevelManager {
 		nextTutorial = false;
 		yield return new WaitForSeconds (2.0f);
 		nextTutorial = true;
+	}
+
+	IEnumerator CoconutGUI () {
+		yield return new WaitForSeconds (2.0f);
+		graphic = Graphic.CoconutDescription;
+	}
+		
+
+	IEnumerator CoconutDescriptionTransition () {
+		spawned = true;
+		yield return new WaitForSeconds (3.0f);
+		graphic = Graphic.None;
+		mode = TutorialState.Coconut;	
+		spawned = false;
+	}
+
+	IEnumerator Hearts () {
+		spawned = true;
+		yield return new WaitForSeconds (1.0f);
+		graphic = Graphic.Hearts;
+		yield return new WaitForSeconds (3.0f);
+		mode = TutorialState.End;
+		spawned = false;
 	}
 }

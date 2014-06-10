@@ -26,12 +26,12 @@ public class Manager : Singleton<Manager> {
 		levels [0] = "easy0";
 		levels [1] = "easy1";
 		levels [2] = "easy2";
-		levels [3] = "easy3";
-		levels [4] = "easy4";
-		levels [5] = "med0";
-		levels [6] = "med1";
-		levels [7] = "med2";
-		levels [8] = "hard0";
+		levels [3] = "med0";
+		levels [4] = "med1";
+		levels [5] = "med2";
+		levels [6] = "hard0";
+		levels [7] = "hard1";
+		levels [8] = "hard2";
 
 		numLevels = levels.Length;
 		levelIndex = 0;

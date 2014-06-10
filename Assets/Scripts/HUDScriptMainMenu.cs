@@ -20,7 +20,7 @@ public class HUDScriptMainMenu : MonoBehaviour {
 	//TODO: make some of these values variables so changing it changes a lot of them
 
 	void OnGUI() {
-		print ("why doesnt this work"); //seriously, why
+		//print ("why doesnt this work"); //seriously, why
 		// Make a background box
 		GUI.Box(new Rect(0,10,400,100), "Logo could prolly go here");
 
