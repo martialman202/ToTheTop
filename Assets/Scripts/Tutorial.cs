@@ -26,7 +26,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	private MonkeyMouse mmouse;
 	private float coconutSpawnHeight;
-	private int counter = 0;
+	public int counter = 0;
 	private GameObject monkey;
 	private testAutoMonkey monkeyController;
 	private float timeCounter = 0.0f;
@@ -36,6 +36,9 @@ public class Tutorial : InfiniteLevelManager {
 	private Vector3 rayPosition;
 
 	private GameObject [] obstacles;
+
+	private bool onTree = true;
+	private bool isJumping = false;
 
 	void OnGUI () {
 		switch (arrow) {
@@ -171,12 +174,12 @@ public class Tutorial : InfiniteLevelManager {
 
 	void ActiveTutorial () {
 		arrow = Arrows.Move;
-		if (monkeyController.onTree && ListenForMove () && counter < 3)
+		if (counter < 3 && ListenForMove())
 			counter++;
 
 		if (counter >= 3 && counter < 6) {
 			arrow = Arrows.Jump;
-			if (monkeyController.onTree && ListenForJump ()) {
+			if (ListenForJump()) {
 				counter++;
 			}
 		}
@@ -186,6 +189,7 @@ public class Tutorial : InfiniteLevelManager {
 			mode = TutorialState.BeeHive;
 			counter = 0;
 		}
+
 	}
 
 	void BeeHiveTutorial () {
@@ -197,9 +201,7 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Model_Beehive") {
 				arrow = Arrows.Swipe;
 			}
-			if (monkeyController.onTree && ListenForJump ())
-				counter++;
-			else if (monkeyController.onTree && ListenForMove ())
+			if (ListenForSwipe())
 				counter++;
 		} else
 			arrow = Arrows.None;
@@ -224,7 +226,7 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Model_Snake") {
 				arrow = Arrows.Move;
 			}
-			if (monkeyController.onTree && ListenForMove ())
+			if (ListenForMove ())
 				counter++;
 		} else
 			arrow = Arrows.None;
@@ -249,7 +251,7 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Prefab_DeathVine(Clone)") {
 				arrow = Arrows.Jump;
 			}
-			if (monkeyController.onTree && ListenForJump ())
+			if (ListenForJump ())
 				counter++;
 		} else
 			arrow = Arrows.None;
@@ -274,7 +276,7 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Prefab_Coconut") {
 				arrow = Arrows.Move;
 			}
-			if (monkeyController.onTree && ListenForMove ())
+			if (ListenForMove ())
 				counter++;
 		//print (counter);
 		} else
@@ -332,24 +334,19 @@ public class Tutorial : InfiniteLevelManager {
 	}
 
 	bool ListenForJump () { // returns true if player jumps
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp ())
-			return true;
-		return false;
+		bool ret = !isJumping && monkeyController.isJumping && (monkeyController.jumpState == testAutoMonkey.JumpState.up);
+		isJumping = monkeyController.isJumping;
+		return ret;
 	}
 	
 	bool ListenForMove () { // returns true if player moves to another tree
-		if (Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown("left") || mmouse.MoveRight() ||
-		    Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown("right") || mmouse.MoveLeft())
-			return true;
-		return false;
+		bool ret = onTree && !monkeyController.onTree && (monkeyController.jumpState == testAutoMonkey.JumpState.left || monkeyController.jumpState == testAutoMonkey.JumpState.right);
+		onTree = monkeyController.onTree;
+		return ret;
 	}
-	
+
 	bool ListenForSwipe () { // returns true if player swipes
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp () ||
-		    Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown ("left") || mmouse.MoveRight () || 
-		    Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown ("right") || mmouse.MoveLeft ())
-			return true;
-		return false;
+		return ListenForMove () || ListenForJump ();
 	}
 
 	void ActivateTutorial () {
