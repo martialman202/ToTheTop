@@ -194,7 +194,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	void BeeHiveTutorial () {
 		RaycastHit hit;
-		rayPosition += monkey.transform.forward * 0.75f;
+		rayPosition += monkey.transform.forward * 0.5f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
@@ -223,7 +223,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	void SnakeTutorial () {
 		RaycastHit hit;
-		rayPosition += monkey.transform.forward * 0.75f;
+		//rayPosition += monkey.transform.forward * 0.75f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
@@ -286,12 +286,15 @@ public class Tutorial : InfiniteLevelManager {
 			if (hit.collider.name == "Prefab_Coconut") {
 				arrow = Arrows.Move;
 			}
-			if (ListenForMove ())
-				counter++;
 		} else
 			arrow = Arrows.None;
 
-		GameObject c = GameObject.Find ("Coconut");
+		if (arrow != Arrows.None) {
+			if (ListenForMove ())
+				counter++;
+		}
+
+		GameObject c = GameObject.Find ("Prefab_Coconut");
 		if (counter <= 1 && !spawned && c == null) {
 			empty = false;
 			StartCoroutine (SpawnObstacle ());
