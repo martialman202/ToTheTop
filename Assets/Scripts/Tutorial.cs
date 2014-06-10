@@ -198,7 +198,6 @@ public class Tutorial : InfiniteLevelManager {
 	void BeeHiveTutorial () {
 		RaycastHit hit;
 		Ray ray = new Ray (rayPosition, Vector3.up);
-		rayPosition.z -= trunkWidth;
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
 			if (hit.transform.name == "Model_Beehive") {
