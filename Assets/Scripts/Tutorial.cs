@@ -85,9 +85,6 @@ public class Tutorial : InfiniteLevelManager {
 		// update ray position
 		rayPosition = monkey.transform.position;
 		rayPosition.y += trunkHeight * 2;
-		rayPosition += monkey.transform.forward * 0.75f;
-		Debug.DrawRay (rayPosition, Vector3.up, Color.red);
-		
 
 		// run clean up to recycle any trunks that are no longer on scene
 		bool wasRowRecycled = base.cleanUp();
@@ -197,6 +194,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	void BeeHiveTutorial () {
 		RaycastHit hit;
+		rayPosition += monkey.transform.forward * 0.75f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
@@ -222,6 +220,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	void SnakeTutorial () {
 		RaycastHit hit;
+		rayPosition += monkey.transform.forward * 0.75f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
@@ -272,6 +271,7 @@ public class Tutorial : InfiniteLevelManager {
 
 	void CoconutTutorial () {
 		RaycastHit hit;
+		rayPosition += monkey.transform.forward * 0.75f;
 		Ray ray = new Ray (rayPosition, Vector3.up);
 		
 		if (Physics.Raycast (ray, out hit) && counter <= 1) {
