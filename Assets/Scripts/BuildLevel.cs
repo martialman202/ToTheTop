@@ -38,10 +38,7 @@ public class BuildLevel : MonoBehaviour {
 	public Texture2D topLeaves;
 	public Vector2 size;
 	private float barDisplay = 0.0f;
-
-	//Tree progress bar resources
-	public Texture2D progressTree;
-	public Texture2D treeFiller;
+	private int fSize = (int)(0.05f * Screen.width);
 
 	private GameObject spawner;
 
@@ -57,11 +54,8 @@ public class BuildLevel : MonoBehaviour {
 		GUI.skin = menuSkin;
 
 		// level indicator
-		int originalSize = GUI.skin.box.fontSize;
-		int boxSize = originalSize / 2;
-		GUI.skin.box.fontSize = boxSize;
+		GUI.skin.box.fontSize = fSize;
 		GUI.Box(new Rect(Screen.width*0.88f, Screen.width*0.01f, Screen.width*0.1f, Screen.width*0.1f), (Manager.Instance.levelIndex+1).ToString());
-		GUI.skin.box.fontSize = originalSize;
 		
 		// progress bar
 		// draw the background:

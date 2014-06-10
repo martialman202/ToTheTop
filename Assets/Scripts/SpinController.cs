@@ -42,9 +42,11 @@ public class SpinController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Transform coconut = this.transform.Find ("Coconut");
 		onTree = monkey.onTree;
-		if ((Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		if (monkey.jumpState == testAutoMonkey.JumpState.none && (Input.GetKeyDown (KeyCode.A) || (Input.GetKeyDown("left")) || (mmouse.MoveRight())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveRight = true;
+			monkey.jumpState = testAutoMonkey.JumpState.left;
 
 			if (sounds.playSoundEffects)
 				sounds.audioSources[4].Play();
@@ -55,9 +57,12 @@ public class SpinController : MonoBehaviour {
 			else {
 				currentRotation++;
 			}
+			/*if (coconut != null)
+				coconut.transform.parent = null*/
 		}
-		else if((Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
+		else if(monkey.jumpState == testAutoMonkey.JumpState.none && (Input.GetKeyDown (KeyCode.D) || (Input.GetKeyDown("right")) || (mmouse.MoveLeft())) && !moveLeft && !moveRight && onTree && !monkey.isJumping) {
 			moveLeft = true;
+			monkey.jumpState = testAutoMonkey.JumpState.right;
 
 			if (sounds.playSoundEffects)
 				sounds.audioSources[4].Play();
@@ -68,6 +73,8 @@ public class SpinController : MonoBehaviour {
 			else {
 				currentRotation--;
 			}
+			/*if (coconut != null)
+				coconut.transform.parent = null;*/
 		}
 		
 
@@ -95,6 +102,7 @@ public class SpinController : MonoBehaviour {
 					spawner.transform.eulerAngles = set;
 					moveRight = false;
 					monkey.onTree = true;
+					monkey.jumpState = testAutoMonkey.JumpState.none;
 				}
 			}
 			else if( spawner.transform.eulerAngles.y >= rotations[currentRotation] ) {
@@ -103,6 +111,7 @@ public class SpinController : MonoBehaviour {
 				spawner.transform.eulerAngles = set;
 				moveRight = false;
 				monkey.onTree = true;
+				monkey.jumpState = testAutoMonkey.JumpState.none;
 			}
 			else {
 				spawner.transform.Rotate (Vector3.up * Time.deltaTime * moveSpeed, Space.World);
@@ -120,6 +129,7 @@ public class SpinController : MonoBehaviour {
 					spawner.transform.eulerAngles = set;
 					moveLeft = false;
 					monkey.onTree = true;
+					monkey.jumpState = testAutoMonkey.JumpState.none;
 				}
 			}
 			else if( rotations[currentRotation] == 240.0f ) {
@@ -132,6 +142,7 @@ public class SpinController : MonoBehaviour {
 					spawner.transform.eulerAngles = set;
 					moveLeft = false;
 					monkey.onTree = true;
+					monkey.jumpState = testAutoMonkey.JumpState.none;
 				}
 			}
 			else if( spawner.transform.eulerAngles.y <= rotations[currentRotation] ) {
@@ -140,6 +151,7 @@ public class SpinController : MonoBehaviour {
 				spawner.transform.eulerAngles = set;
 				moveLeft = false;
 				monkey.onTree = true;
+				monkey.jumpState = testAutoMonkey.JumpState.none;
 			}
 			else {
 				spawner.transform.Rotate (Vector3.down * Time.deltaTime * moveSpeed, Space.World);

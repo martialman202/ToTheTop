@@ -8,7 +8,7 @@ public class Manager : Singleton<Manager> {
 	public float monkeyHeight = 0;
 	public float monkeySpeed = 0;
 
-	public string levelFileName;
+	public string levelFileName = "test";
 
 	public int prevLevel;
 
@@ -16,7 +16,10 @@ public class Manager : Singleton<Manager> {
 	public int levelIndex = 0;
 	public string [] levels;
 
+	public bool onTree;
 	public int score;
+
+	public string difficulty; //either easy, med, hard
 
 	void Start() {
 		levels = new string[numLevels];

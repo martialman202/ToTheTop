@@ -13,6 +13,7 @@ using System.Collections;
 public class testAutoMonkey : MonoBehaviour {
 
 	public bool classicMode = false;
+	public bool tutorialMode = false;
 
 	public int lifePoints = 3;
 
@@ -24,13 +25,27 @@ public class testAutoMonkey : MonoBehaviour {
 	public float monkeySpeed;
 	public bool onTree = false;
 
+	public GameObject coconut;
+	private GameObject coconutObject;
+	//public float coconutSpawnHeight = 15.0f; //how far above the monkey the coconut should respond
+	private float coconutInterval = 7.5f; // the time interval for coconuts to fall if monkey is on same tree and initial delay to activate
+	private Vector3 coconutSpawnPosition;
+	public float minCoconutInterval = 1.5f; // the time interval for coconuts to fall if monkey is on same tree orig 1.5f
+	public float maxCoconutInterval = 3f; // the time interval for coconuts to fall if monkey is on same tree orig 3f
+	private float timeCounter = 0.0f;
+	private GameObject coconutClone;
+
 	public float checkpointHeight = 250.0f;
+	private float height;
 
 	private GameObject mainCam;
 	private Color origColor;
 	private MonkeyMouse mmouse;
-	private enum MonkeyState {sceneStart = 0, initial=1, climbing=2, lose=3, win=4, pause=5};
-	MonkeyState monkeyState;
+	public enum MonkeyState {sceneStart = 0, initial=1, climbing=2, lose=3, win=4, pause=5};
+	public MonkeyState monkeyState;
+
+	public enum JumpState { none = 0, up = 1, left = 2, right = 3 };
+	public JumpState jumpState;
 
 	public bool isJumping = false;
 	public float jumpVel = 0.0f;
@@ -60,16 +75,21 @@ public class testAutoMonkey : MonoBehaviour {
 
 	private CharacterController controller;
 
+	private Animation animation;
+
 	// Use this for initialization
 	void Start () {
 		if (classicMode) {
 			monkeyState = MonkeyState.initial;
 			Manager.Instance.score = 0;
+			height = checkpointHeight;
 		}
 		else { //if not classic mode
 			monkeyState = MonkeyState.sceneStart;
 		}
+		jumpState = JumpState.none;
 
+		timeCounter = coconutInterval;
 		monkeySpeed = moveSpeed;
 		Manager.Instance.monkeySpeed = monkeySpeed;
 
@@ -78,14 +98,34 @@ public class testAutoMonkey : MonoBehaviour {
 
 		//Audio
 		sounds = mainCam.GetComponent<SoundMainScene> ();
-
-		//Set position
-		//TODO: have the monkey start relative to the tree spawners spawn distance
 		
-		origColor = gameObject.renderer.material.color;
+		//origColor = gameObject.renderer.material.color;
+
 		mmouse = this.GetComponent<MonkeyMouse> ();
 		Manager.Instance.prevLevel = Application.loadedLevel;
 		controller = GetComponent<CharacterController>();
+
+		//Coconut stuff
+		if (classicMode) {
+			minCoconutInterval = 1.5f; 
+			maxCoconutInterval = 3f; 		
+		}
+		else { //if not classic mode
+			if (Manager.Instance.difficulty == "easy") {
+				minCoconutInterval = 1.5f; 
+				maxCoconutInterval = 3f; 
+			}
+			else if (Manager.Instance.difficulty == "med") {
+				minCoconutInterval = 1.0f; 
+				maxCoconutInterval = 2.5f; 
+			}
+
+			else if (Manager.Instance.difficulty == "hard"){
+				minCoconutInterval = 1.0f; 
+				maxCoconutInterval = 1.7f; 
+			}
+		}
+
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit)
@@ -97,19 +137,20 @@ public class testAutoMonkey : MonoBehaviour {
 			isClimbing = true; //this variable is for the CameraController
 			//print ("collision detected!");
 		}
-		else if( hit.gameObject.tag == "Tree" && isJumping) {
+		else if (hit.gameObject.tag == "Tree" && isJumping) {
 			isJumping = false;
 			jumpVel = 0;
 			Vector3 resetPos = origPos;
 			resetPos.y = this.gameObject.transform.position.y;
 			this.gameObject.transform.position = resetPos;
+			jumpState = JumpState.none;
 		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Obstacle") {
-			lifePoints--;
+			/*if (!tutorialMode)*/ lifePoints--;
 			monkeySpeed = moveSpeed * slowFactor;
 			if (sounds != null && sounds.playSoundEffects)
 				sounds.audioSources[3].Play ();
@@ -122,22 +163,52 @@ public class testAutoMonkey : MonoBehaviour {
 	}
 
 	void Update() {
-		Manager.Instance.monkeyHeight = this.transform.position.y;
-		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
+		Manager.Instance.onTree = onTree;
+
+		// coconut
+		if (onTree && /*classicMode &&*/ !tutorialMode) { //TODO uncomment after testing, keep it if its cool bro
+			coconutInterval = Random.Range(minCoconutInterval,maxCoconutInterval);
+			if ((Time.time > timeCounter + coconutInterval)) {
+				coconutObject = GameObject.Find ("Coconut");
+				if( coconutObject == null) {
+					SpawnCoconut();
+					print ("coconut!");
+					timeCounter = Time.time;
+				}
 			}
 		}
+		else {
+			timeCounter = Time.time + coconutInterval;
+		}
 
-		if (classicMode) {
+		if( onTree && !isJumping )
+			coconutSpawnPosition = this.transform.position;
+
+		Manager.Instance.monkeyHeight = this.transform.position.y;
+		if(monkeyState == MonkeyState.initial || monkeyState == MonkeyState.climbing) {
+			if (jumpState == JumpState.none && !isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
+				isJumping = true;
+				jumpVel = jumpImpulse;
+
+				if (sounds != null && sounds.playSoundEffects)
+					sounds.audioSources[4].Play();
+
+				mmouse.ResetPos();
+				jumpState = JumpState.up;
+			}
+
+			origPos = this.gameObject.transform.position;
+
+		}
+
+		if (classicMode && !tutorialMode) {
 			if (Manager.Instance.monkeySpeed < maxMonkeySpeed) {
-				if (Manager.Instance.monkeyHeight >= checkpointHeight) {
+				if (Manager.Instance.monkeyHeight >= height) {
 					Manager.Instance.monkeySpeed++;
-					checkpointHeight += checkpointHeight;
+					//checkpointHeight += checkpointHeight;
 					//print(Manager.Instance.monkeySpeed);
+					height += checkpointHeight;
+					print("Speed: " + Manager.Instance.monkeySpeed);
 				}
 			}
 		}
@@ -163,18 +234,6 @@ public class testAutoMonkey : MonoBehaviour {
 			//gameObject.transform.Translate (moveDirection * moveSpeed * Time.deltaTime);
 			Vector3 dir = moveDirection*monkeySpeed;
 
-			if (!isJumping && (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown ("up") || mmouse.MoveUp()) && onTree) {
-				isJumping = true;
-				jumpVel = jumpImpulse;
-
-				//Audio
-				if (sounds != null && sounds.playSoundEffects)
-					sounds.audioSources[4].Play();
-
-				mmouse.ResetPos();
-				origPos = this.gameObject.transform.position;
-			}
-
 			if (isJumping) {
 				jumpVel += simGravity;
 				dir += jumpDir * jumpVel;//new Vector3(0,0,jumpVel);
@@ -182,6 +241,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 			if ( classicMode )
 				Manager.Instance.score += (int)(Time.deltaTime * 100);
+
 
 			controller.Move(dir * Time.deltaTime);
 
@@ -262,7 +322,7 @@ public class testAutoMonkey : MonoBehaviour {
 
 			if (isJumping) { //if jumping
 				jumpDir = new Vector3(0,1,0); //direction of jump, should be +y
-				moveDirection = -this.transform.forward; //Should be towards center of trees
+				moveDirection = this.transform.forward; //Should be towards center of trees
 
 				jumpVel += simGravity;	//decrement the jump velocity
 				dir += jumpDir * jumpVel; 
@@ -280,4 +340,11 @@ public class testAutoMonkey : MonoBehaviour {
 
 	}
 
+	void SpawnCoconut() {
+		if (monkeyState == MonkeyState.climbing) {
+			coconutSpawnPosition.y  = this.transform.position.y + (Screen.height / Camera.main.orthographicSize);
+			coconutClone = (GameObject)Instantiate (coconut, coconutSpawnPosition, Quaternion.identity);
+			coconutClone.name = coconut.name;
+		}
+	}
 }

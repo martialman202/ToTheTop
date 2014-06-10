@@ -9,6 +9,7 @@ public class GUIManager : MonoBehaviour {
 	private float buttonWidth = 0.7f * Screen.width;
 	private float buttonHeight = 0.17f * Screen.width;
 	private float betweenButton = 0.22f * Screen.width;
+	private int fSize = (int)(0.1f * Screen.width);
 
 	private enum MenuState {Main=0, Options=1, Levels=2, Play=3};
 	private MenuState currMenu = MenuState.Main;
@@ -60,8 +61,9 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw the main menu
 	void DrawMain() {
+		GUI.skin.button.fontSize = (int) fSize;
 		GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);
-		GUI.BeginGroup (new Rect (0.15f * Screen.width, 0.3f * Screen.height, buttonWidth, buttonHeight*6));
+		GUI.BeginGroup (new Rect (0.15f * Screen.width, 0.25f * Screen.height, buttonWidth, buttonHeight*7));
 		// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
 		
 		// We'll make a box so you can see where the group is on-screen.
@@ -71,11 +73,13 @@ public class GUIManager : MonoBehaviour {
 		}
 		if (GUI.Button (new Rect (0, betweenButton, buttonWidth, buttonHeight), "Classic"))
 			Application.LoadLevel ("MainScene");
-		if(GUI.Button(new Rect(0, 2*betweenButton, buttonWidth, buttonHeight), "Options")) {
+		if (GUI.Button (new Rect (0, 2*betweenButton, buttonWidth, buttonHeight), "Tutorial"))
+			Application.LoadLevel ("TutorialScene");
+		if(GUI.Button(new Rect(0, 3*betweenButton, buttonWidth, buttonHeight), "Options")) {
 			prevMenu = currMenu;
 			currMenu = MenuState.Options;
 		}
-		if (GUI.Button (new Rect (0, 3*betweenButton, buttonWidth, buttonHeight), "Exit"))
+		if (GUI.Button (new Rect (0, 4*betweenButton, buttonWidth, buttonHeight), "Exit"))
 			Application.Quit ();
 		
 		// End the group we started above. This is very important to remember!
@@ -84,6 +88,7 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw level selector
 	void DrawLevels() {
+		GUI.skin.button.fontSize = (int) fSize;
 		GUI.BeginGroup(new Rect(0.1f * Screen.width, 0.1f * Screen.height, 0.9f * Screen.width, 0.8f * Screen.height));
 
 		//Test drawing star labels
@@ -111,12 +116,23 @@ public class GUIManager : MonoBehaviour {
 			                       0.22f*Screen.width, 0.22f*Screen.width), (i+1).ToString ())) {
 				Manager.Instance.levelIndex = i;
 				Manager.Instance.levelFileName = Manager.Instance.levels[i];
+				//MAGIC NUMBERS FOR LEVEL DIFFICULTY, check Manager.cs to see how many levels there are
+				if (i >= 0 && i < 5) {
+					Manager.Instance.difficulty = "easy";
+				}
+				else if (i >= 5 && i < 8) {
+					Manager.Instance.difficulty = "med";
+				}
+				else {
+					Manager.Instance.difficulty = "hard";
+				}
+
 				Application.LoadLevel("LevelFromFile");
 			}
 		}
 		GUI.EndGroup ();
 		int prevFontSize = GUI.skin.button.fontSize;
-		GUI.skin.button.fontSize = (int)0.75f * prevFontSize; 
+		GUI.skin.button.fontSize = (int) (0.75f * prevFontSize); 
 		if(GUI.Button (new Rect (0.1f * Screen.width, 0.8f * Screen.height, 0.22f * Screen.width, 0.11f * Screen.width), "Back")) {
 			currMenu = MenuState.Main;
 			prevMenu = MenuState.Main;
@@ -126,6 +142,7 @@ public class GUIManager : MonoBehaviour {
 
 	//Draw the Options Menu
 	void DrawOptions() {
+		GUI.skin.button.fontSize = (int)fSize;
 		GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 3 * buttonHeight), gameLogo);
 		GUI.BeginGroup (new Rect (0.15f * Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 		// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.

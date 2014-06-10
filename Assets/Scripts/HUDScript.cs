@@ -14,23 +14,32 @@ public class HUDScript : MonoBehaviour {
 	private float buttonHeight = 0.17f * Screen.width;
 	private float betweenButton = 0.22f * Screen.width;
 
-	private GameObject player ;
+	private GameObject player;
+	private Transform coconut;
 	private testAutoMonkey monkeyScript;
 	private float heartSize = 16.0f;
 
 	public bool displayWin = false;
 
+	public AudioClip winAudioClip;
+	private AudioSource winAudioSource;
+	private bool startAudioLoop = false;
+	public bool tutorialMode = false;
 
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		monkeyScript = player.GetComponent<testAutoMonkey>();
+
+		winAudioSource = this.gameObject.AddComponent ("AudioSource") as AudioSource;
+		winAudioSource.clip = winAudioClip;
+		winAudioSource.loop = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		coconut = player.transform.parent.transform.Find ("Coconut");
 	}
 
 	void OnGUI()
@@ -55,16 +64,26 @@ public class HUDScript : MonoBehaviour {
 		}
 		GUI.skin.button.fontSize = originalSize;
 
+		if (paused)
+			Time.timeScale = 0;
+		else
+			Time.timeScale = 1;
+
 		//Win Screen
 		if (displayWin) {
 			paused = false;
-			//TODO: set display win from testAutoMonkey
-			//Time.timeScale = 0;
+			Time.timeScale = 0;
 			GUI.BeginGroup (new Rect (0.15f*Screen.width, Screen.height/2 - Screen.width/4, buttonWidth, buttonHeight*4));
 			// All rectangles are now adjusted to the group. (0,0) is the topleft corner of the group.
-			
+
+			//play win audio loop
+			if( !startAudioLoop ) {
+				startAudioLoop = true;
+				winAudioSource.Play();
+			}
+
 			// We'll make a box so you can see where the group is on-screen.
-			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length) {
+			if (Manager.Instance.levelIndex+1 < Manager.Instance.levels.Length && !tutorialMode) {
 				if (GUI.Button (new Rect (0, 0, buttonWidth, buttonHeight), "Next Level")) {
 					//paused = false;
 					Manager.Instance.levelIndex++;
@@ -86,11 +105,6 @@ public class HUDScript : MonoBehaviour {
 			GUI.EndGroup ();
 		}
 
-		if (paused)
-			Time.timeScale = 0;
-		else
-			Time.timeScale = 1;
-
 		//Pause Menu
 		if (paused) {
 			GUI.Label(new Rect(0.1f*Screen.width, 0.13f * Screen.height, 0.8f*Screen.width, 4* buttonHeight), pauseTexture);
@@ -110,6 +124,18 @@ public class HUDScript : MonoBehaviour {
 				
 			// End the group we started above. This is very important to remember!
 			GUI.EndGroup ();
+		}
+
+		//Coconut warning
+		//TODO: show only if monkey is under coconut
+		if (coconut != null) {
+			int warningSize = originalSize*3;
+			GUI.skin.label.fontSize = warningSize;
+			Color originalColor = GUI.skin.label.normal.textColor;
+			GUI.skin.label.normal.textColor = Color.red;
+			GUI.Label(new Rect(Screen.width*.45f, Screen.width*.7f, 0.3f*Screen.width, 0.3f*Screen.width), "!");
+			GUI.skin.label.fontSize = originalSize;
+			GUI.skin.label.normal.textColor = originalColor;
 		}
 
 	}

@@ -1,0 +1,332 @@
+fileFormatVersion: 2
+guid: daee5410a0ded014fb785696ae59198e
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Body1
+    100004: Body1_1
+    100006: Body1_2
+    100008: Body1_3
+    100010: Body2
+    100012: Body2_1
+    100014: Body2_2
+    100016: Body2_3
+    100018: Body3
+    100020: Body3_1
+    100022: Body3_2
+    100024: Body3_3
+    100026: Body4
+    100028: Body4_1
+    100030: Body4_2
+    100032: Body4_3
+    100034: Body5
+    100036: Body5_1
+    100038: Body5_2
+    100040: Body5_3
+    100042: Body6
+    100044: Body6_1
+    100046: Body6_2
+    100048: Body6_3
+    100050: Camera
+    100052: Head
+    100054: Head_1
+    100056: Lamp
+    100058: Mesh
+    100060: Neck
+    100062: Neck_1
+    100064: Neck_2
+    100066: Neck_3
+    100068: Neck_4
+    100070: //RootNode
+    400000: Armature
+    400002: Body1
+    400004: Body1_1
+    400006: Body1_2
+    400008: Body1_3
+    400010: Body2
+    400012: Body2_1
+    400014: Body2_2
+    400016: Body2_3
+    400018: Body3
+    400020: Body3_1
+    400022: Body3_2
+    400024: Body3_3
+    400026: Body4
+    400028: Body4_1
+    400030: Body4_2
+    400032: Body4_3
+    400034: Body5
+    400036: Body5_1
+    400038: Body5_2
+    400040: Body5_3
+    400042: Body6
+    400044: Body6_1
+    400046: Body6_2
+    400048: Body6_3
+    400050: Camera
+    400052: Head
+    400054: Head_1
+    400056: Lamp
+    400058: Mesh
+    400060: Neck
+    400062: Neck_1
+    400064: Neck_2
+    400066: Neck_3
+    400068: Neck_4
+    400070: //RootNode
+    4300000: Mesh
+    7400000: Attack
+    7400002: Idle
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Attack
+      takeName: Attack
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 1
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Body1
+        weight: 1
+      - path: Armature/Body1/Body1_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2/Body6_3
+        weight: 1
+      - path: Armature/Body1/Neck
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head/Head_1
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Lamp
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Body1
+        weight: 1
+      - path: Armature/Body1/Body1_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2
+        weight: 1
+      - path: Armature/Body1/Body1_1/Body1_2/Body1_3/Body2/Body2_1/Body2_2/Body2_3/Body3/Body3_1/Body3_2/Body3_3/Body4/Body4_1/Body4_2/Body4_3/Body5/Body5_1/Body5_2/Body5_3/Body6/Body6_1/Body6_2/Body6_3
+        weight: 1
+      - path: Armature/Body1/Neck
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head
+        weight: 1
+      - path: Armature/Body1/Neck/Neck_1/Neck_2/Neck_3/Neck_4/Head/Head_1
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Lamp
+        weight: 1
+      - path: Mesh
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .5
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
