@@ -398,7 +398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9be4720ea1d44aa8855a12c6cc2a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  classicMode: 1
+  classicMode: 0
+  tutorialMode: 1
   distanceFromMonkey: 5
   secondsLookingAtBananas: 2
   secondsGoingDownTree: 3
@@ -869,6 +870,7 @@ MonoBehaviour:
   mode: 0
   arrow: 0
   outroHeight: 10
+  counter: 0
 --- !u!114 &1185485448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,7 +1116,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400012, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: classicMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
       propertyPath: classicMode
@@ -1128,6 +1130,14 @@ Prefab:
       propertyPath: heart
       value: 
       objectReference: {fileID: 2800000, guid: 6905e5ba7bf7d43579d0550a7edba983, type: 3}
+    - target: {fileID: 11400012, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: tutorialMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28459d0063949484c9028ea5b83b4a6e, type: 2}
   m_RootGameObject: {fileID: 1384412716}
@@ -1231,6 +1241,7 @@ MonoBehaviour:
   isClimbing: 0
   lost: 0
   won: 0
+  winJump: 0
 --- !u!114 &1384412721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,7 +1358,7 @@ Renderer:
     type: 2}
   m_PrefabInternal: {fileID: 1383314701}
   m_GameObject: {fileID: 1518541355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255

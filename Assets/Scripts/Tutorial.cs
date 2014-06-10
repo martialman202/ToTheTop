@@ -32,7 +32,8 @@ public class Tutorial : InfiniteLevelManager {
 	private float timeCounter = 0.0f;
 	private bool spawned = false;
 	private bool nextTutorial = false;
-	private float trunkSize;
+	private float trunkHeight;
+	private float trunkWidth;
 	private Vector3 rayPosition;
 
 	private GameObject [] obstacles;
@@ -69,7 +70,8 @@ public class Tutorial : InfiniteLevelManager {
 		mode = TutorialState.Inactive;
 
 
-		trunkSize = emptyTrunk.gameObject.renderer.bounds.size.y;
+		trunkWidth = emptyTrunk.gameObject.renderer.bounds.size.z;
+		trunkHeight = emptyTrunk.gameObject.renderer.bounds.size.y;
 		deltaMove = emptyTrunk.gameObject.renderer.bounds.size.y * 4;
 		deltaJump = emptyTrunk.gameObject.renderer.bounds.size.y * 4;//(Screen.height / Camera.main.orthographicSize) * 0.06f;
 
@@ -82,7 +84,10 @@ public class Tutorial : InfiniteLevelManager {
 	void Update () {
 		// update ray position
 		rayPosition = monkey.transform.position;
-		rayPosition.y += trunkSize*2;
+		rayPosition.y += trunkHeight * 2;
+		rayPosition += monkey.transform.forward * 0.75f;
+		Debug.DrawRay (rayPosition, Vector3.up, Color.red);
+		
 
 		// run clean up to recycle any trunks that are no longer on scene
 		bool wasRowRecycled = base.cleanUp();
@@ -193,10 +198,10 @@ public class Tutorial : InfiniteLevelManager {
 	void BeeHiveTutorial () {
 		RaycastHit hit;
 		Ray ray = new Ray (rayPosition, Vector3.up);
-		Debug.DrawRay (rayPosition, Vector3.up, Color.red);
+		rayPosition.z -= trunkWidth;
 		
 		if (Physics.Raycast (ray, out hit, deltaMove) && counter <= 1) {
-			if (hit.collider.name == "Model_Beehive") {
+			if (hit.transform.name == "Model_Beehive") {
 				arrow = Arrows.Swipe;
 			}
 			if (ListenForSwipe())

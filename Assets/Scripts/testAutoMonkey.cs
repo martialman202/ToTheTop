@@ -80,6 +80,8 @@ public class testAutoMonkey : MonoBehaviour {
 	private GameObject emptyTrunk;
 	private float coconutSpawnHeight;
 
+	private bool winRotate = false;
+
 	// Use this for initialization
 	void Start () {
 		if (classicMode) {
@@ -143,9 +145,6 @@ public class testAutoMonkey : MonoBehaviour {
 			//print ("hit " + other.gameObject.tag);
 			monkeyState = MonkeyState.win;
 			moveDirection = Vector3.zero;
-			Camera.main.transform.parent = null;
-			this.transform.Rotate(0,180,0); //turn around
-			Camera.main.transform.parent = this.transform;
 		}
 	}
 
@@ -312,7 +311,19 @@ public class testAutoMonkey : MonoBehaviour {
 
 			if (isJumping) { //if jumping
 				jumpDir = new Vector3(0,1,0); //direction of jump, should be +y
-				moveDirection = this.transform.forward; //Should be towards center of trees
+
+				if (jumpVel < 0.0f) {
+					if (!winRotate) {
+						winRotate = true;
+						Camera.main.transform.parent = null;
+						this.transform.Rotate(0,180,0); //turn around
+						Camera.main.transform.parent = this.transform;
+					}
+					moveDirection = -this.transform.forward; //Should be towards center of trees
+				}
+				else {
+					moveDirection = this.transform.forward; //Should be towards center of trees
+				}
 
 				jumpVel += simGravity;	//decrement the jump velocity
 				dir += jumpDir * jumpVel; 
