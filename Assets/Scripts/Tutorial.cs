@@ -14,17 +14,24 @@ public class Tutorial : InfiniteLevelManager {
 	private float arrowHeight = 0.17f * Screen.width;
 	private float deltaMove;
 	private float deltaJump;
+
+	public Texture2D coconutDescription;
+	public Texture2D heart1;
+	public Texture2D heart2;
+	public Texture2D heart3;
 	
-	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine,Coconut};
+	public enum TutorialState {Begin,Active,Inactive,End,BeeHive,Snake,Deathvine,Coconut,CoconutDescription,Hearts};
 	public TutorialState state = TutorialState.Begin;
 	public TutorialState mode = TutorialState.Begin;
 
 	public enum Arrows {None,Move,Jump,Swipe};
 	public Arrows arrow = Arrows.None;
-	
-	public int outroHeight = 10;
 
-	private MonkeyMouse mmouse;
+	private enum Graphic {None,CoconutDescription, Hearts};
+	private Graphic graphic = Graphic.None;
+	
+	public int outroHeight = 5;
+
 	private float coconutSpawnHeight;
 	public int counter = 0;
 	private GameObject monkey;
@@ -57,12 +64,26 @@ public class Tutorial : InfiniteLevelManager {
 		default:
 			break;
 		}
+
+		switch (graphic) {
+		case Graphic.None:
+			break;
+		case Graphic.CoconutDescription:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.01f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), coconutDescription);
+			break;
+		case Graphic.Hearts:
+			GUI.Label (new Rect (0.05f * Screen.width, 0.1f * Screen.height, 0.9f*Screen.width, 4 * arrowHeight), heart1);
+			GUI.Label (new Rect (0.05f * Screen.width, (0.1f * Screen.height) + arrowHeight, 0.9f*Screen.width, 4 * arrowHeight), heart2);
+			GUI.Label (new Rect (0.05f * Screen.width, (0.1f * Screen.height) + (2 * arrowHeight), 0.9f*Screen.width, 4 * arrowHeight), heart3);
+			break;
+		default:
+			break;
+		}
 	}
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start ();
-		mmouse = this.GetComponent<MonkeyMouse> ();
 		monkey = GameObject.FindWithTag ("Player");
 		monkeyController = monkey.GetComponent<testAutoMonkey> ();
 		empty = true;
@@ -130,6 +151,8 @@ public class Tutorial : InfiniteLevelManager {
 
 		switch (mode) {
 		case TutorialState.Inactive:
+			arrow = Arrows.None;
+			graphic = Graphic.None;
 			break;
 		case TutorialState.Active:
 			ActiveTutorial ();
@@ -145,9 +168,16 @@ public class Tutorial : InfiniteLevelManager {
 			if (nextTutorial)
 				DeathvineTutorial ();
 			break;
+		case TutorialState.CoconutDescription:
+			if (!spawned)
+				StartCoroutine (CoconutDescriptionTransition ());
+			break;
 		case TutorialState.Coconut:
-			if (nextTutorial)
-				CoconutTutorial ();
+			CoconutTutorial ();
+			break;
+		case TutorialState.Hearts:
+			if (!spawned)
+				StartCoroutine (Hearts ());
 			break;
 		case TutorialState.End:
 			state = mode;
@@ -272,8 +302,9 @@ public class Tutorial : InfiniteLevelManager {
 		}
 		else if (counter > 1) {
 			arrow = Arrows.None;
-			mode = TutorialState.Coconut;
+			mode = TutorialState.CoconutDescription;
 			counter = 0;
+			StartCoroutine (CoconutGUI());
 			StartCoroutine (TutorialTransition());
 		}
 	}
@@ -301,7 +332,7 @@ public class Tutorial : InfiniteLevelManager {
 		}
 		else if (counter > 1) {
 			arrow = Arrows.None;
-			mode = TutorialState.End;
+			mode = TutorialState.Hearts;
 			counter = 0;
 			StartCoroutine (TutorialTransition());
 		}
@@ -377,5 +408,28 @@ public class Tutorial : InfiniteLevelManager {
 		nextTutorial = false;
 		yield return new WaitForSeconds (2.0f);
 		nextTutorial = true;
+	}
+
+	IEnumerator CoconutGUI () {
+		yield return new WaitForSeconds (2.0f);
+		graphic = Graphic.CoconutDescription;
+	}
+		
+
+	IEnumerator CoconutDescriptionTransition () {
+		spawned = true;
+		yield return new WaitForSeconds (3.0f);
+		graphic = Graphic.None;
+		mode = TutorialState.Coconut;	
+		spawned = false;
+	}
+
+	IEnumerator Hearts () {
+		spawned = true;
+		yield return new WaitForSeconds (1.0f);
+		graphic = Graphic.Hearts;
+		yield return new WaitForSeconds (3.0f);
+		mode = TutorialState.End;
+		spawned = false;
 	}
 }
