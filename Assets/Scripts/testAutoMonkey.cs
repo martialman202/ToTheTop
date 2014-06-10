@@ -143,6 +143,9 @@ public class testAutoMonkey : MonoBehaviour {
 			//print ("hit " + other.gameObject.tag);
 			monkeyState = MonkeyState.win;
 			moveDirection = Vector3.zero;
+			Camera.main.transform.parent = null;
+			this.transform.Rotate(0,180,0); //turn around
+			Camera.main.transform.parent = this.transform;
 		}
 	}
 
